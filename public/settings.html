@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>تنظیمات | پنل مدیریت کافه مدن</title>
+<link rel="stylesheet" href="/css/base.css">
+<link rel="stylesheet" href="/css/layout (1).css">
+<link rel="stylesheet" href="/css/components.css">
+<link rel="stylesheet" href="css/dashboard (1).css">
+</head>
+<body>
+
+<div class="app">
+  <aside class="sidebar" id="sidebar-root"></aside>
+  <div class="overlay"></div>
+
+  <div class="main">
+    <header class="topbar" id="topbar-root"></header>
+
+    <div class="content content--narrow">
+      <div class="page-head fade-up">
+        <div>
+          <h1 class="page-head__title">تنظیمات حساب</h1>
+          <p style="font-size: 1rem;" class="page-head__desc">اطلاعات پروفایل، امنیت و اعلان‌های خود را مدیریت کنید.</p>
+        </div>
+      </div>
+
+      <div class="toolbar-tabs fade-up" id="settings-tabs" style="margin-bottom: var(--sp-5);">
+        <button style="font-size: 1rem;" data-tab="profile" class="is-active">پروفایل</button>
+        <button style="font-size: 1rem;" data-tab="security">امنیت</button>
+
+      </div>
+
+      <!-- Profile tab -->
+      <div class="card card--pad fade-up settings-panel" data-panel="profile">
+        <h3 style="font-size: var(--fs-md); margin-bottom: var(--sp-5);">اطلاعات پروفایل</h3>
+        <div style="display:flex; align-items:center; gap: var(--sp-4); margin-bottom: var(--sp-6);">
+          <div class="user-mini__avatar" style="width:64px; height:64px; font-size: var(--fs-lg); border-radius: var(--radius-lg);">م.م</div>
+          <div>
+            <button style="font-size: 1rem;" type="button" class="btn btn--outline btn--sm">تغییر تصویر</button>
+            <div class="text-xs text-muted" style="margin-top: var(--sp-2);font-size: .9rem;">فرمت مجاز: JPG یا PNG، حداکثر ۲ مگابایت</div>
+          </div>
+        </div>
+        <div class="form-grid">
+          <div class="form-field"><label style="font-size: 1rem;" class="form-label">نام و نام خانوادگی</label><input style="font-size: 1rem;" type="text" class="form-control" value="مدیر مدن"></div>
+          <div class="form-field"><label style="font-size: 1rem;" class="form-label">نام کاربری</label><input style="font-size: 1rem;" type="text" class="form-control" dir="ltr" id="profile-username" value="cafemadan_admin"></div>
+          <div class="form-field"><label style="font-size: 1rem;" class="form-label">ایمیل</label><input style="font-size: 1rem;" type="email" class="form-control" dir="ltr" value="admin@cafemadan.ir"></div>
+          <div class="form-field"><label style="font-size: 1rem;" class="form-label">شماره تماس</label><input style="font-size: 1rem;" type="text" class="form-control" dir="ltr" value="09121234567"></div>
+        </div>
+        <div style="display:flex; justify-content:flex-end; margin-top: var(--sp-6);">
+          <button style="font-size: 1rem;" class="btn btn--primary" onclick="SettingsPage.save()">ذخیره تغییرات</button>
+        </div>
+      </div>
+
+      <!-- Security tab -->
+      <div class="card card--pad fade-up settings-panel" data-panel="security" style="display:none;">
+        <h2  style="font-size: var(--fs-md); margin-bottom: var(--sp-5);">تغییر رمز عبور</h2>
+        <div style="font-size: 1rem;" class="form-field form-field--span2">
+  <label style="font-size: 1rem;" class="form-label">رمز عبور فعلی</label>
+
+  <div style="position:relative;">
+    <input 
+      type="password" 
+      id="profile-password" 
+      class="form-control"
+      style="padding-left:45px;"
+    >
+
+    <button 
+      type="button" 
+      id="show-password"
+      style="
+        position:absolute;
+        left:10px;
+        top:50%;
+        transform:translateY(-50%);
+        border:none;
+        background:none;
+        cursor:pointer;
+      "
+    >
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+  <path d="M2.5 12C4.5 7.5 8 5 12 5C16 5 19.5 7.5 21.5 12C19.5 16.5 16 19 12 19C8 19 4.5 16.5 2.5 12Z"
+  stroke="currentColor" stroke-width="2"/>
+  <circle cx="12" cy="12" r="3"
+  stroke="currentColor" stroke-width="2"/>
+</svg>
+    </button>
+  </div>
+ <div class="form-grid">
+
+    <div class="form-field">
+        <label style="font-size: 1rem;" class="form-label">رمز عبور جدید</label>
+        <input
+        style="font-size: 1rem;"
+            type="password"
+            class="form-control"
+            id="new-password"
+        >
+    </div>
+
+    <div class="form-field">
+        <label style="font-size: 1rem;" class="form-label">تکرار رمز عبور جدید</label>
+        <input
+        style="font-size: 1rem;"
+            type="password"
+            class="form-control"
+            id="confirm-password"
+        >
+    </div>
+
+</div>
+
+<button style="font-size: 1rem;" type="button" id="save-password" class="btn btn--primary">
+    ذخیره رمز عبور
+</button>
+
+<div id="password-error"></div>
+      </div>
+
+      <!-- Notifications tab -->
+      <div class="card card--pad fade-up settings-panel" data-panel="notifications" style="display:none;">
+        <h3 style="font-size: var(--fs-md); margin-bottom: var(--sp-5);">تنظیمات اعلان‌ها</h3>
+        <div style="display:flex; flex-direction:column; gap: var(--sp-4);">
+          <label style="display:flex; align-items:center; justify-content:space-between; padding: var(--sp-4); background: var(--color-gray-100); border-radius: var(--radius-md);">
+            <span class="text-sm font-medium">اعلان درخواست مشاوره جدید</span>
+            <input type="checkbox" checked>
+          </label>
+          <label style="display:flex; align-items:center; justify-content:space-between; padding: var(--sp-4); background: var(--color-gray-100); border-radius: var(--radius-md);">
+            <span class="text-sm font-medium">اعلان پیام تماس با ما</span>
+            <input type="checkbox" checked>
+          </label>
+          <label style="display:flex; align-items:center; justify-content:space-between; padding: var(--sp-4); background: var(--color-gray-100); border-radius: var(--radius-md);">
+            <span class="text-sm font-medium">خلاصه هفتگی آمار بازدید</span>
+            <input type="checkbox">
+          </label>
+        </div>
+        <div style="display:flex; justify-content:flex-end; margin-top: var(--sp-6);">
+          <button class="btn btn--primary" onclick="SettingsPage.save()">ذخیره تغییرات</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+
+const username = localStorage.getItem("userName");
+const userpassword = localStorage.getItem("userPassword")
+
+if(username){
+    document.getElementById("profile-username").value = username;
+}
+
+if (userpassword) {
+  document.getElementById("profile-password").value = userpassword
+}
+
+</script>
+
+<script>
+
+const passwordInput = document.getElementById("profile-password");
+const eyeBtn = document.getElementById("show-password");
+
+
+eyeBtn.addEventListener("click",()=>{
+
+    if(passwordInput.type === "password"){
+
+        passwordInput.type = "text";
+        eyeBtn.innerHTML = `
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+  <path d="M3 3L21 21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+  <path d="M10.58 10.59C10.21 10.96 10 11.46 10 12C10 13.1 10.9 14 12 14C12.54 14 13.04 13.79 13.41 13.42" 
+  stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+  <path d="M9.88 5.09C10.57 4.91 11.28 4.82 12 4.82C17 4.82 21 12 21 12C20.43 13.02 19.7 13.95 18.85 14.76" 
+  stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+  <path d="M6.61 6.61C4.62 8.05 3 10.2 3 12C3 12 7 19.18 12 19.18C13.33 19.18 14.58 18.84 15.7 18.26" 
+  stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+</svg>
+`;
+
+    }else{
+
+        passwordInput.type = "password";
+        eyeBtn.innerHTML = `
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+  <path d="M2.5 12C4.5 7.5 8 5 12 5C16 5 19.5 7.5 21.5 12C19.5 16.5 16 19 12 19C8 19 4.5 16.5 2.5 12Z"
+  stroke="currentColor" stroke-width="2"/>
+  <circle cx="12" cy="12" r="3"
+  stroke="currentColor" stroke-width="2"/>
+</svg>
+`;
+
+    }
+
+});
+
+</script>
+
+
+<script>
+
+const newPasswordInput =
+    document.getElementById("new-password");
+
+const confirmPasswordInput =
+    document.getElementById("confirm-password");
+
+const savePasswordBtn =
+    document.getElementById("save-password");
+
+const passwordError =
+    document.getElementById("password-error");
+
+
+// ===============================
+// ذخیره رمز جدید
+// ===============================
+savePasswordBtn.addEventListener("click", async function () {
+
+    const newpassword =
+        newPasswordInput.value;
+
+    const confirmpassword =
+        confirmPasswordInput.value;
+
+
+    // ===============================
+    // پاک کردن خطای قبلی
+    // ===============================
+    passwordError.textContent = "";
+    passwordError.style.color = "red";
+
+
+    // ===============================
+    // خالی بودن
+    // ===============================
+    if (!newpassword || !confirmpassword) {
+
+        passwordError.textContent =
+            "رمز جدید و تکرار آن را وارد کنید";
+
+        return;
+    }
+
+
+    // ===============================
+    // بررسی Match
+    // ===============================
+    if (newpassword !== confirmpassword) {
+
+        passwordError.textContent =
+            "رمز عبور جدید و تکرار آن یکسان نیستند";
+
+        return;
+    }
+
+
+    // ===============================
+    // جلوگیری از کلیک چندباره
+    // ===============================
+    savePasswordBtn.disabled = true;
+    savePasswordBtn.innerText = "در حال ذخیره...";
+
+
+    try {
+
+        // ===============================
+        // ارسال به API
+        // ===============================
+
+        const id = localStorage.getItem("userId");
+
+        const response = await fetch(`/api/setting/${id}`, {
+
+            method: "Put",
+
+            headers: {
+                "Content-Type": "application/json"
+            },
+
+            body: JSON.stringify({
+              newpassword,confirmpassword
+            })
+
+           
+        });
+
+
+        // ===============================
+        // دریافت پاسخ
+        // ===============================
+        let data = {};
+
+        try {
+            data = await response.json();
+        } catch {
+            data = {};
+        }
+
+
+        console.log(
+            "Password API:",
+            response.status,
+            data
+        );
+
+
+        // ===============================
+        // خطا
+        // ===============================
+        if (!response.ok) {
+
+            passwordError.textContent =
+                data.message ||
+                "ذخیره رمز انجام نشد";
+
+            savePasswordBtn.disabled = false;
+            savePasswordBtn.innerText =
+                "ذخیره رمز عبور";
+
+            return;
+        }
+
+
+        // ===============================
+        // موفق
+        // ===============================
+        passwordError.style.color = "green";
+
+        passwordError.textContent =
+            data.message ||
+            "رمز عبور با موفقیت ذخیره شد";
+
+
+        // پاک کردن فیلدها
+        newPasswordInput.value = "";
+        confirmPasswordInput.value = "";
+
+
+        savePasswordBtn.disabled = false;
+        savePasswordBtn.innerText =
+            "ذخیره رمز عبور";
+
+
+    } catch (error) {
+
+        console.error(
+            "Password API Error:",
+            error
+        );
+
+        passwordError.style.color = "red";
+
+        passwordError.textContent =
+            "خطا در ارتباط با سرور";
+
+
+        savePasswordBtn.disabled = false;
+        savePasswordBtn.innerText =
+            "ذخیره رمز عبور";
+    }
+
+});
+
+</script>
+
+
+<script src="/js/utils (1).js"></script>
+<script src="/js/store (1).js"></script>
+<script src="/js/shell (1).js"></script>
+<script src="/js/ui (1).js"></script>
+<script src="/js/settings (1).js"></script>
+</body>
+</html>

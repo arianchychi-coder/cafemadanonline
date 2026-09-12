@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const contactForm = document.getElementById("contactForm");
+    const contactForm = document.getElementById("callform");
     
     // ========== منطق فرم تماس ==========
     contactForm.addEventListener("submit", function(event) {

@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+<title>مدیریت مقالات | پنل مدیریت کافه مدن</title>
+<link rel="stylesheet" href="/css/base.css">
+<link rel="stylesheet" href="/css/layout (1).css">
+<link rel="stylesheet" href="/css/components.css">
+<link rel="stylesheet" href="/css/dashboard (1).css">
+</head>
+<body>
+
+   <style>
+    .edit-modals{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.55);
+    backdrop-filter:blur(6px);
+    justify-content:center;
+    align-items:center;
+    z-index:9999;
+    animation:fadeIn .25s ease;
+}
+
+.edit-modal-contents{
+    width:500px;
+    max-width:90%;
+    background:#fff;
+    border-radius:18px;
+    padding:28px;
+    box-shadow:0 20px 45px rgba(0,0,0,.2);
+    animation:pop .3s ease;
+}
+
+.edit-modal-contents h3{
+    margin:0 0 20px;
+    text-align:center;
+    font-size:24px;
+    color:#222;
+}
+
+.edit-modal-contents input,
+.edit-modal-contents textarea{
+    width:100%;
+    padding:13px 15px;
+    margin:10px 0;
+    border:1px solid #ddd;
+    border-radius:12px;
+    font-size:15px;
+    transition:.25s;
+    outline:none;
+    box-sizing:border-box;
+}
+
+.edit-modal-contents textarea{
+    min-height:120px;
+    resize:vertical;
+}
+
+.edit-modal-contents input:focus,
+.edit-modal-contents textarea:focus{
+    border-color:#F3B300;
+    box-shadow:0 0 0 4px rgba(243,179,0,.18);
+}
+
+.buttonss{
+    display:flex;
+    justify-content:flex-end;
+    gap:12px;
+    margin-top:20px;
+}
+
+.btn-saves,
+.btn-cancels{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    border:none;
+    border-radius:10px;
+    padding:11px 20px;
+    font-size:15px;
+    font-weight:600;
+    cursor:pointer;
+    transition:.25s;
+}
+
+.btn-saves{
+    background:linear-gradient(135deg,#F3B300,#d89b00);
+    color:#111;
+    box-shadow:0 8px 18px rgba(243,179,0,.35);
+}
+
+.btn-saves:hover{
+    transform:translateY(-2px);
+    box-shadow:0 12px 24px rgba(243,179,0,.45);
+}
+
+.btn-cancels{
+    background:#202020;
+    color:#fff;
+    box-shadow:0 8px 18px rgba(0,0,0,.25);
+}
+
+.btn-cancels:hover{
+    transform:translateY(-2px);
+    background:#111;
+    box-shadow:0 12px 24px rgba(0,0,0,.35);
+}
+
+.btn-saves i,
+.btn-cancels i{
+    font-size:17px;
+}
+
+@keyframes fadeIn{
+    from{opacity:0;}
+    to{opacity:1;}
+}
+
+@keyframes pop{
+    from{
+        opacity:0;
+        transform:translateY(20px) scale(.95);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0) scale(1);
+    }
+}
+  </style>
+
+<div class="app">
+  <aside class="sidebar" id="sidebar-root"></aside>
+  <div class="overlay"></div>
+
+  <div class="main">
+    <header class="topbar" id="topbar-root"></header>
+
+    <div class="content">
+      <div class="page-head fade-up">
+        <div>
+          <h1 class="page-head__title">مدیریت مقالات</h1>
+          <p style="font-size: 1rem;" class="page-head__desc">مقالات وبلاگ کافه مدن را مدیریت، ویرایش و منتشر کنید.</p>
+        </div>
+        <button style="font-size: 1rem;" class="btn btn--primary" onclick="window.location.href='/cafemadan/4b5c6d7e-8f99-4dab-c444-444444444444/article-form'">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
+          افزودن مقاله
+        </button>
+      </div>
+
+      <!-- Status Tabs -->
+      <div class="chip-group fade-up" id="status-chips" style="margin-bottom: var(--sp-5);">
+        <button style="font-size: 1rem;" class="chip is-active" data-status="all">همه</button>
+        <button style="font-size: 1rem;" class="chip" data-status="published">منتشر شده</button>
+        <button style="font-size: 1rem;" class="chip" data-status="draft">پیش‌نویس</button>
+        <button style="font-size: 1rem;" class="chip" data-status="archived">بایگانی</button>
+      </div>
+
+      <div class="table-wrap fade-up">
+        <div class="table-toolbar">
+          <div class="search-box">
+            <svg viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/><path d="M21 21l-4.3-4.3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            <input type="text" id="search-input" placeholder="جستجوی عنوان مقاله..." style="font-size: 1rem;">
+          </div>
+          <div class="table-toolbar__filters">
+            <select class="select-box" id="category-filter" style="display: none;">
+              
+            </select>
+            <select class="select-box" id="sort-select">
+              <option value="newest">جدیدترین</option>
+              <option value="oldest">قدیمی‌ترین</option>
+              <option value="most-viewed">پربازدیدترین</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="table-wrap__scroll">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th style="width:36px;"><input type="checkbox" id="select-all"></th>
+                <th style="font-size: 1rem;">عنوان مقاله</th>
+                <th style="font-size: 1rem;">بازدید</th>
+                <th style="font-size: 1rem;">وضعیت</th>
+                <th style="font-size: 1rem;">تاریخ انتشار</th>
+                <th style="font-size: 1rem;">تغیرات</th>
+                <th style="font-size: 1rem;">حذف</th>
+              </tr>
+            </thead>
+            <tbody id="articles-tbody"></tbody>
+          </table>
+        </div>
+
+        <div id="articles-empty" style="display:none;"></div>
+        <div class="pagination" id="articles-pagination"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Preview Modal -->
+<div class="modal-layer" id="preview-modal">
+  <div class="modal-backdrop"></div>
+  <div class="modal modal--preview" role="dialog" aria-modal="true">
+    <div class="modal__head">
+      <div class="modal__title">پیش‌نمایش مقاله</div>
+      <button class="modal__close" data-modal-close>
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none"><path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+    <div class="modal__body" id="preview-body"></div>
+    <div class="modal__foot">
+      <button class="btn btn--outline" data-modal-close>بستن</button>
+    </div>
+  </div>
+</div>
+
+
+<div id="editModalArticels" class="edit-modals">
+    <div class="edit-modal-contents">
+        <h3>ویرایش اطلاعات</h3>
+
+        <input type="hidden" id="edit-ids">
+
+        <input type="text" id="edit-title" placeholder="تایتل">
+        <input type="text" id="edit-adress" placeholder="آدرس">
+        <input type="text" id="edit-information" placeholder="توضیحات">
+        <input type="text" id="edit-date" placeholder="تاریخ">
+
+
+        <input type="file" id="edit-image" accept="image/*">
+
+<input type="file" id="edit-video" accept="video/*">
+
+        <div class="buttonss">
+    <button class="btn-saves" onclick="saveArticels()">
+        <i class="bi bi-check-circle-fill"></i>
+        ذخیره تغییرات
+    </button>
+
+    <button class="btn-cancels" onclick="closeArticels()">
+        <i class="bi bi-x-circle-fill"></i>
+        انصراف
+    </button>
+</div>
+    </div>
+</div>
+
+<script src="/js/utils (1).js"></script>
+<script src="/js/store (1).js"></script>
+<script src="/js/shell (1).js"></script>
+<script src="/js/ui (1).js"></script>
+<script src="/js/articles.js"></script>
+</body>
+</html>

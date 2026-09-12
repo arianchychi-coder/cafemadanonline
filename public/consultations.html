@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+<title>درخواست‌های مشاوره | پنل مدیریت کافه مدن</title>
+<link rel="stylesheet" href="/css/base.css">
+<link rel="stylesheet" href="/css/layout (1).css">
+<link rel="stylesheet" href="/css/components.css">
+<link rel="stylesheet" href="/css/dashboard (1).css">
+</head>
+<body>
+
+<div class="app">
+  <aside class="sidebar" id="sidebar-root"></aside>
+  <div class="overlay"></div>
+
+  <div class="main">
+    <header class="topbar" id="topbar-root"></header>
+
+    <div class="content">
+      <div class="page-head fade-up">
+        <div>
+          <h1 class="page-head__title">درخواست‌های مشاوره</h1>
+          <p style="font-size: 1rem;" class="page-head__desc">لیست تماس‌های ثبت‌شده توسط کاربران برای مشاوره را مدیریت کنید.</p>
+        </div>
+      </div>
+
+      <div class="chip-group fade-up" id="status-chips" style="margin-bottom: var(--sp-5);">
+        <button style="font-size: 1rem;" class="chip is-active" data-status="all">در انتظار تماس</button>
+        <button style="font-size: 1rem;" class="chip" data-status="تماس گرفته شد">تماس گرفته شد</button>
+      </div>
+
+      <div class="table-wrap fade-up">
+        <div class="table-toolbar">
+          <div class="search-box">
+            <svg viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/><path d="M21 21l-4.3-4.3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            <input style="font-size: 1rem;" type="text" id="search-input" placeholder="جستجوی شماره تماس...">
+          </div>
+          <div class="table-toolbar__filters">
+            <select class="select-box" id="sort-select">
+              <option value="newest">جدیدترین</option>
+              <option value="oldest">قدیمی‌ترین</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="table-wrap__scroll">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th style="width:56px;font-size: 1.3rem;">ردیف</th>
+                <th style="font-size: 1.3rem;">نام و مام خانوادگی</th>
+                <th style="font-size: 1.3rem;">شماره تلفن</th>
+                <th style="font-size: 1.3rem;">تاریخ ثبت</th>
+                <th style="font-size: 1.3rem;">وضعیت</th>
+                <th style="font-size: 1.3rem;">حذف</th>
+              </tr>
+            </thead>
+            <tbody id="consult-tbody"></tbody>
+          </table>
+        </div>
+        <div id="consult-empty" style="display:none;"></div>
+        <div class="pagination" id="consult-pagination"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Edit status / note Modal -->
+<div class="modal-layer" id="edit-consult-modal">
+  <div class="modal-backdrop"></div>
+  <div class="modal" role="dialog" aria-modal="true">
+    <div class="modal__head">
+      <div class="modal__title">به‌روزرسانی درخواست مشاوره</div>
+      <button class="modal__close" data-modal-close>
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none"><path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+    <div class="modal__body">
+      <div class="form-field" style="margin-bottom: var(--sp-4);">
+        <label class="form-label">شماره تماس</label>
+        <input type="text" class="form-control" id="ec-phone" dir="ltr" disabled>
+      </div>
+      <div class="form-field" style="margin-bottom: var(--sp-4);">
+        <label class="form-label">وضعیت تماس</label>
+        <select class="form-control" id="ec-status">
+          <option>در انتظار تماس</option>
+          <option>تماس گرفته شد</option>
+          <option>لغو شد</option>
+        </select>
+      </div>
+      <div class="form-field">
+        <label class="form-label">یادداشت</label>
+        <textarea class="form-control" id="ec-note" style="min-height:100px;" placeholder="یادداشت داخلی برای این تماس..."></textarea>
+      </div>
+    </div>
+    <div class="modal__foot">
+      <button class="btn btn--outline" data-modal-close>انصراف</button>
+      <button class="btn btn--primary" id="ec-save">ذخیره تغییرات</button>
+    </div>
+  </div>
+</div>
+
+<script src="/js/utils (1).js"></script>
+<script src="/js/store (1).js"></script>
+<script src="/js/shell (1).js"></script>
+<script src="/js/ui (1).js"></script>
+<script src="/js/consultations.js"></script>
+</body>
+</html>

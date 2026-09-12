@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>خبرنامه کافه معدن</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="hero.css">
+</head>
+<body>
+
+<section class="cm-hero" aria-labelledby="cm-hero-title">
+
+    <!-- Background layers -->
+    <div class="cm-hero__bg" aria-hidden="true">
+        <svg class="cm-hero__bg-svg" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
+            <defs>
+                <pattern id="cmGeo" x="0" y="0" width="240" height="240" patternUnits="userSpaceOnUse">
+                    <path d="M0,80 Q60,60 120,80 T240,75" fill="none" stroke="rgba(255,255,255,0.015)" stroke-width="0.5"/>
+                    <path d="M0,120 Q70,100 140,120 T240,115" fill="none" stroke="rgba(255,255,255,0.012)" stroke-width="0.5"/>
+                    <path d="M0,160 Q50,145 100,160 T200,155 T240,160" fill="none" stroke="rgba(255,255,255,0.010)" stroke-width="0.5"/>
+                    <path d="M0,40 Q40,25 80,40 T160,35 T240,40" fill="none" stroke="rgba(255,255,255,0.013)" stroke-width="0.5"/>
+                    <path d="M0,200 Q80,185 160,200 T240,195" fill="none" stroke="rgba(255,255,255,0.008)" stroke-width="0.5"/>
+                </pattern>
+            </defs>
+            <rect width="100%" height="100%" fill="url(#cmGeo)"/>
+        </svg>
+    </div>
+
+    <!-- Ambient glow -->
+    <div class="cm-hero__glow" aria-hidden="true"></div>
+
+    <!-- Decorative elements -->
+    <div class="cm-hero__decor" aria-hidden="true">
+        <div class="cm-hero__decor-line cm-hero__decor-line--1"></div>
+        <div class="cm-hero__decor-line cm-hero__decor-line--2"></div>
+        <div class="cm-hero__decor-dot cm-hero__decor-dot--1"></div>
+        <div class="cm-hero__decor-dot cm-hero__decor-dot--2"></div>
+    </div>
+
+    <div class="cm-hero__container">
+
+        <!-- LEFT: Visual Composition -->
+        <div class="cm-hero__visual">
+
+            <!-- Editorial badge -->
+            <div class="cm-hero__badge">
+                <span class="cm-hero__badge-label">ISSUE</span>
+                <span class="cm-hero__badge-number">۰۴۸</span>
+            </div>
+
+            <!-- Orange curved accent -->
+            <svg class="cm-hero__curve" viewBox="0 0 200 320" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M30,290 Q10,220 25,160 Q40,100 20,40" stroke="#F28C28" stroke-width="1.2" fill="none" opacity="0.6" stroke-linecap="round"/>
+            </svg>
+
+            <!-- Newsletter Document -->
+            <div class="cm-hero__doc">
+                <div class="cm-hero__doc-inner">
+                    <div class="cm-hero__doc-header">
+                        <div class="cm-hero__doc-brand">
+                            <svg width="18" height="12" viewBox="0 0 18 12" fill="none">
+                                <polygon points="0,12 6,0 9,5 12,0 18,12" fill="#F28C28" opacity="0.85"/>
+                            </svg>
+                            <span class="cm-hero__doc-brand-text">کافه معدن</span>
+                        </div>
+                        <div class="cm-hero__doc-issue">شماره ۴۸</div>
+                    </div>
+                    <div class="cm-hero__doc-title-bar"></div>
+                    <div class="cm-hero__doc-lines">
+                        <div class="cm-hero__doc-line w-90"></div>
+                        <div class="cm-hero__doc-line w-75"></div>
+                        <div class="cm-hero__doc-line w-85"></div>
+                        <div class="cm-hero__doc-line w-60"></div>
+                    </div>
+                    <div class="cm-hero__doc-img-block">
+                        <svg viewBox="0 0 100 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="100" height="60" fill="rgba(255,255,255,0.04)"/>
+                            <path d="M10,50 L30,25 L45,38 L65,18 L90,45 L90,60 L10,60 Z" fill="rgba(255,255,255,0.035)"/>
+                            <circle cx="72" cy="22" r="7" fill="rgba(242,140,40,0.1)"/>
+                        </svg>
+                    </div>
+                    <div class="cm-hero__doc-lines">
+                        <div class="cm-hero__doc-line w-80"></div>
+                        <div class="cm-hero__doc-line w-65"></div>
+                        <div class="cm-hero__doc-line w-70"></div>
+                    </div>
+                    <div class="cm-hero__doc-footer">
+                        <div class="cm-hero__doc-orange-dot"></div>
+                        <div class="cm-hero__doc-footer-line"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Rock Image -->
+            <div class="cm-hero__rock-stage">
+                <img
+                    class="cm-hero__rock-img"
+                    src="rock-Photoroom.png"
+                    alt="سنگ معدن — نماد بصری کافه معدن"
+                    loading="eager"
+                />
+                <div class="cm-hero__rock-glow" aria-hidden="true"></div>
+            </div>
+
+            <!-- Audio Waveform -->
+            <svg class="cm-hero__waveform" viewBox="0 0 220 100" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <g stroke="#F28C28" stroke-width="1.6" stroke-linecap="round">
+                    <line x1="8"  y1="50" x2="8"  y2="44"/>
+                    <line x1="18" y1="50" x2="18" y2="38"/>
+                    <line x1="28" y1="50" x2="28" y2="30"/>
+                    <line x1="38" y1="50" x2="38" y2="24"/>
+                    <line x1="48" y1="50" x2="48" y2="32"/>
+                    <line x1="58" y1="50" x2="58" y2="40"/>
+                    <line x1="68" y1="50" x2="68" y2="28"/>
+                    <line x1="78" y1="50" x2="78" y2="20"/>
+                    <line x1="88" y1="50" x2="88" y2="16"/>
+                    <line x1="98" y1="50" x2="98" y2="26"/>
+                    <line x1="108" y1="50" x2="108" y2="34"/>
+                    <line x1="118" y1="50" x2="118" y2="22"/>
+                    <line x1="128" y1="50" x2="128" y2="14"/>
+                    <line x1="138" y1="50" x2="138" y2="24"/>
+                    <line x1="148" y1="50" x2="148" y2="32"/>
+                    <line x1="158" y1="50" x2="158" y2="20"/>
+                    <line x1="168" y1="50" x2="168" y2="30"/>
+                    <line x1="178" y1="50" x2="178" y2="38"/>
+                    <line x1="188" y1="50" x2="188" y2="42"/>
+                    <line x1="198" y1="50" x2="198" y2="45"/>
+                    <line x1="208" y1="50" x2="208" y2="47"/>
+                    <line x1="218" y1="50" x2="218" y2="48"/>
+                </g>
+            </svg>
+
+            <!-- Editorial marker -->
+            <div class="cm-hero__marker">
+                <span class="cm-hero__marker-line"></span>
+                <span class="cm-hero__marker-text">LISTEN</span>
+            </div>
+
+        </div>
+
+        <!-- RIGHT: Typography Content -->
+        <div class="cm-hero__content">
+
+            <!-- Top meta row -->
+            <div class="cm-hero__meta-row">
+                <span class="cm-hero__meta-tag">خبرنامه تخصصی</span>
+                <span class="cm-hero__meta-date">اردیبهشت ۱۴۰۳</span>
+            </div>
+
+            <!-- Accent line -->
+            <div class="cm-hero__accent" aria-hidden="true"></div>
+
+            <!-- Main title -->
+            <h1 class="cm-hero__title" id="cm-hero-title">
+                <span class="cm-hero__title-line cm-hero__title-line--1">خبرنامه</span>
+                <span class="cm-hero__title-line cm-hero__title-line--2">کافه معدن</span>
+            </h1>
+
+            <!-- Subtitle -->
+            <p class="cm-hero__subtitle">پادکست‌ها، خبرها و تازه‌ترین مطالب تخصصی کافه معدن</p>
+
+            <!-- Creative detail: small info row -->
+            <div class="cm-hero__info-row">
+                <div class="cm-hero__info-item">
+                    <svg class="cm-hero__info-icon" viewBox="0 0 24 24" fill="none" width="16" height="16">
+                        <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+                        <path d="M2 17L12 22L22 17" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+                        <path d="M2 12L12 17L22 12" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+                    </svg>
+                    <span>۴۸ اپیزود</span>
+                </div>
+                <div class="cm-hero__info-divider"></div>
+                <div class="cm-hero__info-item">
+                    <svg class="cm-hero__info-icon" viewBox="0 0 24 24" fill="none" width="16" height="16">
+                        <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" stroke="currentColor" stroke-width="1.6"/>
+                        <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" stroke="currentColor" stroke-width="1.6"/>
+                    </svg>
+                    <span>۲۱ شماره</span>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Scroll indicator -->
+    <div class="cm-hero__scroll" aria-hidden="true">
+        <span class="cm-hero__scroll-text">اسکرول کنید</span>
+        <div class="cm-hero__scroll-line">
+            <div class="cm-hero__scroll-dot"></div>
+        </div>
+    </div>
+
+</section>
+
+<script src="hero.js"></script>
+</body>
+</html>

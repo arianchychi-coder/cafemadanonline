@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>آرشیو خبرنامه‌ها — کافه معدن</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/all-newsletters.css">
+</head>
+<body>
+
+<section class="cm-allnews">
+
+    <!-- Background texture -->
+    <div class="cm-allnews__bg" aria-hidden="true">
+        <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+                <pattern id="anlGeo" x="0" y="0" width="240" height="240" patternUnits="userSpaceOnUse">
+                    <path d="M0,60 Q60,44 120,60 T240,55" fill="none" stroke="var(--anl-geo-line)" stroke-width="0.5"/>
+                    <path d="M0,120 Q75,104 150,120 T240,115" fill="none" stroke="var(--anl-geo-line)" stroke-width="0.5"/>
+                    <path d="M0,180 Q65,164 130,180 T240,175" fill="none" stroke="var(--anl-geo-line)" stroke-width="0.5"/>
+                </pattern>
+            </defs>
+            <rect width="100%" height="100%" fill="url(#anlGeo)"/>
+        </svg>
+    </div>
+
+    <div class="cm-allnews__glow" aria-hidden="true"></div>
+
+    <!-- Hero Header -->
+    <div class="cm-allnews__hero">
+        <div class="cm-allnews__container">
+
+            <!-- Top bar: Back + Theme Toggle -->
+            <div class="cm-allnews__topbar">
+                <a href="/cafemadan/vf902156-6677-62ef-a309-8765689349380/pocast" class="cm-allnews__back" aria-label="بازگشت">
+                    <svg viewBox="0 0 24 24" fill="none" width="18" height="18">
+                        <path d="M9 6L15 12L9 18" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    بازگشت
+                </a>
+
+                <!-- Theme Toggle -->
+                <button class="cm-anl-theme-toggle" id="anlThemeToggle" type="button" aria-label="تغییر تم">
+                    <span class="cm-anl-theme-toggle__track">
+                        <span class="cm-anl-theme-toggle__thumb">
+                            <svg class="cm-anl-theme-toggle__icon cm-anl-theme-toggle__icon--sun" viewBox="0 0 24 24" fill="none" width="13" height="13">
+                                <circle cx="12" cy="12" r="4" fill="currentColor"/>
+                                <path d="M12 2V4M12 20V22M4 12H2M22 12H20M6.34 6.34L4.93 4.93M19.07 19.07L17.66 17.66M6.34 17.66L4.93 19.07M19.07 4.93L17.66 6.34" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+                            </svg>
+                            <svg class="cm-anl-theme-toggle__icon cm-anl-theme-toggle__icon--moon" viewBox="0 0 24 24" fill="none" width="13" height="13">
+                                <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" fill="currentColor"/>
+                            </svg>
+                        </span>
+                    </span>
+                </button>
+            </div>
+
+            <div class="cm-allnews__accent" aria-hidden="true"></div>
+            <h1 class="cm-allnews__title">آرشیو خبرنامه‌ها</h1>
+            <p class="cm-allnews__subtitle">مجموعه کامل خبرنامه‌های تخصصی کافه معدن</p>
+
+            <!-- Search Bar -->
+            <div class="cm-allnews__search-wrap">
+                <svg class="cm-allnews__search-icon" viewBox="0 0 24 24" fill="none" width="20" height="20">
+                    <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="1.6"/>
+                    <path d="M16 16L20 20" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+                </svg>
+                <input
+                    type="text"
+                    class="cm-allnews__search"
+                    id="newsletterSearch"
+                    placeholder="جستجو در خبرنامه‌ها..."
+                    aria-label="جستجو در خبرنامه‌ها"
+                />
+                <button class="cm-allnews__search-clear" id="searchClear" type="button" aria-label="پاک کردن جستجو" style="display:none">
+                    <svg viewBox="0 0 24 24" fill="none" width="16" height="16">
+                        <path d="M6 6L18 18M18 6L6 18" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Filter Chips -->
+            <div class="cm-allnews__filters" role="tablist">
+                <button class="cm-allnews__chip cm-allnews__chip--active" data-filter="all" role="tab" aria-selected="true">همه</button>
+                <button class="cm-allnews__chip" data-filter="market" role="tab" aria-selected="false">بازار و اقتصاد</button>
+                <button class="cm-allnews__chip" data-filter="tech" role="tab" aria-selected="false">فناوری</button>
+                <button class="cm-allnews__chip" data-filter="investment" role="tab" aria-selected="false">سرمایه‌گذاری</button>
+                <button class="cm-allnews__chip" data-filter="analysis" role="tab" aria-selected="false">تحلیل</button>
+            </div>
+
+            <!-- Results Count -->
+            <div class="cm-allnews__results">
+                <span id="resultsCount"></span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Grid -->
+    <div class="cm-allnews__container">
+        <div class="cm-allnews__grid" id="newsletterGrid">
+
+            <!-- Card 1 -->
+            <article class="cm-allnews__card" data-category="analysis" data-title="چشم‌انداز صنعت معدن ۱۴۰۳" data-issue="18">
+                <a href="/cafemadan/ff890939-1111-112ef-a709-2972442904933/newsletter-detail" class="cm-allnews__card-link">
+                    <div class="cm-allnews__card-cover">
+                        <img src="assets/images/newsletter-18.webp" alt="خبرنامه ۱۸" loading="lazy"/>
+                        <div class="cm-allnews__card-overlay"></div>
+                        <div class="cm-allnews__card-brand">
+                            <svg width="14" height="10" viewBox="0 0 16 11" fill="none"><polygon points="0,11 5,0 8,4 11,0 16,11" fill="#F28C28" opacity="0.9"/></svg>
+                            <span>کافه معدن</span>
+                        </div>
+                        <div class="cm-allnews__card-issue-num">شماره ۱</div>
+                    </div>
+                    <div class="cm-allnews__card-content">
+                        <div class="cm-allnews__card-meta">
+                            <span class="cm-allnews__card-issue">شماره ۱۸</span>
+                            <span>۱ فروردین ۴۰۳</span>
+                        </div>
+                        <h3 class="cm-allnews__card-title">چشم‌انداز صنعت معدن ۱۴۰۳</h3>
+                        <p class="cm-allnews__card-desc">بررسی روندها و پیش‌بینی‌های صنعت معدن در سال جدید</p>
+                        <div class="cm-allnews__card-cta">
+                            <span>مطالعه خبرنامه</span>
+                            <svg viewBox="0 0 24 24" fill="none" width="14" height="14"><path d="M15 6L9 12L15 18" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </div>
+                    </div>
+                </a>
+            </article>
+
+            <!-- Card 2 -->
+            <article class="cm-allnews__card" data-category="investment" data-title="سرمایه‌گذاری در معادن ایران" data-issue="19">
+                <a href="/cafemadan/ff890939-1111-112ef-a709-2972442904933/newsletter-detail" class="cm-allnews__card-link">
+                    <div class="cm-allnews__card-cover">
+                        <img src="assets/images/newsletter-19.webp" alt="خبرنامه ۱۹" loading="lazy"/>
+                        <div class="cm-allnews__card-overlay"></div>
+                        <div class="cm-allnews__card-brand">
+                            <svg width="14" height="10" viewBox="0 0 16 11" fill="none"><polygon points="0,11 5,0 8,4 11,0 16,11" fill="#F28C28" opacity="0.9"/></svg>
+                            <span>کافه معدن</span>
+                        </div>
+                        <div class="cm-allnews__card-issue-num">شماره ۱۹</div>
+                    </div>
+                    <div class="cm-allnews__card-content">
+                        <div class="cm-allnews__card-meta">
+                            <span class="cm-allnews__card-issue">شماره ۱۹</span>
+                            <span>۱۸ فروردین ۱۴۰۳</span>
+                        </div>
+                        <h3 class="cm-allnews__card-title">سرمایه‌گذاری در معادن ایران</h3>
+                        <p class="cm-allnews__card-desc">تحلیل فرصت‌ها و چالش‌های سرمایه‌گذاری در بخش معدن</p>
+                        <div class="cm-allnews__card-cta">
+                            <span>مطالعه خبرنامه</span>
+                            <svg viewBox="0 0 24 24" fill="none" width="14" height="14"><path d="M15 6L9 12L15 18" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </div>
+                    </div>
+                </a>
+            </article>
+
+            <!-- Card 3 -->
+            <article class="cm-allnews__card" data-category="tech" data-title="فناوری‌های نوآوری در معدن" data-issue="20">
+                <a href="/cafemadan/ff890939-1111-112ef-a709-2972442904933/newsletter-detail" class="cm-allnews__card-link">
+                    <div class="cm-allnews__card-cover">
+                        <img src="assets/images/newsletter-20.webp" alt="خبرنامه ۲۰" loading="lazy"/>
+                        <div class="cm-allnews__card-overlay"></div>
+                        <div class="cm-allnews__card-brand">
+                            <svg width="14" height="10" viewBox="0 0 16 11" fill="none"><polygon points="0,11 5,0 8,4 11,0 16,11" fill="#F28C28" opacity="0.9"/></svg>
+                            <span>کافه معدن</span>
+                        </div>
+                        <div class="cm-allnews__card-issue-num">شماره ۲۰</div>
+                    </div>
+                    <div class="cm-allnews__card-content">
+                        <div class="cm-allnews__card-meta">
+                            <span class="cm-allnews__card-issue">شماره ۲۰</span>
+                            <span>۲ اردیبهشت ۱۴۳</span>
+                        </div>
+                        <h3 class="cm-allnews__card-title">فناوری‌های نوآوری در معدن</h3>
+                        <p class="cm-allnews__card-desc">نگاهی به جدیدترین فناوری‌ها و تأثیر آن بر بهره‌وری معادن</p>
+                        <div class="cm-allnews__card-cta">
+                            <span>مطالعه خبرنامه</span>
+                            <svg viewBox="0 0 24 24" fill="none" width="14" height="14"><path d="M15 6L9 12L15 18" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </div>
+                    </div>
+                </a>
+            </article>
+
+            <!-- Card 4 -->
+            <article class="cm-allnews__card" data-category="market" data-title="تحلیل بازار سنگ‌آهن" data-issue="21">
+                <a href="/cafemadan/ff890939-1111-112ef-a709-2972442904933/newsletter-detail" class="cm-allnews__card-link">
+                    <div class="cm-allnews__card-cover">
+                        <img src="assets/images/newsletter-21.webp" alt="خبرنامه ۱" loading="lazy"/>
+                        <div class="cm-allnews__card-overlay"></div>
+                        <div class="cm-allnews__card-brand">
+                            <svg width="14" height="10" viewBox="0 0 16 11" fill="none"><polygon points="0,11 5,0 8,4 11,0 16,11" fill="#F28C28" opacity="0.9"/></svg>
+                            <span>کافه معدن</span>
+                        </div>
+                        <div class="cm-allnews__card-issue-num">شماره ۲۱</div>
+                    </div>
+                    <div class="cm-allnews__card-content">
+                        <div class="cm-allnews__card-meta">
+                            <span class="cm-allnews__card-issue">شماره ۲۱</span>
+                            <span>۱۵ اردیبهشت ۱۴۰۳</span>
+                        </div>
+                        <h3 class="cm-allnews__card-title">تحلیل بازار سنگ‌آهن</h3>
+                        <p class="cm-allnews__card-desc">بررسی روند قیمت سنگ‌آهن و چشم‌انداز بازار جهانی</p>
+                        <div class="cm-allnews__card-cta">
+                            <span>مطالعه خبرنامه</span>
+                            <svg viewBox="0 0 24 24" fill="none" width="14" height="14"><path d="M15 6L9 12L15 18" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </div>
+                    </div>
+                </a>
+            </article>
+
+            <!-- Card 5 -->
+            <article class="cm-allnews__card" data-category="market" data-title="بازار جهانی فلزات پایه" data-issue="17">
+                <a href="/cafemadan/ff890939-1111-112ef-a709-2972442904933/newsletter-detail" class="cm-allnews__card-link">
+                    <div class="cm-allnews__card-cover">
+                        <img src="assets/images/newsletter-17.webp" alt="خبرنامه ۱۷" loading="lazy"/>
+                        <div class="cm-allnews__card-overlay"></div>
+                        <div class="cm-allnews__card-brand">
+                            <svg width="14" height="10" viewBox="0 0 16 11" fill="none"><polygon points="0,11 5,0 8,4 11,0 16,11" fill="#F28C28" opacity="0.9"/></svg>
+                            <span>کافه معدن</span>
+                        </div>
+                        <div class="cm-allnews__card-issue-num">شماره ۱</div>
+                    </div>
+                    <div class="cm-allnews__card-content">
+                        <div class="cm-allnews__card-meta">
+                            <span class="cm-allnews__card-issue">شماره ۱۷</span>
+                            <span>۲۵ اسفند ۱۴۰۲</span>
+                        </div>
+                        <h3 class="cm-allnews__card-title">بازار جهانی فلزات پایه</h3>
+                        <p class="cm-allnews__card-desc">تحلیل تحولات بازار فلزات پایه و تأثیر بر صنعت معدن ایران</p>
+                        <div class="cm-allnews__card-cta">
+                            <span>مطالعه خبرنامه</span>
+                            <svg viewBox="0 0 24 24" fill="none" width="14" height="14"><path d="M15 6L9 12L15 18" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </div>
+                    </div>
+                </a>
+            </article>
+
+            <!-- Card 6 -->
+            <article class="cm-allnews__card" data-category="tech" data-title="هوش مصنوعی در اکتشاف معدن" data-issue="16">
+                <a href="/cafemadan/ff890939-1111-112ef-a709-2972442904933/newsletter-detail" class="cm-allnews__card-link">
+                    <div class="cm-allnews__card-cover">
+                        <img src="assets/images/newsletter-16.webp" alt="خبرنامه ۱۶" loading="lazy"/>
+                        <div class="cm-allnews__card-overlay"></div>
+                        <div class="cm-allnews__card-brand">
+                            <svg width="14" height="10" viewBox="0 0 16 11" fill="none"><polygon points="0,11 5,0 8,4 11,0 16,11" fill="#F28C28" opacity="0.9"/></svg>
+                            <span>کافه معدن</span>
+                        </div>
+                        <div class="cm-allnews__card-issue-num">شماره ۱۶</div>
+                    </div>
+                    <div class="cm-allnews__card-content">
+                        <div class="cm-allnews__card-meta">
+                            <span class="cm-allnews__card-issue">شماره ۱۶</span>
+                            <span>۱۰ اسفند ۱۴۰۲</span>
+                        </div>
+                        <h3 class="cm-allnews__card-title">هوش مصنوعی در اکتشاف معدن</h3>
+                        <p class="cm-allnews__card-desc">کاربردهای هوش مصنوعی و یادگیری ماشین در اکتشافات معدنی</p>
+                        <div class="cm-allnews__card-cta">
+                            <span>مطالعه خبرنامه</span>
+                            <svg viewBox="0 0 24 24" fill="none" width="14" height="14"><path d="M15 6L9 12L15 18" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </div>
+                    </div>
+                </a>
+            </article>
+
+            <!-- Card 7 -->
+            <article class="cm-allnews__card" data-category="investment" data-title="فرصت‌های صادراتی معدن" data-issue="15">
+                <a href="/cafemadan/ff890939-1111-112ef-a709-2972442904933/newsletter-detail" class="cm-allnews__card-link">
+                    <div class="cm-allnews__card-cover">
+                        <img src="assets/images/newsletter-15.webp" alt="خبرنامه ۱۵" loading="lazy"/>
+                        <div class="cm-allnews__card-overlay"></div>
+                        <div class="cm-allnews__card-brand">
+                            <svg width="14" height="10" viewBox="0 0 16 11" fill="none"><polygon points="0,11 5,0 8,4 11,0 16,11" fill="#F28C28" opacity="0.9"/></svg>
+                            <span>کافه معدن</span>
+                        </div>
+                        <div class="cm-allnews__card-issue-num">شماره ۱۵</div>
+                    </div>
+                    <div class="cm-allnews__card-content">
+                        <div class="cm-allnews__card-meta">
+                            <span class="cm-allnews__card-issue">شماره ۱۵</span>
+                            <span>۲۲ بهمن ۱۴۰۲</span>
+                        </div>
+                        <h3 class="cm-allnews__card-title">فرصت‌های صادراتی معدن</h3>
+                        <p class="cm-allnews__card-desc">بررسی بازارهای هدف صادراتی محصولات معدنی ایران</p>
+                        <div class="cm-allnews__card-cta">
+                            <span>مطالعه خبرنامه</span>
+                            <svg viewBox="0 0 24 24" fill="none" width="14" height="14"><path d="M15 6L9 12L15 18" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </div>
+                    </div>
+                </a>
+            </article>
+
+            <!-- Card 8 -->
+            <article class="cm-allnews__card" data-category="analysis" data-title="قوانین و مقررات جدید معدن" data-issue="14">
+                <a href="/cafemadan/ff890939-1111-112ef-a709-2972442904933/newsletter-detail" class="cm-allnews__card-link">
+                    <div class="cm-allnews__card-cover">
+                        <img src="assets/images/newsletter-14.webp" alt="خبرنامه ۱۴" loading="lazy"/>
+                        <div class="cm-allnews__card-overlay"></div>
+                        <div class="cm-allnews__card-brand">
+                            <svg width="14" height="10" viewBox="0 0 16 11" fill="none"><polygon points="0,11 5,0 8,4 11,0 16,11" fill="#F28C28" opacity="0.9"/></svg>
+                            <span>کافه معدن</span>
+                        </div>
+                        <div class="cm-allnews__card-issue-num">شماره ۱۴</div>
+                    </div>
+                    <div class="cm-allnews__card-content">
+                        <div class="cm-allnews__card-meta">
+                            <span class="cm-allnews__card-issue">شماره ۱۴</span>
+                            <span>۵ بهمن ۱۴۰۲</span>
+                        </div>
+                        <h3 class="cm-allnews__card-title">قوانین و مقررات جدید معدن</h3>
+                        <p class="cm-allnews__card-desc">تحلیل تغییرات قانونی و تأثیر آن بر فعالان صنعت معدن</p>
+                        <div class="cm-allnews__card-cta">
+                            <span>مطالعه خبرنامه</span>
+                            <svg viewBox="0 0 24 24" fill="none" width="14" height="14"><path d="M15 6L9 12L15 18" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </div>
+                    </div>
+                </a>
+            </article>
+
+        </div>
+
+        <!-- Empty State -->
+        <div class="cm-allnews__empty" id="emptyState" style="display:none">
+            <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
+                <circle cx="28" cy="28" r="18" stroke="var(--anl-text-muted)" stroke-width="2" opacity="0.4"/>
+                <path d="M42 42L54 54" stroke="var(--anl-text-muted)" stroke-width="2" stroke-linecap="round" opacity="0.4"/>
+            </svg>
+            <p>خبرنامه‌ای با این مشخصات یافت نشد</p>
+        </div>
+    </div>
+
+    <!-- Contact / Communication Section -->
+    <div class="cm-allnews__contact">
+        <div class="cm-allnews__container">
+
+            <div class="cm-allnews__contact-header">
+                <div class="cm-allnews__contact-accent" aria-hidden="true"></div>
+                <h2 class="cm-allnews__contact-title">ارتباط با کافه معدن</h2>
+                <p class="cm-allnews__contact-subtitle">برای همکاری، پیشنهاد و سوالات با ما در تماس باشید</p>
+            </div>
+
+            <div class="cm-allnews__contact-grid">
+
+                <!-- Email -->
+                <a href="mailto:info@cafemadan.com" class="cm-allnews__contact-item">
+                    <div class="cm-allnews__contact-item-icon">
+                        <svg viewBox="0 0 24 24" fill="none" width="22" height="22">
+                            <rect x="2" y="4" width="20" height="16" rx="2" stroke="currentColor" stroke-width="1.6"/>
+                            <path d="M2 7L12 13L22 7" stroke="currentColor" stroke-width="1.6"/>
+                        </svg>
+                    </div>
+                    <div class="cm-allnews__contact-item-content">
+                        <span class="cm-allnews__contact-item-label">ایمیل</span>
+                        <span class="cm-allnews__contact-item-value">info@cafemadan.com</span>
+                    </div>
+                    <svg class="cm-allnews__contact-item-arrow" viewBox="0 0 24 24" fill="none" width="16" height="16">
+                        <path d="M15 6L9 12L15 18" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </a>
+
+                <!-- Phone -->
+                <a href="tel:+982133456789" class="cm-allnews__contact-item">
+                    <div class="cm-allnews__contact-item-icon">
+                        <svg viewBox="0 0 24 24" fill="none" width="22" height="22">
+                            <path d="M22 16.92V19.92C22 20.48 21.56 20.93 21 20.97C20.5 21 20 21 19.5 20.97C10.07 20.44 3.56 13.93 3.03 4.5C3 4 3 3.5 3.03 3C3.07 2.44 3.52 2 4.08 2H7.08C7.56 2 7.97 2.34 8.05 2.81C8.14 3.37 8.28 3.92 8.47 4.45C8.61 4.83 8.51 5.26 8.21 5.55L6.93 6.83C8.38 9.68 10.32 11.62 13.17 13.07L14.45 11.79C14.74 11.49 15.17 11.39 15.55 11.53C16.08 11.72 16.63 11.86 17.19 11.95C17.66 12.03 18 12.44 18 12.92V16.92C18 17.48 18.44 17.93 19 17.97C19.5 18 20 18 20.5 17.97C21.06 17.93 21.5 17.48 21.5 16.92H22Z" stroke="currentColor" stroke-width="1.6"/>
+                        </svg>
+                    </div>
+                    <div class="cm-allnews__contact-item-content">
+                        <span class="cm-allnews__contact-item-label">تلفن</span>
+                        <span class="cm-allnews__contact-item-value" dir="ltr">۰۲۱-۳۴۵۶۷۹</span>
+                    </div>
+                    <svg class="cm-allnews__contact-item-arrow" viewBox="0 0 24 24" fill="none" width="16" height="16">
+                        <path d="M15 6L9 12L15 18" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </a>
+
+                <!-- Location -->
+                <div class="cm-allnews__contact-item">
+                    <div class="cm-allnews__contact-item-icon">
+                        <svg viewBox="0 0 24 24" fill="none" width="22" height="22">
+                            <path d="M12 21C15.5 17.4 19 14.1764 19 10.2C19 6.22355 15.866 3 12 3C8.13401 3 5 6.22355 5 10.2C5 14.1764 8.5 17.4 12 21Z" stroke="currentColor" stroke-width="1.6"/>
+                            <circle cx="12" cy="10" r="3" stroke="currentColor" stroke-width="1.6"/>
+                        </svg>
+                    </div>
+                    <div class="cm-allnews__contact-item-content">
+                        <span class="cm-allnews__contact-item-label">آدرس</span>
+                        <span class="cm-allnews__contact-item-value">تهران، خیابان ولیعصر</span>
+                    </div>
+                </div>
+
+                <!-- Social -->
+                <div class="cm-allnews__contact-socials">
+                    <span class="cm-allnews__contact-socials-label">شبکه‌های اجتماعی:</span>
+                    <div class="cm-allnews__contact-socials-list">
+                        <a href="#" class="cm-anl-social cm-anl-social--instagram" aria-label="اینستاگرام">
+                            <svg viewBox="0 0 24 24" fill="none" width="18" height="18">
+                                <rect x="2" y="2" width="20" height="20" rx="5" stroke="currentColor" stroke-width="1.6"/>
+                                <circle cx="12" cy="12" r="5" stroke="currentColor" stroke-width="1.6"/>
+                                <circle cx="17.5" cy="6.5" r="1.5" fill="currentColor"/>
+                            </svg>
+                        </a>
+                        <a href="#" class="cm-anl-social cm-anl-social--telegram" aria-label="تلگرام">
+                            <svg viewBox="0 0 24 24" fill="none" width="18" height="18">
+                                <path d="M21.5 3.5L2.5 10.5L9.5 13.5L12.5 20.5L21.5 3.5Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+                            </svg>
+                        </a>
+                        <a href="#" class="cm-anl-social cm-anl-social--linkedin" aria-label="لینکدین">
+                            <svg viewBox="0 0 24 24" fill="none" width="18" height="18">
+                                <rect x="2" y="2" width="20" height="20" rx="3" stroke="currentColor" stroke-width="1.6"/>
+                                <path d="M8 10V16M8 8V8.01M12 16V12C12 11 13 10 14 10C15 10 16 11 16 12V16" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+                            </svg>
+                        </a>
+                        <a href="#" class="cm-anl-social cm-anl-social--twitter" aria-label="توییتر">
+                            <svg viewBox="0 0 24 24" fill="none" width="18" height="18">
+                                <path d="M4 4L11.07 13.03L4 20H6L12.07 14.07L17 20H20L12.43 10.43L19 4H17L11.43 9.43L7 4H4Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <!-- Newsletter Subscribe -->
+            <div class="cm-allnews__subscribe">
+                <div class="cm-allnews__subscribe-content">
+                    <h3 class="cm-allnews__subscribe-title">عضویت در خبرنامه</h3>
+                    <p class="cm-allnews__subscribe-desc">تازه‌ترین مطالب را مستقیماً در ایمیل خود دریافت کنید</p>
+                </div>
+                <form class="cm-allnews__subscribe-form" onsubmit="return false;">
+                    <input type="email" class="cm-allnews__subscribe-input" placeholder="ایمیل خود را وارد کنید..." aria-label="ایمیل"/>
+                    <button type="submit" class="cm-allnews__subscribe-btn">
+                        <span>عضویت</span>
+                        <svg viewBox="0 0 24 24" fill="none" width="16" height="16">
+                            <path d="M5 12H19M19 12L13 6M19 12L13 18" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                </form>
+            </div>
+
+        </div>
+    </div>
+
+</section>
+
+<script src="/js/all-newsletters.js"></script>
+</body>
+</html>

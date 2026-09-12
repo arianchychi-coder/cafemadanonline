@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>همه پادکست‌ها — کافه معدن</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/all-podcasts (1).css">
+</head>
+<body>
+
+<section class="cm-allpodcasts">
+
+    <!-- Background texture -->
+    <div class="cm-allpodcasts__bg" aria-hidden="true">
+        <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+                <pattern id="apGeo" x="0" y="0" width="220" height="220" patternUnits="userSpaceOnUse">
+                    <path d="M0,55 Q55,40 110,55 T220,50" fill="none" stroke="var(--ap-geo-line)" stroke-width="0.5"/>
+                    <path d="M0,110 Q70,95 140,110 T220,105" fill="none" stroke="var(--ap-geo-line)" stroke-width="0.5"/>
+                    <path d="M0,165 Q60,150 120,165 T220,160" fill="none" stroke="var(--ap-geo-line)" stroke-width="0.5"/>
+                </pattern>
+            </defs>
+            <rect width="100%" height="100%" fill="url(#apGeo)"/>
+        </svg>
+    </div>
+
+    <div class="cm-allpodcasts__glow" aria-hidden="true"></div>
+
+    <!-- Hero Header -->
+    <div class="cm-allpodcasts__hero">
+        <div class="cm-allpodcasts__container">
+
+            <!-- Top bar: Back + Theme Toggle -->
+            <div class="cm-allpodcasts__topbar">
+                <a href="/cafemadan/vf902156-6677-62ef-a309-8765689349380/pocast" class="cm-allpodcasts__back" aria-label="بازگشت">
+                    <svg viewBox="0 0 24 24" fill="none" width="18" height="18">
+                        <path d="M9 6L15 12L9 18" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    بازگشت
+                </a>
+
+                <!-- Theme Toggle -->
+                <button class="cm-theme-toggle" id="themeToggle" type="button" aria-label="تغییر تم">
+                    <span class="cm-theme-toggle__track">
+                        <span class="cm-theme-toggle__thumb">
+                            <svg class="cm-theme-toggle__icon cm-theme-toggle__icon--sun" viewBox="0 0 24 24" fill="none" width="14" height="14">
+                                <circle cx="12" cy="12" r="4" fill="currentColor"/>
+                                <path d="M12 2V4M12 20V22M4 12H2M22 12H20M6.34 6.34L4.93 4.93M19.07 19.07L17.66 17.66M6.34 17.66L4.93 19.07M19.07 4.93L17.66 6.34" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+                            </svg>
+                            <svg class="cm-theme-toggle__icon cm-theme-toggle__icon--moon" viewBox="0 0 24 24" fill="none" width="14" height="14">
+                                <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" fill="currentColor"/>
+                            </svg>
+                        </span>
+                    </span>
+                </button>
+            </div>
+
+            <div class="cm-allpodcasts__accent" aria-hidden="true"></div>
+            <h1 class="cm-allpodcasts__title">آرشیو پادکست‌ها</h1>
+            <p class="cm-allpodcasts__subtitle">مجموعه کامل گفت‌وگوها و روایت‌های تخصصی کافه معدن</p>
+
+            <!-- Search Bar -->
+            <div class="cm-allpodcasts__search-wrap">
+                <svg class="cm-allpodcasts__search-icon" viewBox="0 0 24 24" fill="none" width="20" height="20">
+                    <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="1.6"/>
+                    <path d="M16 16L20 20" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+                </svg>
+                <input
+                    type="text"
+                    class="cm-allpodcasts__search"
+                    id="podcastSearch"
+                    placeholder="جستجو در پادکست‌ها..."
+                    aria-label="جستجو در پادکست‌ها"
+                />
+                <button class="cm-allpodcasts__search-clear" id="searchClear" type="button" aria-label="پاک کردن جستجو" style="display:none">
+                    <svg viewBox="0 0 24 24" fill="none" width="16" height="16">
+                        <path d="M6 6L18 18M18 6L6 18" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Filter Chips -->
+            <div class="cm-allpodcasts__filters" role="tablist">
+                <button class="cm-allpodcasts__chip cm-allpodcasts__chip--active" data-filter="all" role="tab" aria-selected="true">همه</button>
+                <button class="cm-allpodcasts__chip" data-filter="market" role="tab" aria-selected="false">بازار و اقتصاد</button>
+                <button class="cm-allpodcasts__chip" data-filter="tech" role="tab" aria-selected="false">فناوری</button>
+                <button class="cm-allpodcasts__chip" data-filter="management" role="tab" aria-selected="false">مدیریت</button>
+                <button class="cm-allpodcasts__chip" data-filter="environment" role="tab" aria-selected="false">محیط زیست</button>
+            </div>
+
+            <!-- Results Count -->
+            <div class="cm-allpodcasts__results">
+                <span id="resultsCount"></span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Podcast Grid -->
+  <div class="cm-allpodcasts__container">
+
+    <div class="cm-allpodcasts__grid" id="podcastGrid">
+        <!-- پادکست‌ها به صورت داینامیک اینجا قرار می‌گیرند -->
+    </div>
+
+    <!-- Empty State -->
+    <div class="cm-allpodcasts__empty" id="emptyState" style="display:none">
+        <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
+            <circle cx="28" cy="28" r="18"
+                    stroke="var(--ap-text-muted)"
+                    stroke-width="2"
+                    opacity="0.4"/>
+            <path d="M42 42L54 54"
+                  stroke="var(--ap-text-muted)"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  opacity="0.4"/>
+        </svg>
+
+        <p>پادکستی با این مشخصات یافت نشد</p>
+    </div>
+
+</div>
+
+</section>
+
+<!-- ============================================
+     STICKY PODCAST PLAYER
+     ============================================ -->
+<div class="cm-sticky-player" id="stickyPlayer" aria-hidden="true" role="region" aria-label="پخش‌کننده پادکست">
+
+    <div class="cm-sticky-player__progress-track">
+        <div class="cm-sticky-player__progress-fill" id="stickyProgressFill" style="width: 0%"></div>
+        <input class="cm-sticky-player__progress-input" id="stickyProgressInput" type="range" min="0" max="100" value="0" step="0.1" aria-label="پیشرفت پادکست"/>
+    </div>
+
+    <div class="cm-sticky-player__inner">
+
+        <div class="cm-sticky-player__info">
+            <div class="cm-sticky-player__cover-wrap">
+                <img class="cm-sticky-player__cover" id="stickyCover" src="" alt=""/>
+            </div>
+            <div class="cm-sticky-player__meta">
+                <span class="cm-sticky-player__title" id="stickyTitle">—</span>
+                <span class="cm-sticky-player__episode" id="stickyEpisode">—</span>
+            </div>
+        </div>
+
+        <div class="cm-sticky-player__controls-center">
+
+            <div class="cm-sticky-player__speed-wrap">
+                <button class="cm-sticky-player__speed-btn" id="speedBtn" type="button" aria-label="تغییر سرعت پخش" title="سرعت پخش">
+                    <svg viewBox="0 0 24 24" fill="none" width="14" height="14">
+                        <path d="M13 2L3 14H12L11 22L21 10H12L13 2Z" fill="currentColor"/>
+                    </svg>
+                    <span class="cm-sticky-player__speed-value" id="speedValue">۱x</span>
+                </button>
+                <div class="cm-sticky-player__speed-dropdown" id="speedDropdown">
+                    <button class="cm-sticky-player__speed-option" data-speed="0.5">۰.۵x</button>
+                    <button class="cm-sticky-player__speed-option" data-speed="0.75">۰.۷۵x</button>
+                    <button class="cm-sticky-player__speed-option cm-sticky-player__speed-option--active" data-speed="1">۱x</button>
+                    <button class="cm-sticky-player__speed-option" data-speed="1.25">۱.۲۵x</button>
+                    <button class="cm-sticky-player__speed-option" data-speed="1.5">۱.x</button>
+                    <button class="cm-sticky-player__speed-option" data-speed="2">۲x</button>
+                </div>
+            </div>
+
+            <button class="cm-sticky-player__play-btn" id="stickyPlayBtn" type="button" aria-label="پخش/توقف">
+                <svg class="cm-sticky-player__play-icon" viewBox="0 0 24 24" fill="none" width="18" height="18">
+                    <path d="M8 5.5L19 12L8 18.5V5.5Z" fill="currentColor"/>
+                </svg>
+                <svg class="cm-sticky-player__pause-icon" viewBox="0 0 24 24" fill="none" width="18" height="18" style="display:none">
+                    <rect x="6" y="5" width="4" height="14" rx="1" fill="currentColor"/>
+                    <rect x="14" y="5" width="4" height="14" rx="1" fill="currentColor"/>
+                </svg>
+            </button>
+
+            <div class="cm-sticky-player__volume-wrap">
+                <button class="cm-sticky-player__volume-btn" id="volumeBtn" type="button" aria-label="کنترل صدا">
+                    <svg class="cm-volume-icon cm-volume-icon--high" viewBox="0 0 24 24" fill="none" width="18" height="18">
+                        <path d="M11 5L6 9H2V15H6L11 19V5Z" fill="currentColor"/>
+                        <path d="M15.54 8.46C16.4774 9.39764 17.004 10.6692 17.004 11.995C17.004 13.3208 16.4774 14.5924 15.54 15.53" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+                        <path d="M19.07 4.93C21.0146 6.87465 22.104 9.51465 22.104 12.265C22.104 15.0154 21.0146 17.6554 19.07 19.6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+                    </svg>
+                    <svg class="cm-volume-icon cm-volume-icon--low" viewBox="0 0 24 24" fill="none" width="18" height="18" style="display:none">
+                        <path d="M11 5L6 9H2V15H6L11 19V5Z" fill="currentColor"/>
+                        <path d="M15.54 8.46C16.4774 9.39764 17.004 10.6692 17.004 11.995C17.004 13.3208 16.4774 14.5924 15.54 15.53" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+                    </svg>
+                    <svg class="cm-volume-icon cm-volume-icon--mute" viewBox="0 0 24 24" fill="none" width="18" height="18" style="display:none">
+                        <path d="M11 5L6 9H2V15H6L11 19V5Z" fill="currentColor"/>
+                        <line x1="22" y1="9" x2="16" y2="15" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+                        <line x1="16" y1="9" x2="22" y2="15" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+                    </svg>
+                </button>
+                <div class="cm-sticky-player__volume-slider-wrap">
+                    <div class="cm-sticky-player__volume-track">
+                        <div class="cm-sticky-player__volume-fill" id="volumeFill" style="width: 80%"></div>
+                    </div>
+                    <input class="cm-sticky-player__volume-input" id="volumeInput" type="range" min="0" max="100" value="80" step="1" aria-label="ولوم صدا"/>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="cm-sticky-player__controls-right">
+            <div class="cm-sticky-player__time" id="stickyTime">
+                <span class="cm-sticky-player__time-current">۰:۰۰</span>
+                <span class="cm-sticky-player__time-sep">/</span>
+                <span class="cm-sticky-player__time-total">۰:۰۰</span>
+            </div>
+            <button class="cm-sticky-player__close" id="stickyCloseBtn" type="button" aria-label="بستن پخش‌کننده">
+                <svg viewBox="0 0 24 24" fill="none" width="18" height="18">
+                    <path d="M6 6L18 18M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+            </button>
+        </div>
+
+    </div>
+</div>
+
+<div class="cm-sticky-player-spacer" id="stickySpacer" style="display:none"></div>
+
+<script src="/js/all-podcasts (1).js"></script>
+
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    loadAllPodcasts();
+});
+
+
+/* =========================
+   Helpers
+========================= */
+
+function toPersianDigits(value) {
+    if (value === null || value === undefined) return "";
+
+    return String(value).replace(/\d/g, digit => {
+        return "۰۱۲۳۴۵۶۷۸۹"[digit];
+    });
+}
+
+
+function escapeHtml(value) {
+    if (value === null || value === undefined) return "";
+
+    return String(value)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+}
+
+
+function formatDuration(time) {
+    if (!time) return "";
+
+    const parts = String(time).split(":");
+
+    if (parts.length === 2) {
+        const minutes = parseInt(parts[0], 10);
+
+        if (!isNaN(minutes)) {
+            return `${toPersianDigits(minutes)} دقیقه`;
+        }
+    }
+
+    return toPersianDigits(time);
+}
+
+
+function formatDate(dateValue) {
+    if (!dateValue) return "";
+
+    const date = new Date(dateValue);
+
+    if (isNaN(date.getTime())) {
+        return escapeHtml(dateValue);
+    }
+
+    return new Intl.DateTimeFormat("fa-IR", {
+        year: "numeric",
+        month: "long",
+        day: "numeric"
+    }).format(date);
+}
+
+
+/* =========================
+   Load All Podcasts
+========================= */
+
+async function loadAllPodcasts() {
+
+    const podcastGrid = document.getElementById("podcastGrid");
+    const emptyState = document.getElementById("emptyState");
+
+    if (!podcastGrid) {
+        console.error("podcastGrid پیدا نشد!");
+        return;
+    }
+
+    try {
+
+        const response = await fetch("/api/podcast");
+
+        console.log("STATUS:", response.status);
+
+        if (!response.ok) {
+            throw new Error("API Error: " + response.status);
+        }
+
+        const podcasts = await response.json();
+
+        console.log("PODCASTS:", podcasts);
+
+
+        /* فقط پادکست‌های منتشر شده */
+
+        const publishedPodcasts = podcasts
+            .filter(podcast => podcast.status === "published")
+            .sort(
+                (a, b) =>
+                    new Date(b.createdAT) -
+                    new Date(a.createdAT)
+            );
+
+
+        console.log("PUBLISHED:", publishedPodcasts);
+
+
+        podcastGrid.innerHTML = "";
+
+
+        /* اگر پادکستی وجود نداشت */
+
+        if (publishedPodcasts.length === 0) {
+
+            podcastGrid.style.display = "none";
+
+            if (emptyState) {
+                emptyState.style.display = "flex";
+            }
+
+            return;
+        }
+
+
+        /* نمایش Grid */
+
+        podcastGrid.style.display = "grid";
+
+        if (emptyState) {
+            emptyState.style.display = "none";
+        }
+
+
+        /* ساخت کارت‌ها */
+
+        publishedPodcasts.forEach(podcast => {
+
+            podcastGrid.insertAdjacentHTML(
+                "beforeend",
+                createAllPodcastCard(podcast)
+            );
+
+        });
+
+
+        console.log(
+            "GRID HTML:",
+            podcastGrid.innerHTML
+        );
+
+
+        /* فعال کردن پلیر */
+
+        initAllPodcastPlayers();
+
+
+    } catch (error) {
+
+        console.error(
+            "LOAD PODCAST ERROR:",
+            error
+        );
+
+        podcastGrid.innerHTML = "";
+
+        podcastGrid.style.display = "none";
+
+        if (emptyState) {
+            emptyState.style.display = "flex";
+        }
+
+    }
+}
+
+
+/* =========================
+   Podcast Card
+========================= */
+
+function createAllPodcastCard(podcast) {
+
+    const id = escapeHtml(podcast.id);
+
+    const episode = escapeHtml(
+        podcast.episod || ""
+    );
+
+    const title = escapeHtml(
+        podcast.title || "بدون عنوان"
+    );
+
+    const cover = podcast.cover
+        ? escapeHtml(podcast.cover)
+        : "assets/images/podcast-default.webp";
+
+    const time = escapeHtml(
+        podcast.time || ""
+    );
+
+    const audio = escapeHtml(
+        podcast.audio || ""
+    );
+
+    const date = formatDate(
+        podcast.createdAT
+    );
+
+
+    return `
+        <article
+            class="cm-allpodcasts__card"
+            data-id="${id}"
+            data-category="podcast"
+            data-title="${title}"
+            data-episode="${episode}"
+            data-duration="${time}"
+            data-cover="${cover}">
+
+            <!-- ================= MEDIA ================= -->
+
+            <div class="cm-allpodcasts__card-media">
+
+                <img
+                    src="${cover}"
+                    alt="${title}"
+                    loading="lazy"
+                    onerror="this.src='assets/images/podcast-default.webp';"
+                />
+
+
+                <div class="cm-allpodcasts__card-overlay"></div>
+
+
+                <!-- Labels -->
+
+                <div class="cm-allpodcasts__card-labels">
+
+                    <div class="cm-allpodcasts__card-ep">
+
+                        <span class="cm-allpodcasts__card-ep-word">
+                            اپیزود
+                        </span>
+
+                        <span class="cm-allpodcasts__card-ep-num">
+                            ${toPersianDigits(episode)}
+                        </span>
+
+                    </div>
+
+
+                    <div class="cm-allpodcasts__card-brand">
+                        کافه معدن
+                    </div>
+
+                </div>
+
+
+                <!-- Waveform -->
+
+                <div
+                    class="cm-allpodcasts__card-wave"
+                    aria-hidden="true">
+
+                    <svg viewBox="0 0 120 30">
+
+                        <g
+                            stroke="rgba(255,255,255,0.5)"
+                            stroke-width="1.3"
+                            stroke-linecap="round">
+
+                            <line x1="2" y1="15" x2="2" y2="11"/>
+                            <line x1="8" y1="15" x2="8" y2="7"/>
+                            <line x1="14" y1="15" x2="14" y2="4"/>
+                            <line x1="20" y1="15" x2="20" y2="9"/>
+                            <line x1="26" y1="15" x2="26" y2="6"/>
+                            <line x1="32" y1="15" x2="32" y2="11"/>
+                            <line x1="38" y1="15" x2="38" y2="3"/>
+                            <line x1="44" y1="15" x2="44" y2="8"/>
+                            <line x1="50" y1="15" x2="50" y2="5"/>
+                            <line x1="56" y1="15" x2="56" y2="10"/>
+                            <line x1="62" y1="15" x2="62" y2="7"/>
+                            <line x1="68" y1="15" x2="68" y2="2"/>
+                            <line x1="74" y1="15" x2="74" y2="9"/>
+                            <line x1="80" y1="15" x2="80" y2="4"/>
+                            <line x1="86" y1="15" x2="86" y2="10"/>
+                            <line x1="92" y1="15" x2="92" y2="6"/>
+                            <line x1="98" y1="15" x2="98" y2="11"/>
+                            <line x1="104" y1="15" x2="104" y2="8"/>
+                            <line x1="110" y1="15" x2="110" y2="12"/>
+                            <line x1="116" y1="15" x2="116" y2="10"/>
+
+                        </g>
+
+                    </svg>
+
+                </div>
+
+
+                <!-- Play -->
+
+                <button
+                    class="cm-allpodcasts__card-play"
+                    type="button"
+                    aria-label="پخش">
+
+                    <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        width="14"
+                        height="14">
+
+                        <path
+                            d="M8 5.5L19 12L8 18.5V5.5Z"
+                            fill="currentColor"/>
+
+                    </svg>
+
+                </button>
+
+            </div>
+
+
+            <!-- ================= CONTENT ================= -->
+
+            <div class="cm-allpodcasts__card-content">
+
+                <h3 class="cm-allpodcasts__card-title">
+                    ${title}
+                </h3>
+
+
+                <div class="cm-allpodcasts__card-meta">
+
+                    <span>
+                        ${date}
+                    </span>
+
+                    <span>
+                        ${formatDuration(time)}
+                    </span>
+
+                </div>
+
+
+                <!-- ================= PLATFORMS ================= -->
+
+                <div class="cm-allpodcasts__card-platforms">
+
+                    <span class="cm-allpodcasts__card-platforms-label">
+                        شنیدن در:
+                    </span>
+
+
+                    <div class="cm-allpodcasts__card-platforms-list">
+
+
+                        <!-- Apple Music -->
+
+                        <a
+                            href="https://music.apple.com/us/new"
+                            class="cm-plat cm-plat--apple"
+                            data-tooltip="Apple Music">
+
+                            <svg
+                                viewBox="0 0 24 24"
+                                fill="currentColor">
+
+                                <path d="M12 2C6.49 2 2 6.49 2 12s4.49 10 10 10 10-4.49 10-10S17.51 2 12 2Zm4.5 13.25c0 1.24-1.01 2.25-2.25 2.25S12 16.49 12 15.25 13.01 13 14.25 13c.46 0 .89.14 1.25.38V8.25L11 9.5v5.75c0 1.24-1.01 2.25-2.25 2.25S6.5 16.49 6.5 15.25 7.51 13 8.75 13c.46 0 .89.14 1.25.38V7.62c0-.45.3-.84.73-.96l5-1.5c.3-.09.62-.03.87.16.25.19.4.49.4.8v9.13Z"/>
+
+                            </svg>
+
+                            <span class="cm-plat__tooltip">
+                                Apple Music
+                            </span>
+
+                        </a>
+
+
+
+                        <!-- Castbox -->
+
+                        <a
+                            href="https://castbox.fm/"
+                            class="cm-plat cm-plat--castbox"
+                            data-tooltip="Castbox">
+
+                            <svg
+                                viewBox="0 0 24 24"
+                                fill="currentColor">
+
+                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15h-2v-6h2v6zm4 0h-2v-6h2v6z"/>
+
+                            </svg>
+
+                            <span class="cm-plat__tooltip">
+                                Castbox
+                            </span>
+
+                        </a>
+
+
+                        <!-- SoundCloud -->
+
+                        <a
+                            href="https://shenoto.com/"
+                            class="cm-plat cm-plat--soundcloud"
+                            data-tooltip="SoundCloud">
+
+                            <svg
+                                viewBox="0 0 24 24"
+                                fill="currentColor">
+
+                                <path d="M1.175 12.225c-.051 0-.094.046-.101.1l-.233 2.154.233 2.105c.007.058.05.098.101.098.05 0 .09-.04.099-.098l.255-2.105-.27-2.154c-.009-.057-.05-.1-.1-.1zm12.075 1.095c0-.99-.81-1.8-1.8-1.8-.27 0-.525.06-.75.165-.165-2.145-1.965-3.84-4.155-3.84-.675 0-1.32.15-1.905.405-.225.105-.285.21-.285.42v5.85c0 .225.18.405.405.405h7.875c.99 0 1.8-.81 1.8-1.8v.195z"/>
+
+                            </svg>
+
+                            <span class="cm-plat__tooltip">
+                                SoundCloud
+                            </span>
+
+                        </a>
+
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- Audio -->
+
+            <audio
+                class="cm-allpodcasts__card-audio"
+                preload="metadata"
+                src="${audio}">
+            </audio>
+
+        </article>
+    `;
+}
+
+
+/* =========================
+   Audio Player
+========================= */
+
+function initAllPodcastPlayers() {
+
+    const cards = document.querySelectorAll(
+        ".cm-allpodcasts__card"
+    );
+
+    let currentAudio = null;
+    let currentCard = null;
+
+
+    cards.forEach(card => {
+
+        const audio = card.querySelector(
+            ".cm-allpodcasts__card-audio"
+        );
+
+        const playButton = card.querySelector(
+            ".cm-allpodcasts__card-play"
+        );
+
+
+        if (!audio || !playButton) return;
+
+
+        playButton.addEventListener("click", async () => {
+
+            try {
+
+                /* توقف پادکست قبلی */
+
+                if (
+                    currentAudio &&
+                    currentAudio !== audio
+                ) {
+
+                    currentAudio.pause();
+
+                    if (currentCard) {
+                        resetAllPodcastCard(
+                            currentCard
+                        );
+                    }
+
+                }
+
+
+                /* Play */
+
+                if (audio.paused) {
+
+                    await audio.play();
+
+                    currentAudio = audio;
+                    currentCard = card;
+
+
+                    playButton.innerHTML = `
+                        <svg
+                            viewBox="0 0 24 24"
+                            fill="currentColor"
+                            width="14"
+                            height="14">
+
+                            <rect
+                                x="7"
+                                y="5"
+                                width="3"
+                                height="14"
+                                rx="1"/>
+
+                            <rect
+                                x="14"
+                                y="5"
+                                width="3"
+                                height="14"
+                                rx="1"/>
+
+                        </svg>
+                    `;
+
+                }
+
+                /* Pause */
+
+                else {
+
+                    audio.pause();
+
+                    resetAllPodcastCard(card);
+
+                }
+
+            } catch (error) {
+
+                console.error(
+                    "Audio play error:",
+                    error
+                );
+
+            }
+
+        });
+
+
+        /* پایان پادکست */
+
+        audio.addEventListener("ended", () => {
+
+            audio.currentTime = 0;
+
+            resetAllPodcastCard(card);
+
+
+            if (currentAudio === audio) {
+
+                currentAudio = null;
+                currentCard = null;
+
+            }
+
+        });
+
+    });
+
+}
+
+
+/* =========================
+   Reset Play Button
+========================= */
+
+function resetAllPodcastCard(card) {
+
+    const playButton = card.querySelector(
+        ".cm-allpodcasts__card-play"
+    );
+
+    if (!playButton) return;
+
+
+    playButton.innerHTML = `
+        <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            width="14"
+            height="14">
+
+            <path
+                d="M8 5.5L19 12L8 18.5V5.5Z"
+                fill="currentColor"/>
+
+        </svg>
+    `;
+}
+</script>
+</body>
+</html>

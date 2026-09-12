@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl" class="no-js">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#222222">
+  <meta name="robots" content="noindex">
+  <meta name="description" content="خطای ۴۰۴ — مسیر موردنظر در کافه معدن پیدا نشد. مسیرهای جایگزین در دسترس است.">
+  <title>خطای ۴۰۴ — مسیر پیدا نشد | کافه معدن</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=IBM+Plex+Mono:wght@400;500;600&family=Lalezar&family=Vazirmatn:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="/css/404page.css">
+  <script src="/js/404page.js" defer></script>
+</head>
+<body>
+
+  <!-- ═══════════ بخش اصلی ═══════════ -->
+  <main class="wrap main">
+
+    <!-- ستون محتوا -->
+    <section class="content" aria-labelledby="err-heading">
+
+      <p class="kicker mono fx" style="--d:.05s">
+        <span class="kicker-mark" aria-hidden="true"></span>
+        خطای مسیریابی <span dir="ltr">— NAV ERR / 404</span>
+      </p>
+
+      <h1 id="err-heading" class="sr-only">خطای ۴۰۴ — مسیر موردنظر پیدا نشد</h1>
+
+      <!-- عدد ۴۰۴: صفر به‌صورت نشان «مسدود» طراحی شده است -->
+      <div class="number-wrap fx" style="--d:.12s">
+        <div class="number" aria-hidden="true">
+          <span>4</span><span class="zero"></span><span>4</span>
+        </div>
+        <div class="zero-callout" aria-hidden="true">
+          <span class="zc-line"></span>
+          <span class="zc-text mono">نقطهٔ قطع مسیر</span>
+        </div>
+      </div>
+
+      <p class="headline fx" style="--d:.2s">این مسیر به مقصد نمی‌رسد.</p>
+
+      <p class="copy fx" style="--d:.27s">
+        به‌نظر می‌رسد آدرس واردشده اشتباه است یا این صفحه دیگر در دسترس نیست.
+        شبکهٔ مسیرهای کافه معدن همچنان پابرجاست؛ از یکی از مسیرهای زیر ادامه دهید.
+      </p>
+
+      <div class="actions fx" style="--d:.34s">
+        <a class="btn btn-primary" href="/">
+          بازگشت به صفحهٔ اصلی
+          <span class="btn-arrow" aria-hidden="true">←</span>
+        </a>
+        <button class="btn btn-ghost" type="button" id="back-btn">
+          بازگشت به صفحهٔ قبل
+        </button>
+      </div>
+
+      <ul class="meta mono fx" style="--d:.42s" role="list">
+        <li>کد وضعیت: <b>۴۰۴</b></li>
+        <li>وضعیت مسیر: <b class="state">مسدود</b></li>
+        <li>ساعت سیستم: <span class="clock" id="live-clock" dir="ltr">--:--:--</span></li>
+      </ul>
+
+    </section>
+
+    <!-- ستون نقشه: شیت فنی مسیر مسدودشده -->
+    <aside class="sheet fx" style="--d:.3s" aria-label="نقشهٔ مسیر مسدودشده">
+      <div class="sheet-head">
+        <span>نقشهٔ مسیر دسترسی</span>
+        <span class="mono" dir="ltr">ROUTE PLAN · SHT-404</span>
+      </div>
+
+      <svg class="route-svg" viewBox="0 0 520 640" role="img"
+           aria-label="نمودار فنی مسیر: از نقطهٔ ورودی تا مقصد که در مختصات N-404 مسدود شده است">
+        <title>نقشهٔ مسیر مسدودشده</title>
+
+        <defs>
+          <pattern id="grid" width="26" height="26" patternUnits="userSpaceOnUse">
+            <path d="M 26 0 L 0 0 0 26" fill="none" stroke="rgba(255,255,255,.07)" stroke-width="1"/>
+          </pattern>
+          <pattern id="hatch" width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+            <line x1="0" y1="0" x2="0" y2="7" stroke="#F28C28" stroke-width="2.2"/>
+          </pattern>
+          <marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M0 0 L10 5 L0 10 z" fill="rgba(255,255,255,.8)"/>
+          </marker>
+        </defs>
+
+        <!-- قاب شیت نقشه -->
+        <rect x="10" y="10" width="500" height="620" fill="#222222" stroke="#FFFFFF" stroke-width="2"/>
+        <rect x="22" y="22" width="476" height="486" fill="url(#grid)" stroke="rgba(255,255,255,.3)" stroke-width="1"/>
+
+        <!-- جهت شمال -->
+        <g class="fade" style="animation-delay:.5s">
+          <line x1="46" y1="42" x2="46" y2="70" stroke="rgba(255,255,255,.8)" stroke-width="1.5"/>
+          <path d="M46 33 L41 45 L51 45 Z" fill="rgba(255,255,255,.8)"/>
+          <text x="58" y="52" class="mono-sm">N</text>
+        </g>
+
+        <!-- ناحیهٔ هاش‌خوردهٔ انسداد -->
+        <g class="fade" style="animation-delay:.85s">
+          <rect x="104" y="60" width="88" height="80" fill="url(#hatch)" opacity=".3"/>
+          <rect x="104" y="60" width="88" height="80" fill="none" stroke="rgba(255,255,255,.45)" stroke-width="1" stroke-dasharray="4 4"/>
+        </g>
+
+        <!-- خط اندازه -->
+        <g class="fade" style="animation-delay:.7s" opacity=".85">
+          <line x1="234" y1="368" x2="234" y2="502" stroke="rgba(255,255,255,.3)" stroke-width="1"/>
+          <line x1="380" y1="474" x2="380" y2="502" stroke="rgba(255,255,255,.3)" stroke-width="1"/>
+          <line x1="234" y1="500" x2="380" y2="500" stroke="rgba(255,255,255,.8)" stroke-width="1" marker-start="url(#arr)" marker-end="url(#arr)"/>
+          <text x="307" y="492" text-anchor="middle" class="mono-sm">۴۰۴ m</text>
+        </g>
+
+        <!-- مسیر اصلی -->
+        <path id="route-path" class="route-base"
+              d="M 470 470 L 380 470 L 380 364 L 234 364 L 234 240 L 136 142 L 136 96"/>
+        <path class="route-scan" aria-hidden="true"
+              d="M 470 470 L 380 470 L 380 364 L 234 364 L 234 240 L 136 142 L 136 96"/>
+
+        <!-- نقاط مسیر -->
+        <rect class="wp fade" style="animation-delay:.3s" x="376.5" y="466.5" width="7" height="7"/>
+        <rect class="wp fade" style="animation-delay:.4s" x="376.5" y="360.5" width="7" height="7"/>
+        <rect class="wp fade" style="animation-delay:.5s" x="230.5" y="360.5" width="7" height="7"/>
+        <rect class="wp fade" style="animation-delay:.6s" x="230.5" y="236.5" width="7" height="7"/>
+        <rect class="wp fade" style="animation-delay:.7s" x="132.5" y="138.5" width="7" height="7"/>
+
+        <g class="mono-sm fade" style="animation-delay:.6s">
+          <text x="388" y="460">A-1</text>
+          <text x="388" y="356">A-2</text>
+          <text x="242" y="356">B-1</text>
+          <text x="242" y="232">B-2</text>
+        </g>
+
+        <!-- نقطهٔ ورودی -->
+        <g class="fade" style="animation-delay:.2s">
+          <circle cx="470" cy="470" r="11" fill="none" stroke="rgba(255,255,255,.8)" stroke-width="1.5" stroke-dasharray="3 3"/>
+          <circle cx="470" cy="470" r="5.5" fill="#FFFFFF"/>
+          <text x="454" y="492" class="mono-sm">ورودی / ENTRY</text>
+        </g>
+
+        <!-- گره انسداد -->
+        <g class="fade" style="animation-delay:1s">
+          <circle class="pulse" cx="136" cy="96" r="18" fill="none" stroke="#F28C28" stroke-width="2"/>
+          <circle cx="136" cy="96" r="17" fill="#222222" stroke="#FFFFFF" stroke-width="2"/>
+          <line x1="128" y1="88" x2="144" y2="104" stroke="#FFFFFF" stroke-width="2.5"/>
+          <line x1="144" y1="88" x2="128" y2="104" stroke="#FFFFFF" stroke-width="2.5"/>
+          <path d="M153 87 L162 83 L162 91 Z" fill="#F28C28"/>
+          <rect x="162" y="76" width="86" height="22" fill="#F28C28"/>
+          <text x="205" y="91" text-anchor="middle" class="fa-flag">مسیر مسدود</text>
+          <text x="148" y="158" class="mono-code">N-404</text>
+        </g>
+
+        <!-- اسکنر متحرک روی مسیر -->
+        <rect class="scanner" x="-4" y="-4" width="8" height="8"/>
+
+        <!-- جدول مشخصات (Title Block) -->
+        <g class="titleblock fade" style="animation-delay:.45s">
+          <rect x="22" y="508" width="476" height="110" fill="#222222" stroke="rgba(255,255,255,.4)" stroke-width="1.5"/>
+          <line x1="180" y1="508" x2="180" y2="618" stroke="rgba(255,255,255,.25)" stroke-width="1"/>
+          <line x1="340" y1="508" x2="340" y2="618" stroke="rgba(255,255,255,.25)" stroke-width="1"/>
+          <line x1="22" y1="563" x2="498" y2="563" stroke="rgba(255,255,255,.25)" stroke-width="1"/>
+
+          <text x="486" y="524" class="tb-l">پروژه</text>
+          <text x="486" y="548" class="tb-v">کافه معدن</text>
+          <text x="326" y="524" class="tb-l">برگه</text>
+          <text x="326" y="548" class="tb-v">۴۰۴</text>
+          <text x="166" y="524" class="tb-l">موضوع</text>
+          <text x="166" y="548" class="tb-v">نقشهٔ مسیر</text>
+
+          <text x="486" y="579" class="tb-l">مقیاس</text>
+          <text x="486" y="603" class="tb-v">۱:۴۰۴</text>
+          <text x="326" y="579" class="tb-l">وضعیت</text>
+          <text x="326" y="603" class="tb-v tb-warn">مسدود</text>
+          <text x="166" y="579" class="tb-l">تاریخ صدور</text>
+          <text x="166" y="603" class="tb-v" id="sheet-date">—</text>
+        </g>
+      </svg>
+
+      <div class="sheet-foot">
+        <div class="hazard hazard-thin" aria-hidden="true"></div>
+      </div>
+    </aside>
+
+  </main>
+
+  <!-- ═══════════ مسیرهای جایگزین ═══════════ -->
+  <section class="wrap routes fx" style="--d:.5s" aria-labelledby="routes-title">
+    <div class="routes-head">
+      <h2 id="routes-title">مسیرهای جایگزین</h2>
+      <span class="mono" dir="ltr">ALTERNATE ROUTES</span>
+    </div>
+    <ul class="routes-list" role="list">
+      <li>
+        <a class="route-link" href="/cafemadan/90112233-4455-42fa-b999-999999999999/index">
+          <span class="route-idx" aria-hidden="true">۰۱</span>
+          <span class="route-body">
+            <span class="route-name">صفحهٔ اصلی</span>
+            <span class="route-desc">نقطهٔ شروع همهٔ مسیرهای سایت</span>
+          </span>
+          <span class="route-arrow" aria-hidden="true">←</span>
+        </a>
+      </li>
+      <li>
+        <a class="route-link" href="/cafemadan/c2334455-7788-45cd-e303-303030303030/aboutus">
+          <span class="route-idx" aria-hidden="true">۰۲</span>
+          <span class="route-body">
+            <span class="route-name">دربارهٔ کافه معدن</span>
+            <span class="route-desc">آشنایی با برند، تیم و رویکرد ما</span>
+          </span>
+          <span class="route-arrow" aria-hidden="true">←</span>
+        </a>
+      </li>
+      <li>
+        <a class="route-link" href="/cafemadan/d3445566-8899-46de-f404-404040404040/call">
+          <span class="route-idx" aria-hidden="true">۰۳</span>
+          <span class="route-body">
+            <span class="route-name">تماس با ما</span>
+            <span class="route-desc">گزارش مشکل یا ارسال پیام مستقیم</span>
+          </span>
+          <span class="route-arrow" aria-hidden="true">←</span>
+        </a>
+      </li>
+    </ul>
+  </section>
+
+  <!-- ═══════════ فوتر ═══════════ -->
+  <footer class="footer">
+    <div class="hazard" aria-hidden="true"></div>
+    <div class="footer-bar">
+      <div class="wrap footer-inner">
+        <p class="footer-brand">کافه معدن <span class="mono" dir="ltr">KAFE MADAN</span></p>
+        <p class="footer-note">برگهٔ ۴۰۴ — مسیر ادامه دارد · <span id="foot-year">۱۴۰۴</span></p>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

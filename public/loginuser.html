@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title>ورود / ثبت‌نام | کافه معدن</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800&family=Vazirmatn:ital@0&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/login-register.css">
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
+
+</head>
+<body>
+
+<!--
+  ==========================================================================
+  PREVIEW HARNESS ONLY — این نوار بالایی صرفاً برای نمایش هماهنگی دکمه‌های
+  ورود/ثبت‌نام با Navbar واقعی سایت است و بازطراحی Navbar اصلی محسوب نمی‌شود.
+  دکمه‌های .ma-navbar-btn به صورت مستقل و قابل جداسازی طراحی شده‌اند تا
+  بعداً داخل Navbar واقعی کافه معدن Copy/Paste شوند.
+  ==========================================================================
+-->
+
+
+<main class="ma-auth" id="ma-auth-root">
+  <div class="ma-auth__stage">
+
+    <!-- Visual panel — desktop only -->
+    <aside class="ma-auth__visual" aria-hidden="true">
+      <svg class="ma-auth__contours" viewBox="0 0 600 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+        <path d="M -50 70 C 130 15, 210 130, 390 45 S 700 15, 780 95" />
+        <path d="M -50 120 C 120 60, 220 180, 400 90 S 700 60, 780 140" />
+        <path d="M -50 170 C 110 105, 230 230, 410 140 S 700 105, 780 190" />
+        <path d="M -50 220 C 100 150, 240 280, 420 190 S 700 150, 780 240" />
+        <path d="M -50 270 C 95 205, 250 330, 425 240 S 700 200, 780 290" />
+        <path d="M -50 320 C 90 260, 260 380, 430 290 S 700 250, 780 340" />
+        <path d="M -50 370 C 100 310, 255 425, 435 335 S 700 300, 780 390" />
+        <path d="M -50 420 C 110 360, 250 470, 440 380 S 700 350, 780 440" />
+        <path d="M -50 470 C 120 410, 240 515, 425 425 S 700 400, 780 490" />
+        <path d="M -50 520 C 130 460, 230 560, 410 470 S 700 450, 780 540" />
+        <path d="M -50 570 C 115 510, 245 610, 420 520 S 700 500, 780 590" />
+        <path d="M -50 620 C 100 560, 260 660, 430 570 S 700 550, 780 640" />
+        <path d="M -50 670 C 110 610, 250 710, 425 620 S 700 600, 780 690" />
+        <path d="M -50 720 C 120 660, 240 760, 420 670 S 700 650, 780 740" />
+        <path d="M -50 770 C 115 710, 245 810, 425 720 S 700 700, 780 790" />
+        <path d="M -50 820 C 110 760, 250 860, 430 770 S 700 750, 780 840" />
+        <path d="M -50 870 C 125 815, 235 905, 415 815 S 700 800, 780 890" />
+      </svg>
+      <div class="ma-auth__visual-content">
+        <span class="ma-auth__mark" aria-hidden="true">
+          <svg viewBox="0 0 48 48" width="40" height="40" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Mining tunnel -->
+  <path
+    d="M8 38V27C8 17.6 15.2 10 24 10C32.8 10 40 17.6 40 27V38"
+    stroke="#F3B300"
+    stroke-width="2.5"
+    stroke-linecap="round"
+  />
+
+  <!-- Tunnel entrance -->
+  <path
+    d="M15 38V28C15 22.5 18.8 18 24 18C29.2 18 33 22.5 33 28V38"
+    stroke="#F3B300"
+    stroke-width="2.5"
+  />
+
+  <!-- Industrial support -->
+  <path
+    d="M12 38H36"
+    stroke="#F3B300"
+    stroke-width="2.5"
+    stroke-linecap="round"
+  />
+
+  <!-- Mining beam -->
+  <path
+    d="M24 18V11"
+    stroke="#F3B300"
+    stroke-width="2.5"
+    stroke-linecap="round"
+  />
+
+  <!-- Ore / extraction point -->
+  <circle
+    cx="24"
+    cy="28"
+    r="2.5"
+    fill="#F3B300"
+  />
+</svg>
+        </span>
+        <h2 class="ma-auth__visual-title">کافه معدن</h2>
+        <p class="ma-auth__visual-desc">مرجعی تخصصی برای معدن‌داران، فعالان صنعت معدن، ثبت سفارش و مدیریت خدمات.</p>
+      </div>
+    </aside>
+
+    <!-- Form panel -->
+    <section class="ma-auth__panel">
+      <div class="ma-auth__panel-inner">
+
+        <div class="ma-auth__mobile-logo" aria-hidden="true">
+          <svg viewBox="0 0 48 48" width="32" height="32" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M6 38 L18 14 L24 26 L30 10 L42 38 Z" stroke="#F3B300" stroke-width="2.5" stroke-linejoin="round" fill="none"/>
+          </svg>
+          <span>کافه معدن</span>
+        </div>
+
+        <!-- Tabs -->
+        <div class="ma-tabs" role="tablist" aria-label="ورود یا ثبت‌نام">
+          <button type="button" class="ma-tabs__btn is-active" id="ma-tab-login" role="tab" aria-selected="true" aria-controls="ma-form-login" data-ma-tab="login">ورود</button>
+          <button type="button" class="ma-tabs__btn" id="ma-tab-register" role="tab" aria-selected="false" aria-controls="ma-form-register" data-ma-tab="register">ثبت‌نام</button>
+          <span class="ma-tabs__indicator" id="ma-tabs-indicator" aria-hidden="true"></span>
+        </div>
+
+        <!-- LOGIN FORM -->
+        <form class="ma-form"  id="ma-form-login" role="tabpanel" method="post" aria-labelledby="ma-tab-login" novalidate>
+          <h1 class="ma-form__title">ورود به حساب کاربری</h1>
+          <p class="ma-form__desc">برای مشاهده سفارش‌ها و پیگیری حساب خود وارد شوید.</p>
+
+          <div class="ma-field">
+            <label class="ma-field__label" for="ma-login-id">ایمیل یا شماره تلفن</label>
+            <div class="ma-field__control" dir="ltr">
+              <input class="ma-input" type="text" id="ma-login-id" name="email" autocomplete="username" inputmode="email" placeholder="example@mail.com یا 09121234567" required>
+            </div>
+            <p class="ma-field__error" id="ma-login-id-error" role="alert"></p>
+          </div>
+
+          <div class="ma-field">
+            <label class="ma-field__label" for="ma-login-pass">رمز عبور</label>
+            <div class="ma-field__control ma-field__control--password">
+              <input class="ma-input" type="password" id="ma-login-pass" name="password" autocomplete="current-password" placeholder="رمز عبور خود را وارد کنید" required>
+              <button type="button" class="ma-input-toggle" data-ma-toggle="ma-login-pass" aria-label="نمایش رمز عبور" aria-pressed="false">
+                <svg class="ma-eye-open" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7-10-7-10-7Z" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.6"/></svg>
+                <svg class="ma-eye-closed" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:none"><path d="M3 3l18 18M10.6 10.7a3 3 0 0 0 4.2 4.2M6.5 6.7C4.2 8.3 2 12 2 12s3.6 7 10 7c1.8 0 3.3-.4 4.6-1.1M9.8 5.2A10.6 10.6 0 0 1 12 5c6.4 0 10 7 10 7-.5.9-1.4 2.2-2.7 3.4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+              </button>
+            </div>
+            <p class="ma-field__error" id="ma-login-pass-error" role="alert"></p>
+          </div>
+
+          <div class="ma-form__row">
+            <a href="#" class="ma-link" id="ma-forgot-link">رمز عبور را فراموش کرده‌اید؟</a>
+          </div>
+
+          <button type="submit" id="loginbtn" class="ma-btn ma-btn--primary ma-btn--block">ورود به حساب</button>
+
+          <p id="statuss" style="color: green;font-size: 20px;"></p>
+
+          <p class="ma-form__switch">
+            حساب کاربری ندارید؟
+            <button type="button" class="ma-link ma-link--strong" data-ma-tab="register">ثبت نام کنید</button>
+          </p>
+        </form>
+
+        <!-- REGISTER FORM -->
+        <form  class="ma-form" id="ma-form-register"  role="tabpanel" aria-labelledby="ma-tab-register" hidden novalidate>
+          <h1 class="ma-form__title">ساخت حساب کاربری</h1>
+          <p class="ma-form__desc">برای ثبت سفارش و استفاده از امکانات کافه معدن ثبت‌نام کنید.</p>
+
+          <div class="ma-form__grid">
+            <div class="ma-field">
+              <label class="ma-field__label" for="ma-reg-fname">نام</label>
+              <input class="ma-input" type="text" id="ma-reg-fname" name="name" autocomplete="given-name" placeholder="مثلاً علی" required>
+              <p class="ma-field__error" id="ma-reg-fname-error" role="alert"></p>
+            </div>
+
+            <div class="ma-field">
+              <label class="ma-field__label" for="ma-reg-lname">نام خانوادگی</label>
+              <input class="ma-input" type="text" id="ma-reg-lname" name="lastname" autocomplete="family-name" placeholder="مثلاً محمدی" required>
+              <p class="ma-field__error" id="ma-reg-lname-error" role="alert"></p>
+            </div>
+          </div>
+
+          <div class="ma-field">
+            <label class="ma-field__label" for="ma-reg-email">ایمیل</label>
+            <div class="ma-field__control" dir="ltr">
+              <input class="ma-input" type="email" id="ma-reg-email" name="email" autocomplete="email" placeholder="example@mail.com" required>
+            </div>
+            <p class="ma-field__error" id="ma-reg-email-error" role="alert"></p>
+          </div>
+
+          <div class="ma-field">
+            <label class="ma-field__label" for="ma-reg-phone">شماره تلفن همراه</label>
+            <div class="ma-field__control" dir="ltr">
+              <input class="ma-input" type="tel" id="ma-reg-phone" name="phone" inputmode="numeric" autocomplete="tel" placeholder="09121234567" maxlength="11" required>
+            </div>
+            <p class="ma-field__error" id="ma-reg-phone-error" role="alert"></p>
+          </div>
+
+          <div class="ma-field">
+            <label class="ma-field__label" for="ma-reg-pass">رمز عبور</label>
+            <div class="ma-field__control ma-field__control--password">
+              <input class="ma-input" type="password" id="ma-reg-pass" name="password" autocomplete="new-password" placeholder="یک رمز عبور قوی بسازید" required>
+              <button type="button" class="ma-input-toggle" data-ma-toggle="ma-reg-pass" aria-label="نمایش رمز عبور" aria-pressed="false">
+                <svg class="ma-eye-open" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7-10-7-10-7Z" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.6"/></svg>
+                <svg class="ma-eye-closed" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:none"><path d="M3 3l18 18M10.6 10.7a3 3 0 0 0 4.2 4.2M6.5 6.7C4.2 8.3 2 12 2 12s3.6 7 10 7c1.8 0 3.3-.4 4.6-1.1M9.8 5.2A10.6 10.6 0 0 1 12 5c6.4 0 10 7 10 7-.5.9-1.4 2.2-2.7 3.4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+              </button>
+            </div>
+
+            <div class="ma-strength" id="ma-strength" aria-hidden="true">
+              <div class="ma-strength__bar">
+                <span class="ma-strength__seg" data-seg="1"></span>
+                <span class="ma-strength__seg" data-seg="2"></span>
+                <span class="ma-strength__seg" data-seg="3"></span>
+                <span class="ma-strength__seg" data-seg="4"></span>
+              </div>
+              <span class="ma-strength__label" id="ma-strength-label">قدرت رمز عبور</span>
+            </div>
+
+            <ul class="ma-rules" id="ma-pass-rules" aria-live="polite">
+              <li class="ma-rules__item" data-rule="len"><span class="ma-rules__dot"></span>حداقل ۸ کاراکتر</li>
+              <li class="ma-rules__item" data-rule="upper"><span class="ma-rules__dot"></span>حرف بزرگ انگلیسی</li>
+              <li class="ma-rules__item" data-rule="lower"><span class="ma-rules__dot"></span>حرف کوچک انگلیسی</li>
+              <li class="ma-rules__item" data-rule="num"><span class="ma-rules__dot"></span>عدد</li>
+              <li class="ma-rules__item" data-rule="special"><span class="ma-rules__dot"></span>کاراکتر ویژه</li>
+            </ul>
+            <p class="ma-field__error" id="ma-reg-pass-error" role="alert"></p>
+          </div>
+
+          <div class="ma-field">
+            <label class="ma-field__label" for="ma-reg-pass2">تکرار رمز عبور</label>
+            <div class="ma-field__control ma-field__control--password">
+              <input class="ma-input" type="password" id="ma-reg-pass2" name="confirmpassword" autocomplete="new-password" placeholder="رمز عبور را دوباره وارد کنید" required>
+              <button type="button" class="ma-input-toggle" data-ma-toggle="ma-reg-pass2" aria-label="نمایش رمز عبور" aria-pressed="false">
+                <svg class="ma-eye-open" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7-10-7-10-7Z" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.6"/></svg>
+                <svg class="ma-eye-closed" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:none"><path d="M3 3l18 18M10.6 10.7a3 3 0 0 0 4.2 4.2M6.5 6.7C4.2 8.3 2 12 2 12s3.6 7 10 7c1.8 0 3.3-.4 4.6-1.1M9.8 5.2A10.6 10.6 0 0 1 12 5c6.4 0 10 7 10 7-.5.9-1.4 2.2-2.7 3.4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+              </button>
+            </div>
+            <p class="ma-field__error" id="ma-reg-pass2-error" role="alert"></p>
+          </div>
+
+          <button type="submit" class="ma-btn ma-btn--primary ma-btn--block"  id="registerbtn">ساخت حساب کاربری</button>
+
+          <p id="status" style="color: green;font-size: 20px;"></p>
+
+          <p class="ma-form__switch">
+            قبلاً ثبت‌نام کرده‌اید؟
+            <button type="button" class="ma-link ma-link--strong" data-ma-tab="login">وارد شوید</button>
+          </p>
+        </form>
+
+        <!-- Toast for demo submit -->
+        <div class="ma-toast" id="ma-toast" role="status" aria-live="polite"></div>
+
+      </div>
+    </section>
+  </div>
+</main>
+
+
+<script src="/js/login-register.js"></script>
+</body>
+</html>

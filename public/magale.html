@@ -10,7 +10,7 @@
     <!-- آیکون‌های Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- فایل استایل -->
-    <link rel="stylesheet" href="./css/maghale.css">
+    <link rel="stylesheet" href="/css/maghale.css">
 </head>
 <body>
 
@@ -51,7 +51,7 @@
                 </div>
 
                 <!-- مقدمه -->
-                <section class="article-section-block" id="section-intro">
+                <section class="article-section-block" id="section-intro" >
                     <div class="section-header">
                         <div class="section-icon">
                             <i class="fas fa-lightbulb"></i>
@@ -130,7 +130,7 @@
 
 
                 <section style="display: flex;align-items: center;justify-content: center;">
-                    <button style="width: 8rem;border-radius: .8rem;height: 2rem;border: 1px solid #d49d00;color: #d49d00;background: transparent;cursor: pointer;" onclick="window.location.href = 'articels.html'">بازگشت</button>
+                    <button style="width: 8rem;border-radius: .8rem;height: 2rem;border: 1px solid #d49d00;color: #d49d00;background: transparent;cursor: pointer;" onclick="window.location.href = '/cafemadan/b1223344-6677-44bc-d202-202020202020/articels'">بازگشت</button>
                 </section>
 
             </article>
@@ -185,7 +185,21 @@
         </div>
     </main>
 
+
+    <script>
+
+    fetch("/api/visit",{
+    method:"POST",
+    headers:{
+        "Content-Type":"application/json"
+    },
+    body:JSON.stringify({
+        page:window.location.pathname
+    })
+});
+</script>
+
     <!-- فایل جاوااسکریپت -->
-    <script src="./js/maghale.js"></script>
+    <script src="/js/maghale.js"></script>
 </body>
 </html>

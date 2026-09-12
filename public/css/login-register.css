@@ -1,0 +1,662 @@
+/* =========================================================================
+   کافه معدن — Login / Register UI
+   Scoped, standalone stylesheet. No global selectors (body, button, a, *)
+   are touched — everything lives under .ma- prefixed classes so this file
+   can be dropped into the main site without conflicts.
+   ========================================================================= */
+
+.ma-preview-navbar,
+.ma-auth,
+.ma-toast {
+  --ma-bg: #0a0a0a;
+  --ma-bg-elevated: #111111;
+  --ma-panel: #141414;
+  --ma-input: #1a1a1a;
+  --ma-input-focus: #1e1a0c;
+  --ma-accent: #f3b300;
+  --ma-accent-hover: #ffc61f;
+  --ma-accent-active: #d99e00;
+  --ma-text: #ffffff;
+  --ma-text-secondary: #a6a6a6;
+  --ma-text-tertiary: #6e6e6e;
+  --ma-border: rgba(255, 255, 255, 0.08);
+  --ma-border-strong: rgba(255, 255, 255, 0.14);
+  --ma-border-accent: rgba(243, 179, 0, 0.28);
+  --ma-danger: #ff6b5e;
+  --realGold: #F3B300;
+  --ma-radius-sm: 10px;
+  --ma-radius-md: 12px;
+  --ma-radius-lg: 14px;
+  --ma-font: "Vazirmatn", "IRANSans", Tahoma, "Segoe UI", sans-serif;
+  font-family: var(--ma-font);
+  box-sizing: border-box;
+}
+
+.ma-preview-navbar *,
+.ma-auth *,
+.ma-toast * {
+  box-sizing: border-box;
+}
+
+/* ---------------------------------------------------------------------
+   Preview navbar (demo harness — mirrors real navbar for context only)
+   --------------------------------------------------------------------- */
+.ma-preview-navbar {
+  background: #000000;
+  border-bottom: 1px solid var(--ma-border);
+  direction: rtl;
+}
+
+.ma-preview-navbar__inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.ma-preview-navbar__logo {
+  color: var(--ma-text);
+  font-weight: 700;
+  font-size: 18px;
+  letter-spacing: 0.2px;
+}
+
+.ma-navbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.ma-navbar-btn {
+  font-family: var(--ma-font);
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: var(--ma-radius-sm);
+  padding: 9px 20px;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease, filter 0.15s ease;
+  min-height: 44px;
+}
+
+.ma-navbar-btn--ghost {
+  background: transparent;
+  border-color: var(--ma-border-strong);
+  color: var(--ma-text);
+}
+.ma-navbar-btn--ghost:hover {
+  border-color: var(--ma-accent);
+  color: var(--ma-accent);
+}
+
+.ma-navbar-btn--solid {
+  background: var(--ma-accent);
+  color: #171000;
+}
+.ma-navbar-btn--solid:hover {
+  background: var(--ma-accent-hover);
+}
+.ma-navbar-btn--solid:active {
+  background: var(--ma-accent-active);
+}
+
+.ma-navbar-btn:focus-visible,
+.ma-navbar-btn--ghost:focus-visible {
+  outline: 2px solid var(--ma-accent);
+  outline-offset: 2px;
+}
+
+/* ---------------------------------------------------------------------
+   Layout shell
+   --------------------------------------------------------------------- */
+.ma-auth {
+  direction: rtl;
+  background: var(--ma-bg);
+  min-height: 100vh;
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  padding: 0;
+}
+
+.ma-auth__stage {
+  width: 100%;
+  max-width: 1400px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: row-reverse; /* form reads first, on the visual right side */
+}
+
+/* Visual side panel (desktop only) */
+.ma-auth__visual {
+  position: relative;
+  flex: 0 0 38%;
+  max-width: 38%;
+  background: linear-gradient(160deg, #0d0d0d 0%, #070707 100%);
+  border-right: 1px solid var(--ma-border);
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+  overflow: hidden;
+  padding: 48px;
+}
+
+.ma-auth__contours {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.22;
+}
+.ma-auth__contours path {
+  fill: none;
+  stroke: var(--ma-accent);
+  stroke-width: 1.4;
+}
+
+.ma-auth__visual-content {
+  position: relative;
+  z-index: 1;
+}
+
+.ma-auth__mark {
+  display: inline-flex;
+  margin-bottom: 18px;
+  opacity: 0.9;
+}
+
+.ma-auth__visual-title {
+  color: var(--ma-text);
+  font-size: 26px;
+  font-weight: 800;
+  margin: 0 0 10px;
+  letter-spacing: 0.2px;
+}
+
+.ma-auth__visual-desc {
+  color: var(--ma-text-secondary);
+  font-size: 14.5px;
+  line-height: 1.9;
+  max-width: 320px;
+  margin: 0;
+}
+
+/* Form panel */
+.ma-auth__panel {
+  flex: 1 1 62%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 24px;
+  background: var(--ma-bg);
+}
+
+.ma-auth__panel-inner {
+  width: 100%;
+  max-width: 420px;
+}
+
+.ma-auth__mobile-logo {
+  display: none;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 28px;
+  color: var(--ma-text);
+  font-weight: 700;
+  font-size: 16px;
+}
+
+/* ---------------------------------------------------------------------
+   Tabs
+   --------------------------------------------------------------------- */
+.ma-tabs {
+  position: relative;
+  display: flex;
+  background: var(--ma-input);
+  border: 1px solid var(--ma-border);
+  border-radius: var(--ma-radius-md);
+  padding: 4px;
+  margin-bottom: 28px;
+}
+
+.ma-tabs__btn {
+  flex: 1 1 50%;
+  position: relative;
+  z-index: 2;
+  background: transparent;
+  border: none;
+  font-family: var(--ma-font);
+  font-size: 14.5px;
+  font-weight: 600;
+  color: var(--ma-text-secondary);
+  padding: 10px 12px;
+  border-radius: calc(var(--ma-radius-md) - 4px);
+  cursor: pointer;
+  min-height: 40px;
+  transition: color 0.2s ease;
+}
+
+.ma-tabs__btn.is-active {
+  color: #171000;
+}
+
+.ma-tabs__btn:focus-visible {
+  outline: 2px solid var(--ma-accent);
+  outline-offset: 2px;
+}
+
+.ma-tabs__indicator {
+  position: absolute;
+  z-index: 1;
+  top: 4px;
+  bottom: 4px;
+  width: calc(50% - 4px);
+  right: 4px;
+  background: var(--ma-accent);
+  border-radius: calc(var(--ma-radius-md) - 4px);
+  transition: right 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.ma-tabs[data-active="register"] .ma-tabs__indicator {
+  right: calc(50%);
+}
+
+/* ---------------------------------------------------------------------
+   Forms
+   --------------------------------------------------------------------- */
+.ma-form__title {
+  color: var(--ma-text);
+  font-size: 22px;
+  font-weight: 800;
+  margin: 0 0 8px;
+  letter-spacing: 0.1px;
+}
+
+.ma-form__desc {
+  color: var(--ma-text-secondary);
+  font-size: 13.5px;
+  line-height: 1.7;
+  margin: 0 0 26px;
+}
+
+.ma-form__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.ma-field {
+  margin-bottom: 18px;
+}
+
+.ma-field__label {
+  display: block;
+  color: var(--ma-text);
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.ma-field__control {
+  position: relative;
+}
+
+.ma-input {
+  width: 100%;
+  background: var(--ma-input);
+  border: 1px solid var(--ma-border);
+  border-radius: var(--ma-radius-sm);
+  color: var(--ma-text);
+  font-family: var(--ma-font);
+  font-size: 14.5px;
+  padding: 13px 14px;
+  min-height: 46px;
+  transition: border-color 0.15s ease, background-color 0.15s ease;
+}
+
+.ma-input::placeholder {
+  color: var(--ma-text-tertiary);
+}
+
+.ma-input:hover {
+  border-color: var(--ma-border-strong);
+}
+
+.ma-input:focus {
+  outline: none;
+  border-color: var(--ma-accent);
+  background: var(--ma-input-focus);
+  box-shadow: 0 0 0 3px rgba(243, 179, 0, 0.14);
+}
+
+.ma-field.has-error .ma-input {
+  border-color: var(--ma-danger);
+}
+
+.ma-field.is-valid .ma-input {
+  border-color: rgba(243, 179, 0, 0.4);
+}
+
+.ma-field__control--password .ma-input {
+  padding-left: 44px;
+}
+
+.ma-input-toggle {
+  position: absolute;
+  left: 6px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 34px;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  color: var(--ma-text-tertiary);
+  cursor: pointer;
+  border-radius: 8px;
+}
+
+.ma-input-toggle:hover {
+  color: var(--ma-accent);
+}
+
+.ma-input-toggle:focus-visible {
+  outline: 2px solid var(--ma-accent);
+  outline-offset: 2px;
+}
+
+.ma-field__error {
+  min-height: 18px;
+  margin: 7px 2px 0;
+  color: var(--ma-danger);
+  font-size: 12.5px;
+  line-height: 1.5;
+}
+
+.ma-form__row {
+  display: flex;
+  justify-content: flex-end;
+  margin: -6px 0 22px;
+}
+
+.ma-link {
+  background: none;
+  border: none;
+  padding: 0;
+  color: var(--ma-text-secondary);
+  font-family: var(--ma-font);
+  font-size: 13px;
+  cursor: pointer;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+}
+
+.ma-link:hover {
+  color: var(--ma-accent);
+  border-bottom-color: var(--ma-border-accent);
+}
+
+.ma-link:focus-visible {
+  outline: 2px solid var(--ma-accent);
+  outline-offset: 2px;
+}
+
+.ma-link--strong {
+  color: var(--ma-accent);
+  font-weight: 600;
+}
+
+.ma-form__switch {
+  text-align: center;
+  color: var(--ma-text-secondary);
+  font-size: 13px;
+  margin: 20px 0 0;
+}
+
+/* ---------------------------------------------------------------------
+   Buttons
+   --------------------------------------------------------------------- */
+.ma-btn {
+  font-family: var(--ma-font);
+  font-size: 15px;
+  font-weight: 700;
+  border-radius: var(--ma-radius-sm);
+  padding: 13px 20px;
+  cursor: pointer;
+  border: 1px solid transparent;
+  min-height: 48px;
+  transition: filter 0.15s ease, background-color 0.15s ease;
+}
+
+.ma-btn--block {
+  width: 100%;
+  display: block;
+}
+
+.ma-btn--primary {
+  background: var(--ma-accent);
+  color: #171000;
+}
+
+.ma-btn--primary:hover {
+  background: var(--ma-accent-hover);
+}
+
+.ma-btn--primary:active {
+  background: var(--ma-accent-active);
+}
+
+.ma-btn--primary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.ma-btn:focus-visible {
+  outline: 2px solid var(--ma-accent);
+  outline-offset: 2px;
+}
+
+/* ---------------------------------------------------------------------
+   Password strength + rules
+   --------------------------------------------------------------------- */
+.ma-strength {
+  margin-top: 10px;
+}
+
+.ma-strength__bar {
+  display: flex;
+  gap: 5px;
+  margin-bottom: 8px;
+}
+
+.ma-strength__seg {
+  flex: 1 1 0;
+  height: 4px;
+  border-radius: 3px;
+  background: var(--ma-border);
+  transition: background-color 0.2s ease;
+}
+
+.ma-strength__label {
+  font-size: 12px;
+  color: var(--ma-text-tertiary);
+}
+
+.ma-strength[data-level="1"] .ma-strength__seg[data-seg="1"] { background: #ff6b5e; }
+.ma-strength[data-level="1"] .ma-strength__label { color: #ff6b5e; }
+
+.ma-strength[data-level="2"] .ma-strength__seg[data-seg="1"],
+.ma-strength[data-level="2"] .ma-strength__seg[data-seg="2"] { background: #ff9d42; }
+.ma-strength[data-level="2"] .ma-strength__label { color: #ff9d42; }
+
+.ma-strength[data-level="3"] .ma-strength__seg[data-seg="1"],
+.ma-strength[data-level="3"] .ma-strength__seg[data-seg="2"],
+.ma-strength[data-level="3"] .ma-strength__seg[data-seg="3"] { background: var(--ma-accent); }
+.ma-strength[data-level="3"] .ma-strength__label { color: var(--ma-accent); }
+
+.ma-strength[data-level="4"] .ma-strength__seg { background: #3ddc8c; }
+.ma-strength[data-level="4"] .ma-strength__label { color: #3ddc8c; }
+
+.ma-rules {
+  list-style: none;
+  margin: 12px 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 7px 10px;
+}
+
+.ma-rules__item {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 12px;
+  color: var(--ma-text-tertiary);
+  transition: color 0.15s ease;
+}
+
+.ma-rules__dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--ma-text-tertiary);
+  flex: none;
+  transition: background-color 0.15s ease;
+}
+
+.ma-rules__item.is-met {
+  color: var(--ma-text-secondary);
+}
+
+.ma-rules__item.is-met .ma-rules__dot {
+  background: var(--ma-accent);
+}
+
+/* ---------------------------------------------------------------------
+   Toast (demo submit confirmation)
+   --------------------------------------------------------------------- */
+.ma-toast {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  left: auto;
+  background: var(--ma-panel);
+  border: 1px solid var(--ma-border-accent);
+  color: var(--ma-text);
+  padding: 14px 18px;
+  border-radius: var(--ma-radius-md);
+  font-size: 13.5px;
+  max-width: 320px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+  transform: translateY(12px);
+  opacity: 0;
+  pointer-events: none;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+  z-index: 40;
+}
+
+.ma-toast.is-visible {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* ---------------------------------------------------------------------
+   Responsive
+   --------------------------------------------------------------------- */
+@media (max-width: 1024px) {
+  .ma-auth__visual {
+    flex: 0 0 34%;
+    max-width: 34%;
+    padding: 36px;
+  }
+}
+
+@media (max-width: 860px) {
+  .ma-auth__visual {
+    display: none;
+  }
+  .ma-auth__stage {
+    flex-direction: column;
+  }
+  .ma-auth__panel {
+    padding: 40px 24px;
+  }
+  .ma-auth__mobile-logo {
+    display: flex;
+  }
+}
+
+@media (max-width: 480px) {
+  .ma-preview-navbar__inner {
+    padding: 12px 16px;
+  }
+  .ma-navbar-btn {
+    padding: 9px 14px;
+    font-size: 13px;
+  }
+  .ma-auth__panel {
+    padding: 28px 16px 40px;
+  }
+  .ma-form__title {
+    font-size: 19px;
+  }
+  .ma-form__grid {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+  .ma-rules {
+    grid-template-columns: 1fr;
+  }
+  .ma-toast {
+    right: 16px;
+    left: 16px;
+    max-width: none;
+  }
+}
+
+@media (max-width: 340px) {
+  .ma-form__title {
+    font-size: 18px;
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .ma-tabs__indicator,
+  .ma-navbar-btn,
+  .ma-btn,
+  .ma-input,
+  .ma-toast {
+    transition: none !important;
+  }
+}
+
+
+/* جلوگیری از سفید شدن Input هنگام Autofill */
+.ma-input:-webkit-autofill,
+.ma-input:-webkit-autofill:hover,
+.ma-input:-webkit-autofill:focus,
+.ma-input:-webkit-autofill:active {
+    -webkit-text-fill-color: var(--ma-text) !important;
+    -webkit-box-shadow: 0 0 0 1000px var(--ma-input) inset !important;
+    box-shadow: 0 0 0 1000px var(--ma-input) inset !important;
+    background-color: var(--ma-input) !important;
+    caret-color: var(--ma-text) !important;
+}
+
+/* حالت معمولی و Hover */
+.ma-input,
+.ma-input:hover {
+    background-color: var(--ma-input);
+    color: var(--ma-text);
+}
+
+/* حالت Focus */
+.ma-input:focus {
+    background-color: var(--ma-input-focus);
+    color: var(--ma-text);
+}

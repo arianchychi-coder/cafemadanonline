@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>داشبورد | پنل مدیریت کافه معدن</title>
+<link rel="stylesheet" href="/css/base.css">
+<link rel="stylesheet" href="/css/layout (1).css">
+<link rel="stylesheet" href="/css/components.css">
+<link rel="stylesheet" href="/css/dashboard (1).css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+</head>
+<body>
+
+<!-- App Shell -->
+<div class="app">
+
+  <!-- Sidebar (injected by shell.js) -->
+  <aside class="sidebar" id="sidebar-root"></aside>
+
+  <!-- Mobile overlay -->
+  <div class="overlay"></div>
+
+  <!-- Main -->
+  <div class="main">
+    <header class="topbar" id="topbar-root"></header>
+
+    <div class="content">
+
+      <!-- Page heading -->
+      <div class="page-head fade-up">
+        <div>
+          <h1 class="page-head__title">سلام، مدیر معدن 👋</h1>
+          <p style="font-size:1rem" class="page-head__desc">خلاصه‌ای از عملکرد امروز کافه معدن را اینجا می‌بینید.</p>
+        </div>
+        <button style="font-size:1.1rem" class="btn btn--primary" onclick="window.location.href = '/cafemadan/4b5c6d7e-8f99-4dab-c444-444444444444/article-form'">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
+          مقاله جدید
+        </button>
+      </div>
+
+      <!-- Statistics Cards -->
+      <section class="stats-grid stagger" id="stats-grid">
+        <!-- Cards injected by dashboard.js -->
+      </section>
+
+      <!-- Charts + Activity -->
+      <div class="dash-grid">
+
+        <!-- Visitor Analytics -->
+        <div class="card chart-card fade-up">
+          <div class="chart-card__head">
+            <div>
+              <div class="chart-card__title">آمار بازدیدکنندگان</div>
+              <div class="chart-card__legend"><span><i></i> بازدید سایت</span></div>
+            </div>
+            <div class="range-tabs" id="range-tabs">
+              <button data-range="weekly">روزانه</button>
+              <button data-range="daily" class="is-active">هفتگی</button>
+              <button data-range="monthly">ماهانه</button>
+              <button data-range="yearly">سالانه</button>
+            </div>
+          </div>
+          <div class="chart-canvas-wrap">
+            <canvas id="visitors-chart"></canvas>
+          </div>
+        </div>
+
+        <!-- Recent Activities -->
+        <div class="card activity-card fade-up">
+          <div class="chart-card__head">
+            <div class="chart-card__title">فعالیت‌های اخیر</div>
+          </div>
+          <div class="activity-list" id="activity-list"></div>
+        </div>
+      </div>
+
+      <!-- Content status breakdown -->
+      <div class="dash-grid" style="margin-top: var(--sp-5); grid-template-columns: 1fr 1.6fr; width: 100% !important;">
+        <div class="card chart-card fade-up">
+          <div class="chart-card__head"><div class="chart-card__title">وضعیت مقالات</div></div>
+          <div class="mini-donut-wrap">
+            <div class="chart-canvas-wrap" style="height: 150px; width: 150px; flex-shrink: 0;">
+              <canvas id="status-donut"></canvas>
+            </div>
+            <div class="mini-donut-legend" id="status-legend"></div>
+          </div>
+        </div>
+
+        
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+
+fetch("/api/visit",{
+    method:"POST",
+    headers:{
+        "Content-Type":"application/json"
+    },
+    body:JSON.stringify({
+        page:window.location.pathname
+    })
+})
+.then(res=>res.json())
+.then(data=>{
+    console.log("VISIT:",data);
+})
+.catch(err=>{
+    console.log(err);
+});
+
+</script>
+
+<!-- Scripts -->
+<script src="/js/utils (1).js  "></script>
+<script src="/js/store (1).js"></script>
+<script src="/js/shell (1).js"></script>
+<script src="/js/ui (1).js"></script>
+<script src="/js/charts.js"></script>
+<script src="/js/dashboard (1).js"></script>
+</body>
+</html>

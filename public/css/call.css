@@ -1229,3 +1229,40 @@ body .container {
         padding: 3rem !important;
     }
 }
+
+
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 1000px #1e1e1e inset !important; /* رنگ پس‌زمینه */
+    -webkit-text-fill-color: #fff !important; /* رنگ متن */
+    caret-color: #fff;
+    transition: background-color 5000s ease-in-out 0s;
+}
+
+
+
+.toast{
+    position: fixed;
+    top: 20px;
+    right: -400px;
+    background: #0a0a0a;
+    border-right: 1px solid var(--realGold);
+    color: #fff;
+    padding: 15px 25px;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0,0,0,.2);
+    transition: right .4s ease;
+    z-index: 9999;
+    font-family: inherit;
+}
+
+.toast.show{
+    right: 20px;
+}
+
+.toast.hide{
+    right: -400px;
+}

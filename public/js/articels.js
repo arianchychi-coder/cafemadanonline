@@ -5,11 +5,11 @@ document.addEventListener('DOMContentLoaded', () => {
        ========================================================= */
     let activeFilter = 'all'; // 'all', 'article', 'video'
     let searchQuery = '';
-    const cards = document.querySelectorAll('.article-card');
     const searchInput = document.querySelector('.search-input');
     const clearBtn = document.getElementById('clearBtn');
     const dropdown = document.querySelector('.dropdown');
     const tabLinks = document.querySelectorAll('.tab-link');
+    const cards = document.querySelectorAll('.article-card');
 
     /* =========================================================
        تابع هسته‌ای: اعمال همزمان فیلتر تب و جستجو
@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function applyFilters() {
         let visibleCount = 0;
 
-        cards.forEach(card => {
+        document.querySelectorAll('.article-card').forEach(card => {
             const type = card.getAttribute('data-type');
             const name = (card.getAttribute('data-name') || '').toLowerCase();
 
@@ -99,10 +99,7 @@ document.addEventListener('DOMContentLoaded', () => {
             this.classList.add('active');
 
             // ۲. تعیین فیلتر بر اساس متن
-            const text = this.textContent.trim();
-            if (text === 'همه مقالات') activeFilter = 'all';
-            else if (text === 'مقالات') activeFilter = 'article';
-            else if (text === 'ویدیوها') activeFilter = 'video';
+            activeFilter = this.dataset.filter;
 
             // ۳. بستن خودکار منوی کشویی (حل مشکل موبایل)
             if (dropdown) {
@@ -263,3 +260,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
     console.log('✅ تمام ماژول‌های صفحه مقالات با موفقیت بارگذاری شدند.');
 });
+
+
+
+let allArticles = [];
+
+async function loadArticles() {
+
+    const response = await fetch("/api/articels");
+
+    allArticles = await response.json();
+
+    renderArticles(allArticles);
+
+    
+}
+
+loadArticles();
+
+
+

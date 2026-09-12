@@ -305,9 +305,11 @@
         gap: 0.5rem;
         list-style: none;
         margin: 0;
-        padding: 0;
+        padding-right: 2rem;
+        padding-left: 2rem;
         flex: 1;
         justify-content: center;
+        
     }
 
     .nav-item {
@@ -5370,3 +5372,229 @@ body:has(.nav-menu.active) .filter-outer-section {
 .filter-outer-section {
     transition: opacity 0.4s ease, visibility 0.4s ease;
 }
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 1000px #1e1e1e inset !important; /* رنگ پس‌زمینه */
+    -webkit-text-fill-color: #fff !important; /* رنگ متن */
+    caret-color: #fff;
+    transition: background-color 5000s ease-in-out 0s;
+}
+
+
+
+
+
+
+
+
+.toasts{
+    position: fixed;
+    top: 20px;
+    right: -400px;
+    background: #0a0a0a;
+    border-right: 1px solid var(--realGold);
+    color: #fff;
+    padding: 15px 25px;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0,0,0,.2);
+    transition: right .4s ease;
+    z-index: 9999;
+    font-family: inherit;
+}
+
+.toasts.show{
+    right: 20px;
+}
+
+.toasts.hide{
+    right: -400px;
+}
+
+
+
+/* =========================================================
+   Profile Button — Scoped Component
+   Font: Vazirmatn
+   All selectors prefixed with .profile-
+   ========================================================= */
+
+.profile-container {
+  display: inline-flex;
+  align-items: center;
+  font-family: 'Vazirmatn', system-ui, -apple-system, sans-serif;
+  direction: rtl;
+}
+
+.profile-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 6px 14px 6px 8px;
+  background: linear-gradient(180deg, #1d1d1d 0%, #181818 100%);
+  border: 1px solid rgba(201, 169, 97, 0.15);
+  border-radius: 999px;
+  color: #ece4cf;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.2;
+  cursor: pointer;
+  transition:
+    background 240ms ease,
+    border-color 240ms ease,
+    box-shadow 240ms ease,
+    transform 140ms ease;
+  white-space: nowrap;
+  user-select: none;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+  position: relative;
+}
+
+.profile-button:hover {
+  background: linear-gradient(180deg, #222222 0%, #1b1b1b 100%);
+  border-color: rgba(201, 169, 97, 0.45);
+  box-shadow: 0 4px 18px -6px rgba(201, 169, 97, 0.18);
+}
+
+.profile-button:active {
+  transform: translateY(0.5px);
+  border-color: rgba(201, 169, 97, 0.55);
+}
+
+.profile-button:focus-visible {
+  border-color: #c9a961;
+  box-shadow: 0 0 0 3px rgba(201, 169, 97, 0.22);
+}
+
+/* =========================================================
+   Avatar — Monogram with Initials
+   ========================================================= */
+.profile-avatar {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--realGold);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.18),
+    0 1px 2px rgba(0, 0, 0, 0.4);
+  flex-shrink: 0;
+  transition: transform 240ms ease, box-shadow 240ms ease;
+}
+
+.profile-button:hover .profile-avatar {
+  transform: scale(1.04);
+  box-shadow: 1px var(--realGold)
+}
+
+.profile-initials {
+  font-family: 'Vazirmatn', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  color: #1a1408;
+  letter-spacing: -0.5px;
+  line-height: 1;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+/* =========================================================
+   Status Dot — Online indicator
+   ========================================================= */
+.profile-status {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #7fbf5c;
+  border: 2px solid #1a1a1a;
+  box-shadow: 0 0 0 1px rgba(127, 191, 92, 0.35);
+}
+
+.profile-button:hover .profile-status {
+  animation: profile-status-pulse 1.8s ease-in-out infinite;
+}
+
+@keyframes profile-status-pulse {
+  0%, 100% { box-shadow: 0 0 0 1px rgba(127, 191, 92, 0.35); }
+  50%      { box-shadow: 0 0 0 3px rgba(127, 191, 92, 0.15); }
+}
+
+/* =========================================================
+   Accent Divider — Industrial vertical bar
+   ========================================================= */
+.profile-divider {
+  width: 1px;
+  height: 18px;
+  background: var(--realGold);
+  flex-shrink: 0;
+  transition: background 240ms ease;
+}
+
+.profile-button:hover .profile-divider {
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    rgba(201, 169, 97, 0.85) 50%,
+    transparent 100%
+  );
+}
+
+/* =========================================================
+   User Name
+   ========================================================= */
+.profile-name {
+  font-family: 'Vazirmatn', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: #ece4cf;
+  max-width: 160px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  transition: color 240ms ease;
+}
+
+.profile-button:hover .profile-name {
+  color: #f8efcf;
+}
+
+/* =========================================================
+   Responsive
+   ========================================================= */
+@media (max-width: 640px) {
+  .profile-button {
+    padding: 4px;
+    gap: 0;
+    border-radius: 50%;
+  }
+
+  .profile-name,
+  .profile-divider {
+    display: none;
+  }
+
+  .profile-avatar {
+    width: 38px;
+    height: 38px;
+  }
+
+  .profile-initials {
+    font-size: 14px;
+  }
+}
+
+@media (min-width: 641px) and (max-width: 900px) {
+  .profile-name {
+    max-width: 110px;
+  }
+}
+    

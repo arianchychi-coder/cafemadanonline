@@ -10,8 +10,13 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
     <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.0.0/Vazirmatn-font-face.css" rel="stylesheet" type="text/css" />
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
 <title>درباره ما - کافه معدن</title>
-<link rel="stylesheet" href="css/aboutus.css">
-<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="/css/aboutus.css">
+<link rel="stylesheet" href="/css/style.css">
+
+
+          <script src="https://cdn.tailwindcss.com"></script>
+
+
 </head>
 <body style="background: #0a0a0a;">
 
@@ -53,12 +58,19 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
 <nav class="navbar" id="navbar">
         <div class="navbar-overlay"></div>
         <div class="container nav-container">
+
+
+            <button class="hamburger" id="hamburger" aria-label="منو">
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                </button>
             
             <!-- Logo Section -->
             <div class="nav-logo">
                 <div class="logo-wrapper">
                     <div style="position: relative;top: .3rem;">
-                        <img src="images/Asset 1.png" style="object-fit: cover;width: 50px;height: 70px;" alt="">
+                        <img src="/images/Asset 1.png" style="object-fit: cover;width: 50px;height: 70px;" alt="">
                         
                     </div>
                     <div class="logo-text">
@@ -71,40 +83,46 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
             <!-- Navigation Menu -->
             <ul class="nav-menu" id="navMenu">
                 <li class="nav-item">
-                    <a href="index.html" style="font-size: 1.2rem;" class="nav-link">
+                    <a href="/cafemadan/90112233-4455-42fa-b999-999999999999/index" style="font-size: 1.2rem;" class="nav-link">
                         <span class="link-text">خانه</span>
                         <span class="link-underline"></span>
                     </a>
                 </li>
                 
                 <li class="nav-item">
-                    <a href="khadamat.html" style="font-size: 1.2rem;" class="nav-link">
+                    <a href="/cafemadan/a0112233-5566-43ab-c101-101010101010/khadamat" style="font-size: 1.2rem;" class="nav-link">
                         <span class="link-text">خدمات</span>
                         <span class="link-underline"></span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="articels.html" style="font-size: 1.2rem;" class="nav-link">
+                    <a href="/cafemadan/b1223344-6677-44bc-d202-202020202020/articels" style="font-size: 1.2rem;" class="nav-link">
                         <span class="link-text">مقالات</span>
                         <span class="link-underline"></span>
                     </a>
                 </li>
                
                 <li class="nav-item">
-                    <a href="aboutus.html" style="font-size: 1.2rem;" class="nav-link active">
+                    <a href="#aboutus" style="font-size: 1.2rem;" class="nav-link active">
                         <span class="link-text">درباره ما</span>
                         <span class="link-underline"></span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="call.html" style="font-size: 1.2rem;" class="nav-link">
+                    <a href="/cafemadan/d3445566-8899-46de-f404-404040404040/call" style="font-size: 1.2rem;" class="nav-link">
                         <span class="link-text">تماس با ما</span>
                         <span class="link-underline"></span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="storyus.html" style="font-size: 1.2rem;" class="nav-link">
+                    <a href="/cafemadan/e4556677-9900-47ef-a505-505050505050/storyus" style="font-size: 1.2rem;" class="nav-link">
                         <span class="link-text">داستان ما</span>
+                        <span class="link-underline"></span>
+                    </a>
+                </li>
+                               <li class="nav-item">
+                    <a href="/cafemadan/vf902156-6677-62ef-a309-8765689349380/pocast" style="font-size: 1.2rem;" class="nav-link">
+                        <span class="link-text">خبر نامه</span>
                         <span class="link-underline"></span>
                     </a>
                 </li>
@@ -112,19 +130,40 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
 
             <!-- Action Buttons -->
             <div class="nav-actions">
-                <a href="#" style="font-size: 1.1rem;" class="btn-ecosystem">
-                    <span class="btn-text">دریافت مشاوره تخصصی</span>
-                    <span class="btn-icon">
-                        <i class="fas fa-arrow-left"></i>
-                    </span>
-                    <span class="btn-shine"></span>
-                </a>
-                
-                <button class="hamburger" id="hamburger" aria-label="منو">
-                    <span class="hamburger-line"></span>
-                    <span class="hamburger-line"></span>
-                    <span class="hamburger-line"></span>
-                </button>
+                   <div class="profile-container">
+    <button
+      type="button"
+      class="profile-button"
+      id="profile-button"
+      aria-label="حساب کاربری محمد رضایی"
+    >
+      <!-- Avatar with Initials -->
+      <span class="profile-avatar" aria-hidden="true">
+        <span class="profile-initials" id="profile-initials">م.ر</span>
+        <span class="profile-status" aria-hidden="true"></span>
+      </span>
+
+      <!-- Accent Divider (Industrial touch) -->
+      <span class="profile-divider" aria-hidden="true"></span>
+
+      <!-- User Name -->
+      <span class="profile-name" id="display-name"></span>
+      <span class="profile-LastName" id="display-LastName"></span>
+    </button>
+  </div>
+
+
+
+                 <a href="/cafemadan/p45596s87-9999-48ef-a606-707070707070/login" id="vorodbtn" class="relative inline-flex items-center justify-center p-4 px-6 py-3 overflow-hidden font-medium text-yellow-600 transition duration-300 ease-out border-2 border-yellow-500 rounded-full shadow-md group">
+        <span class="absolute inset-0 flex items-center justify-center w-full h-full text-white duration-300 -translate-x-full bg-yellow-500 group-hover:translate-x-0 ease">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+            </svg>
+        </span>
+        <span class="absolute flex items-center justify-center w-full h-full text-yellow-500 transition-all duration-300 transform group-hover:translate-x-full ease">ورود</span>
+        <span class="relative invisible">Button Text</span>
+    </a>
+            
             </div>
         </div>
     </nav>
@@ -153,7 +192,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
     </div>
 
     <div class="hero-image">
-        <img src="images/sp2.jpg" alt="">
+        <img src="/images/sp2.jpg" alt="">
     </div>
 
     <button style="position: relative;right: 107rem;font-family:'Vazirmatn',sans-serif;">کار ما را بررسی کنید</button>
@@ -465,7 +504,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
             <div class="cf-image-section cf-js-animate">
                 <div class="cf-image-outline"></div>
                 <div class="cf-image-bg">
-                    <img src="images/cofounder.png" alt="مهندس حسن کلانکی">
+                    <img src="/images/cofounder.png" alt="مهندس حسن کلانکی">
                 </div>
                 
                 <div class="cf-dark-badge">
@@ -556,7 +595,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
             <div class="ceo-image-section ceo-js-animate">
                 <div class="ceo-image-outline"></div>
                 <div class="ceo-image-bg">
-                    <img src="images/5915844879743389779.jpg" alt="خانم مهندس کلانکی">
+                    <img src="/images/5915844879743389779.jpg" alt="خانم مهندس کلانکی">
                 </div>
                 
                 <div class="ceo-light-badge">
@@ -641,7 +680,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
             <!-- کارت 1 -->
             <div class="eco2-card eco2-js-anim">
                 <div class="eco2-icon-ring">
-                  <img src="images/لوگوی-معدن-داد.webp" style="width: 10rem;
+                  <img src="/images/لوگوی-معدن-داد.webp" style="width: 10rem;
                   height: 5rem;border-radius: 1rem;" alt="">
                 </div>
                 <h3 class="eco2-card-ttl">معدن داد</h3>
@@ -665,7 +704,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
             <!-- کارت 2 -->
             <div class="eco2-card eco2-js-anim">
                 <div class="eco2-icon-ring">
-                    <img src="images/لوگوی-معدن-مشاور.webp" style="width: 10rem;
+                    <img src="/images/لوگوی-معدن-مشاور.webp" style="width: 10rem;
                   height: 5rem;border-radius: 1rem;" alt="">
                 </div>
                 <h3 class="eco2-card-ttl">معدن مشاور</h3>
@@ -687,7 +726,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
             <!-- کارت 3 -->
             <div class="eco2-card eco2-js-anim">
                 <div class="eco2-icon-ring">
-                    <img src="images/لوگوی-معدن-آکادمی.webp" style="width: 10rem;
+                    <img src="/images/لوگوی-معدن-آکادمی.webp" style="width: 10rem;
                   height: 5rem;border-radius: 1rem;" alt="">
                 </div>
                 <h3 class="eco2-card-ttl">معدن آکادمی</h3>
@@ -710,7 +749,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
             <!-- کارت 4 -->
             <div class="eco2-card eco2-js-anim">
                 <div class="eco2-icon-ring">
-                    <img src="images/لوگوی-معدن-ادز.webp" style="width: 10rem;
+                    <img src="/images/لوگوی-معدن-ادز.webp" style="width: 10rem;
                   height: 5rem;border-radius: 1rem;" alt="">
                 </div>
                 <h3 class="eco2-card-ttl">معدن ادز</h3>
@@ -780,19 +819,19 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
         <div class="partners-grid">
 
             <a href="#" class="partner-card">
-                <img src="images/partner1-150x150.webp" alt="">
+                <img src="/images/partner1-150x150.webp" alt="">
             </a>
 
             <a href="#" class="partner-card">
-                <img src="images/partner2-150x150.webp" alt="">
+                <img src="/images/partner2-150x150.webp" alt="">
             </a>
 
             <a href="#" class="partner-card">
-                <img src="images/partner3-150x150.webp" alt="">
+                <img src="/images/partner3-150x150.webp" alt="">
             </a>
 
             <a href="#" class="partner-card">
-                <img src="images/partner4-150x150.webp" alt="">
+                <img src="/images/partner4-150x150.webp" alt="">
             </a>
 
         </div>
@@ -800,13 +839,15 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
     </div>
 </section>
 
-
+<div id="toasts" class="toasts">
+    درخواست شما با موفقیت ثبت شد.
+</div>
 
 
 
        <div style="height: 6rem; background: #0a0a0a;"></div>
 
-    <footer class="site-footer" style="position: relative;bottom: 3rem;">
+    <footer class="site-footer" style="position: relative;bottom: 3rem;top: 4rem;">
         
 
         <div class="footer-top-pattern">
@@ -837,7 +878,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
                 <div class="footer-col footer-brand">
                     <div class="footer-logo">
                         <div class="footer-logo">
-                            <img src="images/Asset 1.png" alt="کافه معدن - Cafe Madan">
+                            <img src="/images/Asset 1.png" alt="کافه معدن - Cafe Madan">
                         </div>
                     </div>
                     <p class="footer-desc">
@@ -901,25 +942,25 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
                     </h4>
                     <ul class="footer-links">
                         <li>
-                            <a href="aboutus.html" class="footer-link">
+                            <a href="/cafemadan/c2334455-7788-45cd-e303-303030303030/aboutus" class="footer-link">
                                 <i class="fas fa-chevron-left"></i>
                                 درباره ما
                             </a>
                         </li>
                         <li>
-                            <a href="khadamat.html" class="footer-link">
+                            <a href="/cafemadan/a0112233-5566-43ab-c101-101010101010/khadamat" class="footer-link">
                                 <i class="fas fa-chevron-left"></i>
                                 خدمات
                             </a>
                         </li>
                         <li>
-                            <a href="articels.html" class="footer-link">
+                            <a href="/cafemadan/b1223344-6677-44bc-d202-202020202020/articels" class="footer-link">
                                 <i class="fas fa-chevron-left"></i>
                                 بلاگ
                             </a>
                         </li>
                         <li>
-                            <a href="call.html" class="footer-link">
+                            <a href="/cafemadan/d3445566-8899-46de-f404-404040404040/call" class="footer-link">
                                 <i class="fas fa-chevron-left"></i>
                                 تماس با ما
                             </a>
@@ -999,28 +1040,30 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
 </a>
 
 
-
-    <section class="consultation" id="consultation">
+<section class="consultation" id="consultation">
     <div class="content" style="display: flex;align-items: center;justify-content: center;">
 
         <div class="title-box" style="padding: 0 1rem;">
-            <span style="color: #d4a24c;">FREE CONSULTATION</span>
+            <span style="color: #FAB900;">FREE CONSULTATION</span>
             <h2 style="color: #f1f1f1;">دریافت مشاوره رایگان</h2>
         </div>
 
-          <form class="consult-banner__form">
+          <form class="consult-banner__form" id="requsetForm" method="post" action="">
 
         <div class="consult-banner__field">
-            <input type="text" placeholder="نام و نام خانوادگی" style="font-family: 'Vazirmatn', sans-serif;font-size: 20px;">
-            <i class="fas fa-user"></i>
+            <input type="text" placeholder="نام و نام خانوادگی" style="font-family: 'Vazirmatn', sans-serif;font-size: 20px;" name="name" >
+            <i class="fas fa-user" style="color: #FAB900;"></i>
         </div>
+
 
         <div class="consult-banner__field">
-            <input type="tel" placeholder="شماره تماس" style="font-family: 'Vazirmatn', sans-serif;font-size: 20px;">
-            <i class="fas fa-phone"></i>
+            <input type="tel" placeholder="شماره تماس" style="font-family: 'Vazirmatn', sans-serif;font-size: 20px;" name="phone" onkeypress="return event.charCode >= 48 && event.charCode <= 57" 
+    oninput="validatePhone(this)" required>
+            <i class="fas fa-phone" style="color: #FAB900;"></i>
         </div>
+                    <p id="phone-error" style="color: red; font-size: 0.9rem; display: none;"></p>
 
-        <button class="consult-banner__btn" style="font-family: 'Vazirmatn', sans-serif;position: relative;bottom: .8rem;">
+        <button class="consult-banner__btn" style="font-family: 'Vazirmatn', sans-serif;background: #FAB900 !important;" type="submit" id="requestbtnsssss">
             ثبت درخواست
             <i class="fas fa-arrow-left"></i>
         </button>
@@ -1029,6 +1072,10 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
 
     </div>
 </section>
+
+<div id="toasts" class="toasts">
+    درخواست شما با موفقیت ثبت شد.
+</div>
 
 
 <script>
@@ -1128,8 +1175,109 @@ document.querySelectorAll(".timeline-item").forEach(item => {
 });*/
 </script>
 
- <script src="./js/aboutus.js"></script>
-<script src="./js/footer.js"></script>
-<script src="./js/navbar.js"></script>
+
+<script>
+
+    fetch("/api/visit",{
+    method:"POST",
+    headers:{
+        "Content-Type":"application/json"
+    },
+    body:JSON.stringify({
+        page:window.location.pathname
+    })
+});
+</script>
+
+
+<script>
+    window.addEventListener("DOMContentLoaded", function(){
+    const name = localStorage.getItem("btn-text")
+    const lastname = localStorage.getItem("btn-text2")
+
+
+    if (name) {
+        document.getElementById("displayName").textContent = name
+    }
+    else{
+        document.getElementById("displayName").textContent = "Err"
+    }
+
+
+    if (lastname) {
+        document.getElementById("displayLastname").textContent = lastname
+    }
+    else{
+                document.getElementById("displayLastname").textContent = "Err"
+    }
+})
+</script>
+
+
+<script>
+    window.addEventListener("DOMContentLoaded", function(){
+    const name = localStorage.getItem("profile-name")
+    const lastname = localStorage.getItem("profile-LastName")
+
+
+    if (name) {
+        document.getElementById("display-name").textContent = name
+    }
+    else{
+        document.getElementById("display-name").textContent = "Err"
+    }
+
+
+    if (lastname) {
+        document.getElementById("display-LastName").textContent = lastname
+    }
+    else{
+                document.getElementById("display-LastName").textContent = "Err"
+    }
+
+       if (name && lastname) {
+
+        const firstNameLetter = name.trim().charAt(0);
+        const lastNameLetter = lastname.trim().charAt(0);
+
+        document.getElementById("profile-initials").textContent =
+            `${firstNameLetter}.${lastNameLetter}`;
+
+    } else {
+
+        document.getElementById("profile-initials").textContent = "؟.؟";
+
+    }
+})
+</script>
+
+
+
+
+<script>
+    document.addEventListener("DOMContentLoaded",function(){
+        const vorbtn = document.getElementById("vorodbtn")
+
+        if (!vorbtn) {
+            return
+        }
+
+    const token = localStorage.getItem("accessToken")
+
+
+    if (token) {
+        vorbtn.style.display = "none"
+    }
+    else{
+        vorbtn.style.display="flex"
+    }
+    })
+</script>
+
+
+<script src="/js/request.js"></script>
+ <script src="/js/aboutus.js"></script>
+<script src="/js/footer.js"></script>
+<script src="/js/navbar.js"></script>
 </body>
 </html>

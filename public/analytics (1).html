@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>آمار بازدید | پنل مدیریت کافه مدن</title>
+<link rel="stylesheet" href="/css/base.css">
+<link rel="stylesheet" href="/css/layout (1).css">
+<link rel="stylesheet" href="/css/components.css">
+<link rel="stylesheet" href="/css/dashboard (1).css">
+</head>
+<body>
+
+<div class="app">
+  <aside class="sidebar" id="sidebar-root"></aside>
+  <div class="overlay"></div>
+
+  <div class="main">
+    <header class="topbar" id="topbar-root"></header>
+
+    <div class="content">
+      <div class="page-head fade-up">
+        <div>
+          <h1 class="page-head__title">آمار بازدید سایت</h1>
+          <p style="font-size: 1rem;" class="page-head__desc">روند بازدید کاربران را به تفکیک بازه زمانی بررسی کنید.</p>
+        </div>
+      </div>
+
+      <section class="stats-grid stagger" id="analytics-stats" style="grid-template-columns: repeat(4,1fr);"></section>
+
+      <div class="card chart-card fade-up" style="margin-bottom: var(--sp-5);">
+        <div class="chart-card__head">
+          <div>
+            <div style="font-size: 1.3rem;" class="chart-card__title">روند بازدیدکنندگان</div>
+            <div style="font-size: 1rem;" class="chart-card__legend"><span><i></i> بازدید سایت</span></div>
+          </div>
+          <div class="range-tabs" id="range-tabs">
+            <button style="font-size: 1rem;" data-range="daily">روزانه</button>
+            <button style="font-size: 1rem;" data-range="weekly" class="is-active">هفتگی</button>
+            <button style="font-size: 1rem;" data-range="monthly">ماهانه</button>
+            <button style="font-size: 1rem;" data-range="yearly">سالانه</button>
+          </div>
+        </div>
+        <div class="chart-canvas-wrap" style="height: 320px;">
+          <canvas id="analytics-chart"></canvas>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+</div>
+
+<script src="/js/utils (1).js  "></script>
+<script src="/js/store (1).js"></script>
+<script src="/js/shell (1).js"></script>
+<script src="/js/ui (1).js"></script>
+<script src="/js/charts.js"></script>
+<script src="/js/analytics (1).js"></script>
+</body>
+</html>

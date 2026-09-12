@@ -10,20 +10,35 @@
     <!-- آیکون‌های فونت آوسوم -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- فایل استایل -->
-    <link rel="stylesheet" href="css/call.css">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="/css/call.css">
+    <link rel="stylesheet" href="/css/style.css">
+
+
+
+
+
+     <script src="https://cdn.tailwindcss.com"></script>
+
+
 </head>
 <body>
 
      <nav class="navbar" id="navbar">
         <div class="navbar-overlay"></div>
         <div class="container nav-container">
+
+
+            <button class="hamburger" id="hamburger" aria-label="منو">
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                </button>
             
             <!-- Logo Section -->
             <div class="nav-logo" style="padding: 0 1rem !important;">
                 <div class="logo-wrapper">
                     <div style="position: relative;top: .3rem;">
-                        <img src="images/Asset 1.png" style="object-fit: cover;width: 50px;height: 70px;" alt="">
+                        <img src="/images/Asset 1.png" style="object-fit: cover;width: 50px;height: 70px;" alt="">
                         
                     </div>
                     <div class="logo-text">
@@ -36,40 +51,46 @@
             <!-- Navigation Menu -->
             <ul class="nav-menu" id="navMenu">
                 <li class="nav-item">
-                    <a href="index.html" style="font-size: 1.2rem;" class="nav-link">
+                    <a href="/cafemadan/90112233-4455-42fa-b999-999999999999/index" style="font-size: 1.2rem;" class="nav-link">
                         <span class="link-text">خانه</span>
                         <span class="link-underline"></span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" style="font-size: 1.2rem;" class="nav-link">
+                    <a href="/cafemadan/a0112233-5566-43ab-c101-101010101010/khadamat" style="font-size: 1.2rem;" class="nav-link">
                         <span class="link-text">خدمات</span>
                         <span class="link-underline"></span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="articels.html" style="font-size: 1.2rem;" class="nav-link">
+                    <a href="/cafemadan/b1223344-6677-44bc-d202-202020202020/articels" style="font-size: 1.2rem;" class="nav-link">
                         <span class="link-text">مقالات</span>
                         <span class="link-underline"></span>
                     </a>
                 </li>
                
                 <li class="nav-item">
-                    <a href="#aboutus.html" style="font-size: 1.2rem;" class="nav-link">
+                    <a href="/cafemadan/c2334455-7788-45cd-e303-303030303030/aboutus" style="font-size: 1.2rem;" class="nav-link">
                         <span class="link-text">درباره ما</span>
                         <span class="link-underline"></span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="call.html" style="font-size: 1.2rem;" class="nav-link active">
+                    <a href="#call.html" style="font-size: 1.2rem;" class="nav-link active">
                         <span class="link-text">تماس با ما</span>
                         <span class="link-underline"></span>
                     </a>
                 </li>
 
                  <li class="nav-item">
-                    <a href="storyus.html" style="font-size: 1.2rem;" class="nav-link">
+                    <a href="/cafemadan/e4556677-9900-47ef-a505-505050505050/storyus" style="font-size: 1.2rem;" class="nav-link">
                         <span class="link-text">داستان ما</span>
+                        <span class="link-underline"></span>
+                    </a>
+                </li>
+                                <li class="nav-item">
+                    <a href="/cafemadan/vf902156-6677-62ef-a309-8765689349380/pocast" style="font-size: 1.2rem;" class="nav-link">
+                        <span class="link-text">خبر نامه</span>
                         <span class="link-underline"></span>
                     </a>
                 </li>
@@ -77,20 +98,40 @@
 
             <!-- Action Buttons -->
             <div class="nav-actions" style="padding: 0 1rem !important;">
-                <a href="#" style="font-size: 1.1rem;" class="btn-ecosystem">
-                    <span class="btn-text">دریافت مشاوره تخصصی</span>
-                    <span class="btn-icon">
-                        <i class="fas fa-arrow-left"></i>
-                    </span>
-                    <span class="btn-shine"></span>
-                </a>
+                  <div class="profile-container">
+    <button
+      type="button"
+      class="profile-button"
+      id="profile-button"
+      aria-label="حساب کاربری محمد رضایی"
+    >
+      <!-- Avatar with Initials -->
+      <span class="profile-avatar" aria-hidden="true">
+        <span class="profile-initials" id="profile-initials">م.ر</span>
+        <span class="profile-status" aria-hidden="true"></span>
+      </span>
+
+      <!-- Accent Divider (Industrial touch) -->
+      <span class="profile-divider" aria-hidden="true"></span>
+
+      <!-- User Name -->
+      <span class="profile-name" id="display-name"></span>
+      <span class="profile-LastName" id="display-LastName"></span>
+    </button>
+  </div>
+
+
+
+                 <a href="/cafemadan/p45596s87-9999-48ef-a606-707070707070/login" id="vorodbtn" class="relative inline-flex items-center justify-center p-4 px-6 py-3 overflow-hidden font-medium text-yellow-600 transition duration-300 ease-out border-2 border-yellow-500 rounded-full shadow-md group">
+        <span class="absolute inset-0 flex items-center justify-center w-full h-full text-white duration-300 -translate-x-full bg-yellow-500 group-hover:translate-x-0 ease">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+            </svg>
+        </span>
+        <span class="absolute flex items-center justify-center w-full h-full text-yellow-500 transition-all duration-300 transform group-hover:translate-x-full ease">ورود</span>
+        <span class="relative invisible">Button Text</span>
+    </a>
                 
-                
-                <button class="hamburger" id="hamburger" aria-label="منو">
-                    <span class="hamburger-line"></span>
-                    <span class="hamburger-line"></span>
-                    <span class="hamburger-line"></span>
-                </button>
             </div>
         </div>
     </nav>
@@ -118,14 +159,14 @@
                     <div class="expert-card" 
                          data-name="سارا احمدی"
                          data-role="مشاور حقوقی"
-                         data-image="./images/woman-call.jpg"
+                         data-image="/images/woman-call.jpg"
                          data-description="سارا احمدی با بیش از ۸ سال تجربه در حوزه حقوق معدن و قراردادهای بین‌المللی، آماده ارائه مشاوره تخصصی به شماست. تخصص اصلی ایشان در تنظیم قراردادهای استخراج، حل اختلافات حقوقی و مشاوره در زمینه مجوزهای قانونی معادن است."
                          data-questions="• سوالات مربوط به قراردادهای استخراج و اکتشاف
 • مشاوره در زمینه مجوزهای قانونی و محیط زیستی
 • حل اختلافات حقوقی با پیمانکاران
 • تنظیم قراردادهای مشارکت مدنی
 • مشاوره در زمینه بیمه و مسئولیت‌های حقوقی">
-                        <img src=" ./images/woman-call.jpg" alt="سارا احمدی" class="expert-avatar">
+                        <img src=" /images/woman-call.jpg" alt="سارا احمدی" class="expert-avatar">
                         <div class="expert-info">
                             <div class="expert-name">سارا احمدی</div>
                             <span class="expert-role">مشاور حقوقی</span>
@@ -142,14 +183,14 @@
                     <div class="expert-card"
                          data-name="محمد رضایی"
                          data-role="مدیر پروژه‌ها"
-                         data-image=" ./images/man-call.jpg"
+                         data-image=" /images/man-call.jpg"
                          data-description="محمد رضایی مدیر ارشد پروژه‌های معدنی با سابقه مدیریت بیش از ۲۰ پروژه بزرگ در سطح کشور است. ایشان مسئولیت برنامه‌ریزی، نظارت و اجرای پروژه‌های اکتشاف و استخراج را بر عهده دارد و در بهینه‌سازی فرآیندهای عملیاتی تخصص دارد."
                          data-questions="• برنامه‌ریزی و زمان‌بندی پروژه‌های معدنی
 • برآورد هزینه و بودجه‌بندی پروژه
 • مدیریت منابع انسانی و تجهیزات
 • نظارت بر پیشرفت فیزیکی پروژه
 • بهینه‌سازی فرآیندهای عملیاتی">
-                        <img src=" ./images/man-call.jpg" alt="محمد رضایی" class="expert-avatar">
+                        <img src=" /images/man-call.jpg" alt="محمد رضایی" class="expert-avatar">
                         <div class="expert-info">
                             <div class="expert-name">محمد رضایی</div>
                             <span class="expert-role">مدیر پروژه‌ها</span>
@@ -166,14 +207,14 @@
                     <div class="expert-card"
                          data-name="مینا شریفی"
                          data-role="کارشناس مالی"
-                         data-image="./images/woman-call.jpg"
+                         data-image="/images/woman-call.jpg"
                          data-description="مینا شریفی کارشناس ارشد مالی با تخصص در تحلیل اقتصادی پروژه‌های معدنی است. ایشان در زمینه ارزیابی سودآوری معادن، تأمین مالی، حسابداری صنعتی و گزارش‌های مالیاتی فعالیت می‌کند و به شرکت‌ها در تصمیم‌گیری‌های مالی کمک می‌کند."
                          data-questions="• تحلیل اقتصادی و امکان‌سنجی پروژه
 • تأمین مالی و جذب سرمایه‌گذار
 • حسابداری صنعتی و بهای تمام‌شده
 • گزارش‌های مالیاتی و بیمه‌ای
 • برآورد هزینه‌های استخراج و فرآوری">
-                        <img src="./images/woman-call.jpg" alt="مینا شریفی" class="expert-avatar">
+                        <img src="/images/woman-call.jpg" alt="مینا شریفی" class="expert-avatar">
                         <div class="expert-info">
                             <div class="expert-name">مینا شریفی</div>
                             <span class="expert-role">کارشناس مالی</span>
@@ -190,14 +231,14 @@
                     <div class="expert-card"
                          data-name="علی قربانی"
                          data-role="کارشناس فنی"
-                         data-image="./images/man-call.jpg"
+                         data-image="/images/man-call.jpg"
                          data-description="علی قربانی مهندس معدن با تخصص در مکانیک سنگ و طراحی استخراج است. ایشان در زمینه انتخاب روش‌های استخراج، طراحی تونل‌ها، ایمنی معادن و بهینه‌سازی فرآیندهای فنی فعالیت می‌کند و مشاوره تخصصی در مسائل فنی ارائه می‌دهد."
                          data-questions="• طراحی روش‌های استخراج روباز و زیرزمینی
 • مشاوره در زمینه ایمنی و HSE معادن
 • انتخاب تجهیزات و ماشین‌آلات معدنی
 • تحلیل پایداری دیواره‌ها و سازه‌ها
 • بهینه‌سازی فرآیندهای فرآوری">
-                        <img src="./images/man-call.jpg" alt="علی قربانی" class="expert-avatar">
+                        <img src="/images/man-call.jpg" alt="علی قربانی" class="expert-avatar">
                         <div class="expert-info">
                             <div class="expert-name">علی قربانی</div>
                             <span class="expert-role">کارشناس فنی</span>
@@ -214,14 +255,14 @@
                     <div class="expert-card"
                          data-name="الهام مرادی"
                          data-role="پشتیبانی و خدمات"
-                         data-image="./images/woman-call.jpg"
+                         data-image="/images/woman-call.jpg"
                          data-description="الهام مرادی مسئول تیم پشتیبانی و خدمات مشتریان است. ایشان و تیمش آماده پاسخگویی به سوالات عمومی، پیگیری درخواست‌ها، ارائه راهنمایی در استفاده از خدمات و حل مشکلات احتمالی شما هستند. هدف اصلی ایشان رضایت کامل مشتریان است."
                          data-questions="• پیگیری درخواست‌ها و سفارشات
 • راهنمایی در استفاده از خدمات سایت
 • حل مشکلات فنی و پشتیبانی
 • ثبت نظرات و پیشنهادات
 • اطلاع از وضعیت پروژه‌ها">
-                        <img src="./images/woman-call.jpg" alt="الهام مرادی" class="expert-avatar">
+                        <img src="/images/woman-call.jpg" alt="الهام مرادی" class="expert-avatar">
                         <div class="expert-info">
                             <div class="expert-name">الهام مرادی</div>
                             <span class="expert-role">پشتیبانی و خدمات</span>
@@ -238,14 +279,14 @@
                     <div class="expert-card"
                          data-name="رضا نیکوکار"
                          data-role="مدیر بازرگانی"
-                         data-image="./images/man-call.jpg"
+                         data-image="/images/man-call.jpg"
                          data-description="رضا نیکوکار مدیر بازرگانی با تجربه در بازارهای داخلی و بین‌المللی مواد معدنی است. ایشان در زمینه بازاریابی محصولات معدنی، صادرات و واردات، مذاکرات تجاری و ایجاد ارتباط با مشتریان کلیدی فعالیت می‌کند."
                          data-questions="• خرید و فروش مواد معدنی
 • صادرات و واردات محصولات معدنی
 • مذاکرات تجاری و قراردادهای بازرگانی
 • بازاریابی و معرفی محصولات
 • ارتباط با مشتریان بین‌المللی">
-                        <img src="./images/man-call.jpg" alt="رضا نیکوکار" class="expert-avatar">
+                        <img src="/images/man-call.jpg" alt="رضا نیکوکار" class="expert-avatar">
                         <div class="expert-info">
                             <div class="expert-name">رضا نیکوکار</div>
                             <span class="expert-role">مدیر بازرگانی</span>
@@ -272,32 +313,32 @@
                     <h2 style="font-size: 1.2rem;"><i class="fas fa-envelope-open-text" style="color: #F3B300;"></i> با کارشناسان ما در ارتباط باشید</h2>
                     <p style="font-size: 1.1rem;">فرم زیر را تکمیل کنید، کارشناسان ما در سریع‌ترین زمان با شما تماس خواهند گرفت.</p>
                 </div>
-                <form id="contactForm">
+                <form  method="post" id="callform" autocomplete="off">
                     <div class="form-grid">
                         <div class="input-group">
                             <i class="fas fa-user"></i>
-                            <input type="text" id="fullname" name="fullname" placeholder="نام و نام خانوادگی" required>
+                            <input type="text"  name="name" placeholder="نام و نام خانوادگی" autocomplete="off" required>
                         </div>
                         <div class="input-group">
                             <i class="fas fa-building"></i>
-                            <input type="text" id="company" name="company" placeholder="نام شرکت">
+                            <input type="text"  name="compenyname" autocomplete="off" placeholder="نام شرکت">
                         </div>
                         <div class="input-group">
                             <i class="fas fa-phone"></i>
-                            <input type="tel" id="phone" name="phone" placeholder="شماره تماس" pattern="[0-9]+" maxlength="11" inputmode="numeric" onkeypress="return event.charCode >= 48 && event.charCode <= 57" 
+                            <input type="tel" name="phone" placeholder="شماره تماس" autocomplete="off" pattern="[0-9]+" maxlength="11" inputmode="numeric" onkeypress="return event.charCode >= 48 && event.charCode <= 57" 
     oninput="validatePhone(this)" required>
     <p id="phone-error" style="color: red; font-size: 0.9rem; display: none;"></p>
                         </div>
                         <div class="input-group">
                             <i class="fas fa-envelope"></i>
-                            <input type="email" id="email" name="email" placeholder="ایمیل">
+                            <input type="email" name="email" autocomplete="off" placeholder="ایمیل">
                         </div>
                         <div class="input-group full-width">
                             <i class="fas fa-comment-dots" style="top: 15px; transform: none;"></i>
-                            <textarea id="message" name="message" rows="5" placeholder="پیام شما..." required></textarea>
+                            <textarea name="message" rows="5" placeholder="پیام شما..." autocomplete="off" required></textarea>
                         </div>
                     </div>
-                    <button type="submit" class="submit-btn">
+                    <button id="calbtn" type="submit" class="submit-btn">
                         <i class="fas fa-paper-plane"></i>
                         ارسال درخواست
                     </button>
@@ -334,6 +375,13 @@
             </div>
         </div>
     </div>
+
+
+
+
+
+
+
 
     <!-- ========== مودال کارشناسان ========== -->
     <div class="modal-overlay" id="expertModal">
@@ -416,7 +464,7 @@
                 <div class="footer-col footer-brand">
                     <div class="footer-logo">
                         <div class="footer-logo">
-                            <img src="images/Asset 1.png" alt="کافه معدن - Cafe Madan">
+                            <img src="/images/Asset 1.png" alt="کافه معدن - Cafe Madan">
                         </div>
                     </div>
                     <p class="footer-desc">
@@ -480,25 +528,25 @@
                     </h4>
                     <ul class="footer-links">
                         <li>
-                            <a href="aboutus.html" class="footer-link">
+                            <a href="/cafemadan/c2334455-7788-45cd-e303-303030303030/aboutus" class="footer-link">
                                 <i class="fas fa-chevron-left"></i>
                                 درباره ما
                             </a>
                         </li>
                         <li>
-                            <a href="khadamat.html" class="footer-link">
+                            <a href="/cafemadan/a0112233-5566-43ab-c101-101010101010/khadamat" class="footer-link">
                                 <i class="fas fa-chevron-left"></i>
                                 خدمات
                             </a>
                         </li>
                         <li>
-                            <a href="articels.html" class="footer-link">
+                            <a href="/cafemadan/b1223344-6677-44bc-d202-202020202020/articels" class="footer-link">
                                 <i class="fas fa-chevron-left"></i>
                                 بلاگ
                             </a>
                         </li>
                         <li>
-                            <a href="call.html" class="footer-link">
+                            <a href="/cafemadan/d3445566-8899-46de-f404-404040404040/call" class="footer-link">
                                 <i class="fas fa-chevron-left"></i>
                                 تماس با ما
                             </a>
@@ -582,19 +630,22 @@
             <h2 style="color: #f1f1f1;">دریافت مشاوره رایگان</h2>
         </div>
 
-          <form class="consult-banner__form">
+          <form class="consult-banner__form" id="requsetForm" method="post" action="">
 
         <div class="consult-banner__field">
-            <input type="text" placeholder="نام و نام خانوادگی" style="font-family: 'Vazirmatn', sans-serif;font-size: 20px;">
+            <input type="text" placeholder="نام و نام خانوادگی" style="font-family: 'Vazirmatn', sans-serif;font-size: 20px;" name="name" >
             <i class="fas fa-user" style="color: #FAB900;"></i>
         </div>
 
-        <div class="consult-banner__field" >
-            <input type="tel" placeholder="شماره تماس" style="font-family: 'Vazirmatn', sans-serif;font-size: 20px;">
+
+        <div class="consult-banner__field">
+            <input type="tel" placeholder="شماره تماس" style="font-family: 'Vazirmatn', sans-serif;font-size: 20px;" name="phone" onkeypress="return event.charCode >= 48 && event.charCode <= 57" 
+    oninput="validatePhone(this)" required>
             <i class="fas fa-phone" style="color: #FAB900;"></i>
         </div>
+                    <p id="phone-error" style="color: red; font-size: 0.9rem; display: none;"></p>
 
-        <button class="consult-banner__btn" style="font-family: 'Vazirmatn', sans-serif;background: #FAB900 !important;">
+        <button class="consult-banner__btn" style="font-family: 'Vazirmatn', sans-serif;background: #FAB900 !important;" type="submit" id="requestbtnsssss">
             ثبت درخواست
             <i class="fas fa-arrow-left"></i>
         </button>
@@ -604,6 +655,50 @@
     </div>
 </section>
     <div id="consultation"></div>
+
+
+
+
+    
+
+    <div id="toast" class="toast">
+    درخواست شما با موفقیت ثبت شد.
+</div>
+
+
+
+
+
+
+
+
+<script>
+    window.addEventListener("DOMContentLoaded", function(){
+    const name = localStorage.getItem("btn-text")
+    const lastname = localStorage.getItem("btn-text2")
+
+
+    if (name) {
+        document.getElementById("displayName").textContent = name
+    }
+    else{
+        document.getElementById("displayName").textContent = "Err"
+    }
+
+
+    if (lastname) {
+        document.getElementById("displayLastname").textContent = lastname
+    }
+    else{
+                document.getElementById("displayLastname").textContent = "Err"
+    }
+})
+</script>
+
+
+
+<script src="/js/request.js"></script>
+
 <script>
     function validatePhone(input) {
     // فقط عدد قبول کنه
@@ -624,9 +719,70 @@
 }
 </script>
 
+
+<script>
+    window.addEventListener("DOMContentLoaded", function(){
+    const name = localStorage.getItem("profile-name")
+    const lastname = localStorage.getItem("profile-LastName")
+
+
+    if (name) {
+        document.getElementById("display-name").textContent = name
+    }
+    else{
+        document.getElementById("display-name").textContent = "Err"
+    }
+
+
+    if (lastname) {
+        document.getElementById("display-LastName").textContent = lastname
+    }
+    else{
+                document.getElementById("display-LastName").textContent = "Err"
+    }
+
+       if (name && lastname) {
+
+        const firstNameLetter = name.trim().charAt(0);
+        const lastNameLetter = lastname.trim().charAt(0);
+
+        document.getElementById("profile-initials").textContent =
+            `${firstNameLetter}.${lastNameLetter}`;
+
+    } else {
+
+        document.getElementById("profile-initials").textContent = "؟.؟";
+
+    }
+})
+</script>
+
+
+<script>
+    document.addEventListener("DOMContentLoaded",function(){
+        const vorbtn = document.getElementById("vorodbtn")
+
+        if (!vorbtn) {
+            return
+        }
+
+    const token = localStorage.getItem("accessToken")
+
+
+    if (token) {
+        vorbtn.style.display = "none"
+    }
+    else{
+        vorbtn.style.display="flex"
+    }
+    })
+</script>
+
     <!-- فایل جاوااسکریپت -->
-    <script src="./js/call.js"></script>
-    <script src="./js/navbar.js"></script>
-    <script src="./js/footer.js"></script>
+     <script src="/js/callform.js"></script>
+    <script src="/js/call.js"></script>
+    <script src="/js/navbar.js"></script>
+    <script src="/js/footer.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 </html>

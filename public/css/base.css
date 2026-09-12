@@ -1,0 +1,197 @@
+/* ==========================================================================
+   CafeMadan Admin — Design Tokens & Base Styles
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800&display=swap');
+
+:root {
+  /* -- Brand Colors -- */
+  --color-primary: #F3B300;
+  --color-primary-dark: #D89C00;
+  --color-primary-light: #FFD966;
+  --color-primary-tint: #FFF7E0;
+
+  /* -- Neutrals -- */
+  --color-black: #14140F;
+  --color-ink: #1D1D18;
+  --color-dark-gray: #2B2B26;
+  --color-gray-700: #4A4A44;
+  --color-gray-500: #767068;
+  --color-gray-400: #9C978F;
+  --color-gray-300: #C8C3B8;
+  --color-gray-200: #E7E2D6;
+  --color-gray-100: #F2EFE6;
+  --color-white: #FFFFFF;
+  --color-bg: #F8F6F1;
+  --color-surface: #FFFFFF;
+
+  /* -- Semantic -- */
+  --color-success: #1F9D55;
+  --color-success-tint: #E6F6EC;
+  --color-warning: #C77D00;
+  --color-warning-tint: #FFF3DE;
+  --color-error: #D64545;
+  --color-error-tint: #FCEAEA;
+  --color-info: #2B6CB0;
+  --color-info-tint: #E8F1FB;
+
+  /* -- Typography -- */
+  --font-main: 'Vazirmatn', 'Tahoma', sans-serif;
+  --fs-xs: 0.75rem;
+  --fs-sm: 0.8125rem;
+  --fs-base: 0.9375rem;
+  --fs-md: 1.0625rem;
+  --fs-lg: 1.25rem;
+  --fs-xl: 1.5rem;
+  --fs-2xl: 1.875rem;
+  --fs-3xl: 2.25rem;
+
+  /* -- Spacing scale -- */
+  --sp-1: 4px;
+  --sp-2: 8px;
+  --sp-3: 12px;
+  --sp-4: 16px;
+  --sp-5: 20px;
+  --sp-6: 24px;
+  --sp-7: 32px;
+  --sp-8: 40px;
+  --sp-9: 48px;
+  --sp-10: 64px;
+
+  /* -- Radius -- */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 20px;
+  --radius-full: 999px;
+
+  /* -- Shadows -- */
+  --shadow-xs: 0 1px 2px rgba(20, 20, 15, 0.05);
+  --shadow-sm: 0 2px 8px rgba(20, 20, 15, 0.06);
+  --shadow-md: 0 8px 24px rgba(20, 20, 15, 0.08);
+  --shadow-lg: 0 16px 40px rgba(20, 20, 15, 0.12);
+  --shadow-primary: 0 8px 20px rgba(243, 179, 0, 0.28);
+
+  /* -- Layout -- */
+  --sidebar-width: 272px;
+  --sidebar-width-collapsed: 84px;
+  --header-height: 72px;
+
+  /* -- Motion -- */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --dur-fast: 150ms;
+  --dur-base: 220ms;
+  --dur-slow: 360ms;
+}
+
+/* -- Reset -- */
+* , *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-main);
+  background: var(--color-bg);
+  color: var(--color-ink);
+  font-size: var(--fs-base);
+  line-height: 1.7;
+  direction: rtl;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+
+img { max-width: 100%; display: block; }
+button { font-family: inherit; cursor: pointer; }
+input, select, textarea { font-family: inherit; font-size: inherit; }
+a { text-decoration: none; color: inherit; }
+ul, ol { list-style: none; }
+
+::selection { background: var(--color-primary-light); color: var(--color-black); }
+
+/* -- Scrollbar -- */
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--color-gray-300); border-radius: var(--radius-full); }
+::-webkit-scrollbar-thumb:hover { background: var(--color-gray-400); }
+
+/* -- Focus visibility (accessibility) -- */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
+/* -- Reduced motion -- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* -- Typography helpers -- */
+h1, h2, h3, h4 { font-weight: 700; color: var(--color-black); line-height: 1.35; }
+.text-muted { color: var(--color-gray-500); }
+.text-sm { font-size: var(--fs-sm); }
+.text-xs { font-size: var(--fs-xs); }
+.font-medium { font-weight: 500; }
+.font-semibold { font-weight: 600; }
+.font-bold { font-weight: 700; }
+
+
+
+
+
+.view-chart-btn {
+
+    margin-top: 15px;
+    width: 100%;
+    padding: 8px 14px;
+
+    border-radius: 12px;
+    border: 1px solid #F3B300;
+
+    background: #fff;
+    color: #2B2B26;
+
+    cursor: pointer;
+
+    font-size: 12px;
+    font-weight: 600;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+
+    transition: all .25s ease;
+}
+
+
+.view-chart-btn:hover {
+
+    background: #F3B300;
+    color: #fff;
+
+    transform: translateY(-3px);
+
+    box-shadow: 0 8px 18px rgba(243,179,0,.25);
+
+}
+
+
+.view-chart-btn:active {
+
+    transform: scale(.96);
+
+}
+
+

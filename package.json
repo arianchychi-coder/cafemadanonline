@@ -1,0 +1,35 @@
+{
+  "name": "nav-web12",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/arianchychi-coder/cafe41.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/arianchychi-coder/cafe41/issues"
+  },
+  "homepage": "https://github.com/arianchychi-coder/cafe41#readme",
+  "description": "",
+  "devDependencies": {
+    "nodemon": "^3.1.14"
+  },
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "crypto": "^1.0.1",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "joi": "^18.2.3",
+    "jsonwebtoken": "^9.0.3",
+    "mongodb": "^7.5.0",
+    "multer": "^2.2.0",
+    "nodemailer": "^9.0.3",
+    "uuid": "^14.0.1"
+  }
+}

@@ -47,3 +47,103 @@ document.addEventListener('keydown', (e) => {
         searchToggle.classList.remove('active');
     }
 });
+
+
+
+/* =========================================================
+   Profile Button — Scoped Component
+   Modular, clean, no dependencies.
+   ========================================================= */
+
+(function () {
+  'use strict';
+
+  // ---------------------------------------------------------
+  // Configuration (Mock Data)
+  // Replace this value from Backend / LocalStorage later.
+  // ---------------------------------------------------------
+  var profileUserName = 'محمد رضایی';
+
+  // ---------------------------------------------------------
+  // DOM References
+  // ---------------------------------------------------------
+  var profileButton    = document.getElementById('profile-button');
+  var profileName      = document.getElementById('profile-name');
+  var profileInitials  = document.getElementById('profile-initials');
+
+  if (!profileButton || !profileName || !profileInitials) {
+    return;
+  }
+
+  // ---------------------------------------------------------
+  // Helpers
+  // ---------------------------------------------------------
+  function extractInitials(fullName) {
+    if (typeof fullName !== 'string' || fullName.trim() === '') return '';
+    var parts = fullName.trim().split(/\s+/);
+    if (parts.length === 1) {
+      return parts[0].charAt(0);
+    }
+    return parts[0].charAt(0) + '.' + parts[parts.length - 1].charAt(0);
+  }
+
+  function renderName(name) {
+    profileName.textContent = name;
+    profileInitials.textContent = extractInitials(name);
+    profileButton.setAttribute('aria-label', 'حساب کاربری ' + name);
+  }
+
+  // ---------------------------------------------------------
+  // Public API
+  // Usage: window.ProfileButton.setName('علی احمدی');
+  // ---------------------------------------------------------
+  var ProfileButton = {
+    setName: function (name) {
+      if (typeof name !== 'string' || name.trim() === '') return;
+      profileUserName = name.trim();
+      renderName(profileUserName);
+    },
+    getName: function () {
+      return profileUserName;
+    }
+  };
+
+  // ---------------------------------------------------------
+  // Initial Render
+  // ---------------------------------------------------------
+  renderName(profileUserName);
+
+  // ---------------------------------------------------------
+  // Click Handler (placeholder for future navigation)
+  // ---------------------------------------------------------
+  profileButton.addEventListener('click', function (event) {
+    event.preventDefault();
+    // Future: navigate to profile page or dispatch event
+    var clickEvent;
+    try {
+      clickEvent = new CustomEvent('profile:click', {
+        detail: { userName: profileUserName }
+      });
+    } catch (e) {
+      clickEvent = document.createEvent('CustomEvent');
+      clickEvent.initCustomEvent('profile:click', true, true, {
+        userName: profileUserName
+      });
+    }
+    profileButton.dispatchEvent(clickEvent);
+  });
+
+  // Prevent Space-scroll on button
+  profileButton.addEventListener('keydown', function (event) {
+    if (event.key === ' ') {
+      event.preventDefault();
+    }
+  });
+
+  // Expose API
+  window.ProfileButton = ProfileButton;
+})();
+
+
+
+

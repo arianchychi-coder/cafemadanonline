@@ -1,0 +1,371 @@
+/* ═══════════════════════════════════════════════════════════
+   کافه معدن — صفحهٔ ۴۰۴ · تم دارک
+   زبان بصری: صنعتی / مهندسی / ادیتوریال / مینیمال
+   پالت: #F28C28 (اکسنت) · #222222 (زمینه) · #FFFFFF (متن)
+   ═══════════════════════════════════════════════════════════ */
+
+:root {
+  --orange: #F3B300;
+  --ink:    #222222;
+  --paper:  #FFFFFF;
+
+  --white-05: rgba(255, 255, 255, .05);
+  --white-08: rgba(255, 255, 255, .08);
+  --white-15: rgba(255, 255, 255, .15);
+  --white-25: rgba(255, 255, 255, .25);
+  --white-40: rgba(255, 255, 255, .4);
+  --white-55: rgba(255, 255, 255, .55);
+  --white-70: rgba(255, 255, 255, .7);
+
+  --font-display: 'Lalezar', 'Vazirmatn', serif;
+  --font-body: 'Vazirmatn', 'Segoe UI', Tahoma, sans-serif;
+  --font-numeral: 'Anton', 'Arial Narrow', sans-serif;
+  --font-mono: 'IBM Plex Mono', 'Courier New', monospace;
+
+  --gap: clamp(2.5rem, 6vw, 4.5rem);
+}
+
+/* ── ریست و پایه ─────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--ink);
+  /* گرید نقشه‌کشی بسیار ملایم روی زمینهٔ تیره */
+  background-image:
+    linear-gradient(var(--white-08) 1px, transparent 1px),
+    linear-gradient(90deg, var(--white-08) 1px, transparent 1px),
+    linear-gradient(var(--white-05) 1px, transparent 1px),
+    linear-gradient(90deg, var(--white-05) 1px, transparent 1px);
+  background-size: 220px 220px, 220px 220px, 44px 44px, 44px 44px;
+  color: var(--paper);
+  line-height: 1.9;
+  min-height: 100dvh;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection { background: var(--orange); color: var(--ink); }
+
+img, svg { display: block; max-width: 100%; }
+a { color: inherit; }
+
+.wrap {
+  width: min(100% - clamp(2rem, 6vw, 6rem), 1480px);
+  margin-inline: auto;
+}
+
+.mono {
+  font-family: var(--font-mono);
+  font-size: .72rem;
+  letter-spacing: .14em;
+}
+
+.sr-only {
+  position: absolute; width: 1px; height: 1px;
+  padding: 0; margin: -1px; overflow: hidden;
+  clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+
+/* فوکوس کیبورد — همیشه مشخص */
+:focus-visible { outline: 2px solid var(--orange); outline-offset: 3px; }
+a:focus-visible, button:focus-visible { border-radius: 2px; }
+
+/* ── چیدمان اصلی ─────────────────────────────────────────── */
+.main {
+  display: grid; grid-template-columns: minmax(0, 1fr);
+  gap: var(--gap); align-items: start;
+  padding-block: clamp(3rem, 9vh, 5.5rem) clamp(1.5rem, 4vh, 3rem);
+}
+
+.content { position: relative; }
+
+/* ── کیکر ────────────────────────────────────────────────── */
+.kicker {
+  display: flex; align-items: center; gap: .6rem;
+  font-weight: 500; color: var(--white-55); text-transform: uppercase;
+}
+.kicker-mark { width: 10px; height: 10px; background: var(--orange); flex: none; }
+
+/* ── عدد ۴۰۴ ─────────────────────────────────────────────── */
+.number-wrap { position: relative; margin-top: clamp(.6rem, 2vw, 1.2rem); }
+
+.number {
+  direction: ltr; unicode-bidi: isolate;
+  display: flex; align-items: center; justify-content: flex-start;
+  font-family: var(--font-numeral);
+  font-size: clamp(5.4rem, 21vw, 13rem);
+  line-height: .95; color: var(--paper);
+  user-select: none;
+}
+
+/* صفر = نشان صنعتی «مسدود»: حلقهٔ هاش‌خورده با نوار اریب نارنجی */
+.zero {
+  position: relative; flex: none;
+  width: .7em; height: .92em; margin-inline: .03em;
+  border: .082em solid var(--paper); border-radius: 50%;
+  overflow: hidden;
+}
+.zero::before { /* هاش مهندسی */
+  content: ""; position: absolute; inset: .06em; border-radius: 50%;
+  background: repeating-linear-gradient(45deg,
+    rgba(255,255,255,.18) 0 .034em, transparent .034em .115em);
+}
+.zero::after { /* نوار ممنوعیت */
+  content: ""; position: absolute; left: 50%; top: 50%;
+  width: 1.04em; height: .085em; background: var(--orange);
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+/* برچسب اشاره‌گر به صفر — فقط در نمایشگرهای کافی */
+.zero-callout { display: none; }
+
+/* ── تیتر و متن ──────────────────────────────────────────── */
+.headline {
+  font-family: var(--font-display); font-weight: 400;
+  font-size: clamp(1.85rem, 4.4vw, 3.2rem);
+  line-height: 1.3; margin-top: clamp(.8rem, 2vw, 1.4rem);
+}
+.copy {
+  max-width: 46ch; color: var(--white-70);
+  font-size: clamp(.95rem, 1.1vw, 1.06rem);
+  margin-top: .8rem;
+}
+
+/* ── دکمه‌ها: فلت، با انیمیشن Sweep از راست ──────────────── */
+.actions {
+  display: flex; flex-wrap: wrap; gap: .9rem;
+  margin-top: clamp(1.6rem, 3vw, 2.2rem);
+}
+
+.btn {
+  position: relative; isolation: isolate; overflow: hidden;
+  display: inline-flex; align-items: center; justify-content: center; gap: .6rem;
+  min-height: 48px; padding: .8rem 1.9rem;
+  font: 600 1rem var(--font-body); text-decoration: none; cursor: pointer;
+  border: none; border-radius: 2px;
+  transition: color .35s ease, border-color .35s ease, transform .15s ease;
+}
+/* لایهٔ پرشدن — از لبهٔ راست (هماهنگ با RTL) */
+.btn::before {
+  content: ""; position: absolute; inset: 0; z-index: -1;
+  transform: scaleX(0); transform-origin: 100% 50%;
+  transition: transform .45s cubic-bezier(.65, 0, .35, 1);
+}
+.btn:hover::before,
+.btn:focus-visible::before { transform: scaleX(1); }
+.btn:active { transform: scale(.985); }
+
+.btn-arrow { transition: transform .35s ease; }
+.btn:hover .btn-arrow { transform: translateX(-4px); }
+
+.btn-primary { background: var(--orange); color: var(--ink); }
+.btn-primary::before { background: var(--paper); }
+.btn-primary:focus-visible { outline-color: var(--paper); }
+
+.btn-ghost {
+  background: transparent; color: var(--paper);
+  border: 1.5px solid var(--white-40);
+}
+.btn-ghost::before { background: var(--paper); }
+.btn-ghost:hover,
+.btn-ghost:focus-visible { color: var(--ink); border-color: var(--paper); }
+
+/* ── نوار دادهٔ وضعیت ────────────────────────────────────── */
+.meta {
+  display: flex; flex-wrap: wrap; align-items: center;
+  gap: .4rem 1.2rem; list-style: none;
+  margin-top: clamp(1.6rem, 3vw, 2.4rem);
+  padding-top: 1rem; border-top: 1px dashed var(--white-25);
+  color: var(--white-55); font-size: .7rem;
+}
+.meta li + li::before { content: "·"; margin-inline-end: 1.2rem; color: var(--white-25); }
+.meta b { color: var(--paper); font-weight: 600; }
+.state::before {
+  content: ""; display: inline-block; width: 8px; height: 8px;
+  background: var(--orange); margin-inline-end: .45rem;
+}
+.clock { unicode-bidi: isolate; font-weight: 500; }
+
+/* ── شیت نقشه ────────────────────────────────────────────── */
+.sheet {
+  background: var(--white-05);
+  border: 1px solid var(--white-25);
+  box-shadow: 12px 12px 0 var(--white-05);
+  max-width: 560px; width: 100%; justify-self: center;
+}
+.sheet-head {
+  display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+  padding: .65rem 1rem; border-bottom: 1px solid var(--white-25);
+  font-weight: 600; font-size: .85rem;
+}
+.sheet-head .mono { color: var(--white-55); font-size: .62rem; }
+
+.route-svg { width: 100%; height: auto; }
+
+.sheet-foot { border-top: 1px solid var(--white-25); }
+.hazard-thin { height: 9px; }
+
+/* عناصر داخل SVG */
+.route-base {
+  fill: none; stroke: var(--paper); stroke-width: 2.5;
+  stroke-linecap: square; stroke-linejoin: miter;
+}
+.route-scan {
+  fill: none; stroke: var(--orange); stroke-width: 1.75;
+  stroke-dasharray: 4 12; opacity: 0;
+}
+.is-live .route-scan { animation: scanmove 14s linear infinite; }
+@keyframes scanmove { from { stroke-dashoffset: 0; } to { stroke-dashoffset: 160; } }
+
+.scanner {
+  fill: var(--orange); stroke: var(--ink); stroke-width: 1;
+  opacity: 0;
+  offset-path: path("M 470 470 L 380 470 L 380 364 L 234 364 L 234 240 L 136 142 L 136 96");
+  offset-rotate: 0deg;
+}
+.is-live .scanner { animation: scan 9s cubic-bezier(.45,.05,.55,.95) infinite .4s; }
+@keyframes scan {
+  0%   { offset-distance: 0%;   opacity: 0; }
+  5%   { opacity: 1; }
+  66%  { offset-distance: 100%; opacity: 1; }
+  74%  { offset-distance: 100%; opacity: 0; }
+  100% { offset-distance: 100%; opacity: 0; }
+}
+
+.pulse {
+  transform-box: fill-box; transform-origin: center; opacity: 0;
+}
+.is-live .pulse { animation: pulse 3s ease-out infinite 1.5s; }
+@keyframes pulse {
+  0%   { transform: scale(.85); opacity: .8; }
+  70%  { transform: scale(1.55); opacity: 0; }
+  100% { transform: scale(1.55); opacity: 0; }
+}
+
+.wp { fill: var(--paper); }
+.fade { opacity: 0; animation: fadein .7s ease forwards; }
+@keyframes fadein { to { opacity: 1; } }
+
+/* متن‌های SVG */
+.mono-sm { font: 500 9.5px var(--font-mono); fill: var(--white-55); letter-spacing: .08em; }
+.mono-code { font: 600 11px var(--font-mono); fill: var(--orange); letter-spacing: .1em; }
+.fa-flag { font: 700 10.5px var(--font-body); fill: var(--ink); }
+.tb-l { font: 400 8.5px var(--font-body); fill: var(--white-40); text-anchor: end; }
+.tb-v { font: 600 12.5px var(--font-body); fill: var(--paper); text-anchor: end; }
+.tb-warn { fill: var(--orange); }
+
+/* ── نوار هشدار (مورب صنعتی) ─────────────────────────────── */
+.hazard {
+  height: 12px;
+  border-block: 1px solid var(--white-25);
+  background: repeating-linear-gradient(-45deg, var(--orange) 0 14px, var(--ink) 14px 28px);
+  background-size: 40px 40px;
+  animation: hazardmove 32s linear infinite;
+}
+@keyframes hazardmove { to { background-position: -400px 0; } }
+
+/* ── مسیرهای جایگزین ─────────────────────────────────────── */
+.routes { padding-block: clamp(2.2rem, 5vh, 3.5rem) clamp(3rem, 7vh, 4.5rem); }
+
+.routes-head {
+  display: flex; align-items: baseline; justify-content: space-between; gap: 1rem;
+  border-top: 2px solid var(--paper); padding-top: .9rem;
+  margin-bottom: 1.4rem;
+}
+.routes-head h2 { font-family: var(--font-display); font-weight: 400; font-size: 1.45rem; }
+.routes-head .mono { color: var(--white-40); font-size: .62rem; }
+
+.routes-list {
+  list-style: none;
+  display: grid; grid-template-columns: minmax(0, 1fr); gap: 1rem;
+}
+
+.route-link {
+  display: flex; align-items: center; gap: 1rem;
+  padding: 1rem .4rem; border-top: 1px solid var(--white-15);
+  text-decoration: none;
+  transition: background-color .25s ease, padding .25s ease;
+}
+.route-idx {
+  font-family: var(--font-mono); font-weight: 600; font-size: .9rem;
+  color: var(--orange); flex: none;
+}
+.route-body { display: flex; flex-direction: column; gap: .1rem; min-width: 0; }
+.route-name { font-weight: 700; font-size: .98rem; }
+.route-desc { font-size: .78rem; color: var(--white-55); }
+.route-arrow { margin-inline-start: auto; font-size: 1.1rem; transition: transform .25s ease, color .25s ease; }
+
+.route-link:hover {
+  background: var(--white-08); padding-inline: 1rem;
+}
+.route-link:hover .route-arrow { color: var(--orange); transform: translateX(-5px); }
+
+/* ── فوتر ─────────────────────────────────────────────────── */
+.footer-bar {
+  background: var(--white-05);
+  border-top: 1px solid var(--white-15);
+}
+.footer-inner {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+  gap: .5rem 1.5rem; padding-block: 1.1rem;
+}
+.footer-brand { font-family: var(--font-display); font-size: 1.05rem; }
+.footer-brand .mono { font-size: .58rem; color: var(--white-40); margin-inline-start: .5rem; }
+.footer-note { font-size: .75rem; color: var(--white-55); }
+
+/* ── ورود عناصر (فقط وقتی JS فعال باشد) ──────────────────── */
+html.js .fx { animation: fx-in .7s cubic-bezier(.2, .6, .2, 1) both; animation-delay: var(--d, 0s); }
+@keyframes fx-in {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* ── برک‌پوینت‌ها ─────────────────────────────────────────── */
+
+/* تبلت: سه ستون برای مسیرهای جایگزین */
+@media (min-width: 760px) {
+  .routes-list { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.6rem; }
+}
+
+/* دسکتاپ: دو ستون محتوا + نقشه */
+@media (min-width: 1000px) {
+  .main { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); }
+  .sheet { justify-self: stretch; max-width: none; }
+
+  .zero-callout {
+    display: flex; align-items: center; gap: .6rem;
+    position: absolute;
+    top: calc(clamp(5.4rem, 21vw, 13rem) * .98);
+    left: 0;
+  }
+  .zc-line { width: clamp(1.5rem, 4vw, 3rem); height: 1px; background: var(--white-40); }
+  .zc-text { font-size: .62rem; color: var(--white-55); white-space: nowrap; }
+}
+
+/* نمایشگرهای خیلی بزرگ */
+@media (min-width: 1600px) {
+  .main { gap: 6rem; }
+}
+
+/* قد کوتاه — جلوگیری از اسکرول اضافه در لپ‌تاپ‌ها */
+@media (max-height: 700px) and (min-width: 1000px) {
+  .main { padding-block: 2rem 1rem; }
+  .number { font-size: clamp(5rem, 16vh, 10rem); }
+}
+
+/* ── کاهش حرکت ───────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+  }
+  .route-scan, .scanner, .pulse, .hazard { animation: none !important; }
+  .scanner, .route-scan { opacity: 0 !important; }
+  .fade { opacity: 1; animation: none; }
+  html.js .fx { animation: none; opacity: 1; transform: none; }
+}

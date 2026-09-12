@@ -8,22 +8,39 @@
           <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+
+
+        <script src="https://cdn.tailwindcss.com"></script>
+
+
+
     <title>کافه معدن</title>
 
-    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 
 <body>
 
+
         <nav class="navbar" id="navbar">
+
+            
         <div class="navbar-overlay"></div>
         <div class="container nav-container">
+
+
+            <button class="hamburger" id="hamburger" aria-label="منو">
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                </button>
             
             <!-- Logo Section -->
             <div class="nav-logo">
                 <div class="logo-wrapper">
                     <div style="position: relative;top: .3rem;">
-                        <img src="images/Asset 1.png" style="object-fit: cover;width: 50px;height: 70px;" alt="">
+                        <img src="/images/Asset 1.png" style="object-fit: cover;width: 50px;height: 70px;" alt="">
                         
                     </div>
                     <div class="logo-text">
@@ -32,6 +49,8 @@
                     </div>
                 </div>
             </div>
+
+            
 
             <!-- Navigation Menu -->
             <ul class="nav-menu" id="navMenu">
@@ -43,33 +62,39 @@
                 </li>
                 
                 <li class="nav-item">
-                    <a href="khadamat.html" style="font-size: 1.2rem;" class="nav-link">
+                    <a href="/cafemadan/a0112233-5566-43ab-c101-101010101010/khadamat" style="font-size: 1.2rem;" class="nav-link">
                         <span class="link-text">خدمات</span>
                         <span class="link-underline"></span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="articels.html" style="font-size: 1.2rem;" class="nav-link">
+                    <a href="/cafemadan/b1223344-6677-44bc-d202-202020202020/articels" style="font-size: 1.2rem;" class="nav-link">
                         <span class="link-text">مقالات</span>
                         <span class="link-underline"></span>
                     </a>
                 </li>
                
                 <li class="nav-item">
-                    <a href="aboutus.html" style="font-size: 1.2rem;" class="nav-link">
+                    <a href="/cafemadan/c2334455-7788-45cd-e303-303030303030/aboutus" style="font-size: 1.2rem;" class="nav-link">
                         <span class="link-text">درباره ما</span>
                         <span class="link-underline"></span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="call.html" style="font-size: 1.2rem;" class="nav-link">
+                    <a href="/cafemadan/d3445566-8899-46de-f404-404040404040/call" style="font-size: 1.2rem;" class="nav-link">
                         <span class="link-text">تماس با ما</span>
                         <span class="link-underline"></span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="storyus.html" style="font-size: 1.2rem;" class="nav-link">
+                    <a href="/cafemadan/e4556677-9900-47ef-a505-505050505050/storyus" style="font-size: 1.2rem;" class="nav-link">
                         <span class="link-text">داستان ما</span>
+                        <span class="link-underline"></span>
+                    </a>
+                </li>
+                                <li class="nav-item">
+                    <a href="/cafemadan/vf902156-6677-62ef-a309-8765689349380/pocast" style="font-size: 1.2rem;" class="nav-link">
+                        <span class="link-text">خبر نامه</span>
                         <span class="link-underline"></span>
                     </a>
                 </li>
@@ -77,25 +102,50 @@
 
             <!-- Action Buttons -->
             <div class="nav-actions">
-                <a href="#" style="font-size: 1.1rem;" class="btn-ecosystem">
-                    <span class="btn-text">دریافت مشاوره تخصصی</span>
-                    <span class="btn-icon">
-                        <i class="fas fa-arrow-left"></i>
-                    </span>
-                    <span class="btn-shine"></span>
-                </a>
                 
-                <button class="hamburger" id="hamburger" aria-label="منو">
-                    <span class="hamburger-line"></span>
-                    <span class="hamburger-line"></span>
-                    <span class="hamburger-line"></span>
-                </button>
+               
+
+
+                <!-- Profile Button Component (Scoped) -->
+  <div class="profile-container">
+    <button
+      type="button"
+      class="profile-button"
+      id="profile-button"
+      aria-label="حساب کاربری محمد رضایی"
+    >
+      <!-- Avatar with Initials -->
+      <span class="profile-avatar" aria-hidden="true">
+        <span class="profile-initials" id="profile-initials">م.ر</span>
+        <span class="profile-status" aria-hidden="true"></span>
+      </span>
+
+      <!-- Accent Divider (Industrial touch) -->
+      <span class="profile-divider" aria-hidden="true"></span>
+
+      <!-- User Name -->
+      <span class="profile-name" id="display-name"></span>
+      <span class="profile-LastName" id="display-LastName"></span>
+    </button>
+  </div>
+
+
+
+                 <a href="/cafemadan/p45596s87-9999-48ef-a606-707070707070/login" id="vorodbtn" class="relative inline-flex items-center justify-center p-4 px-6 py-3 overflow-hidden font-medium text-yellow-600 transition duration-300 ease-out border-2 border-yellow-500 rounded-full shadow-md group">
+        <span class="absolute inset-0 flex items-center justify-center w-full h-full text-white duration-300 -translate-x-full bg-yellow-500 group-hover:translate-x-0 ease">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+            </svg>
+        </span>
+        <span class="absolute flex items-center justify-center w-full h-full text-yellow-500 transition-all duration-300 transform group-hover:translate-x-full ease">ورود</span>
+        <span class="relative invisible">Button Text</span>
+    </a>
             </div>
         </div>
     </nav>
 
 
-    <section class="home" style="background: url('./images/view-heavy-machinery-used-construction-industry.jpg') no-repeat;    display: flex;
+    <section class="home" style="background: url('/images/view-heavy-machinery-used-construction-industry.jpg') no-repeat;    display: flex;
     align-items: center;
     min-height: 100vh;
     background-position: center;
@@ -229,7 +279,7 @@
                         </div-->
                     <div class="card-body">
                         <div class="card-icon" style="position: relative;bottom: 2rem;left: 1rem;">
-                            <img src="images/لوگوی-معدن-آکادمی.webp" alt="" style="width: 6rem;border-radius: 1rem;margin-top: 1rem;">
+                            <img src="/images/لوگوی-معدن-آکادمی.webp" alt="" style="width: 6rem;border-radius: 1rem;margin-top: 1rem;">
                         </div>
                         <div style="position: relative;bottom: 7rem;left: 7rem;">
                             <h3 class="card-title">معدن آکادمی</h3>
@@ -253,7 +303,7 @@
                     </div>
                     <div class="card-body">
                         <div class="card-icon" style="position: relative;bottom: 2rem;left: 1rem;">
-                            <img src="images/لوگوی-معدن-داد.webp" alt="" style="width: 6rem;border-radius: 1rem;margin-top: 1rem;">
+                            <img src="/images/لوگوی-معدن-داد.webp" alt="" style="width: 6rem;border-radius: 1rem;margin-top: 1rem;">
                         </div>
                         <div style="position: relative;bottom: 7rem;left: 7rem;"">
                             <h3 class="card-title">معدن داد</h3>
@@ -277,7 +327,7 @@
                     </div>
                     <div class="card-body">
                         <div class="card-icon" style="position: relative;bottom: 2rem;left: 1rem;">
-                            <img src="images/لوگوی-معدن-ادز.webp" alt="" style="width: 6rem;border-radius: 1rem;margin-top: 1rem;">
+                            <img src="/images/لوگوی-معدن-ادز.webp" alt="" style="width: 6rem;border-radius: 1rem;margin-top: 1rem;">
                         </div>
                         <div style="position: relative;bottom: 7rem;left: 7rem;">
                             <h3 class="card-title">معدن ادز</h3>
@@ -303,7 +353,7 @@
                     </div>
                     <div class="card-body">
                         <div class="card-icon" style="position: relative;bottom: 2rem;left: 1rem;">
-                            <img src="images/لوگوی-معدن-مشاور.webp" alt="" style="width: 6rem;border-radius: 1rem;margin-top: 1rem;">
+                            <img src="/images/لوگوی-معدن-مشاور.webp" alt="" style="width: 6rem;border-radius: 1rem;margin-top: 1rem;">
                         </div>
                         <div style="position: relative;bottom: 7rem;left: 7rem;">
                             <h3 class="card-title">معدن مشاور</h3>
@@ -512,7 +562,7 @@
                 <!-- Left Side: Image -->
                 <div class="research-image-wrapper">
                     <div class="research-image">
-                        <img src="images/5893497563606879744.jpg" alt="Mining Research Center - مهندس معدن در حال بررسی معدن روباز">
+                        <img src="/images/5893497563606879744.jpg" alt="Mining Research Center - مهندس معدن در حال بررسی معدن روباز">
                         <div class="image-overlay"></div>
                     </div>
                     <div class="image-accent"></div>
@@ -586,7 +636,7 @@
 
         <div class="box" data-name=">مشاوره و خدمات فنی ,ارائه خدمات و مشاور های فنی در پروژه معدنی طبق دهده های روز دنیا">
             <div class="img">
-                <img src="images/sp2.jpg" alt="">
+                <img src="/images/sp2.jpg" alt="">
             </div>
             <div class="inf">
                 <div style="width: 55px; height: 55px;background: #0a0a0a;color: #FAB900; border-radius: 50px;display: flex;align-items: center;text-align: center;justify-content: center;position: relative;right: 22rem;bottom: 4rem;font-size: 1.7rem;">
@@ -600,7 +650,7 @@
 
         <div class="box" data-name="بازرگانی و صادرات,بازاریابی و صادرات مواد معدنی با رعایت استاندارد های جهانی و بین المللی">
             <div class="img">
-                <img src="images/GE_4530_Shutterstock_1077721433_RV.jpg" alt="">
+                <img src="/images/GE_4530_Shutterstock_1077721433_RV.jpg" alt="">
             </div>
             <div style="width: 55px; height: 55px;background: #0a0a0a;color: #FAB900;border-radius: 50px;display: flex;align-items: center;text-align: center;justify-content: center;position: relative;right: 22rem;bottom: 4rem;font-size: 1.7rem;">
                 <i class="bi bi-train-front" style="position: relative; top: .3rem;"></i>
@@ -612,7 +662,7 @@
 
         <div class="box" data-name="فرآوری,تبدیل مواد معدنی به محصولات با ارزش افزوده بالا تکنولوژِی روز دنیا">
             <div class="img">
-                <img src="images/pexels-tomfisk-6542371.jpg" alt="">
+                <img src="/images/pexels-tomfisk-6542371.jpg" alt="">
             </div>
             <div style="width: 55px; height: 55px;background: #0a0a0a;color: #FAB900;border-radius: 50px;display: flex;align-items: center;text-align: center;justify-content: center;position: relative;right: 22rem;bottom: 4rem;font-size: 1.7rem;">
                 <i class="bi bi-sign-yield" style="position: relative; top: .3rem;"></i>
@@ -783,7 +833,7 @@
                 <div class="footer-col footer-brand">
                     <div class="footer-logo">
                         <div class="footer-logo">
-                            <img src="images/Asset 1.png" alt="کافه معدن - Cafe Madan">
+                            <img src="/images/Asset 1.png" alt="کافه معدن - Cafe Madan">
                         </div>
                     </div>
                     <p class="footer-desc">
@@ -847,25 +897,25 @@
                     </h4>
                     <ul class="footer-links">
                         <li>
-                            <a href="aboutus.html" class="footer-link">
+                            <a href="/cafemadan/c2334455-7788-45cd-e303-303030303030/aboutus" class="footer-link">
                                 <i class="fas fa-chevron-left"></i>
                                 درباره ما
                             </a>
                         </li>
                         <li>
-                            <a href="khadamat.html" class="footer-link">
+                            <a href="/cafemadan/a0112233-5566-43ab-c101-101010101010/khadamat" class="footer-link">
                                 <i class="fas fa-chevron-left"></i>
                                 خدمات
                             </a>
                         </li>
                         <li>
-                            <a href="articels.html" class="footer-link">
+                            <a href="/cafemadan/b1223344-6677-44bc-d202-202020202020/articels" class="footer-link">
                                 <i class="fas fa-chevron-left"></i>
                                 بلاگ
                             </a>
                         </li>
                         <li>
-                            <a href="call.html" class="footer-link">
+                            <a href="/cafemadan/d3445566-8899-46de-f404-404040404040/call" class="footer-link">
                                 <i class="fas fa-chevron-left"></i>
                                 تماس با ما
                             </a>
@@ -952,19 +1002,22 @@
             <h2 style="color: #f1f1f1;">دریافت مشاوره رایگان</h2>
         </div>
 
-          <form class="consult-banner__form">
+          <form class="consult-banner__form" id="requsetForm" method="post" action="">
 
         <div class="consult-banner__field">
-            <input type="text" placeholder="نام و نام خانوادگی" style="font-family: 'Vazirmatn', sans-serif;font-size: 20px;">
+            <input type="text" placeholder="نام و نام خانوادگی" style="font-family: 'Vazirmatn', sans-serif;font-size: 20px;" name="name" >
             <i class="fas fa-user" style="color: #FAB900;"></i>
         </div>
 
+
         <div class="consult-banner__field">
-            <input type="tel" placeholder="شماره تماس" style="font-family: 'Vazirmatn', sans-serif;font-size: 20px;">
+            <input type="tel" placeholder="شماره تماس" style="font-family: 'Vazirmatn', sans-serif;font-size: 20px;" name="phone" onkeypress="return event.charCode >= 48 && event.charCode <= 57" 
+    oninput="validatePhone(this)" required>
             <i class="fas fa-phone" style="color: #FAB900;"></i>
         </div>
+                    <p id="phone-error" style="color: red; font-size: 0.9rem; display: none;"></p>
 
-        <button class="consult-banner__btn" style="font-family: 'Vazirmatn', sans-serif;background: #FAB900 !important;">
+        <button class="consult-banner__btn" style="font-family: 'Vazirmatn', sans-serif;background: #FAB900 !important;" type="submit" id="requestbtnsssss">
             ثبت درخواست
             <i class="fas fa-arrow-left"></i>
         </button>
@@ -973,19 +1026,119 @@
 
     </div>
 </section>
-    <script src="./js/calanaci.js"></script>
-    <script src="./js/eco2.js"></script>
-<script src="./js/abooutus.js"></script>
-<script src="./js/footer.js"></script>
-<script src="./js/articels2.js"></script>
-<script src="./js/articels.js"></script>
-<script src="./js/faq.js"></script>
-<script src="./js/research.js"></script>
-<script src="./js/servis.js"></script>
-<script src="./js/eco.js"></script>
-<script src="./js/navbar.js"></script>
-<script src="./js/card.js"></script>    
-<script src="./js/search.js"></script>
-<script src="./js/main.js"></script>
+
+
+
+    <div id="toasts" class="toasts">
+    درخواست شما با موفقیت ثبت شد.
+</div>
+
+
+<script>
+
+    fetch("/api/visit",{
+    method:"POST",
+    headers:{
+        "Content-Type":"application/json"
+    },
+    body:JSON.stringify({
+        page:window.location.pathname
+    })
+});
+</script>
+
+
+<script>
+    window.addEventListener("DOMContentLoaded", function(){
+    const name = localStorage.getItem("profile-name")
+    const lastname = localStorage.getItem("profile-LastName")
+
+
+    if (name) {
+        document.getElementById("display-name").textContent = name
+    }
+    else{
+        document.getElementById("display-name").textContent = "Err"
+    }
+
+
+    if (lastname) {
+        document.getElementById("display-LastName").textContent = lastname
+    }
+    else{
+                document.getElementById("display-LastName").textContent = "Err"
+    }
+
+       if (name && lastname) {
+
+        const firstNameLetter = name.trim().charAt(0);
+        const lastNameLetter = lastname.trim().charAt(0);
+
+        document.getElementById("profile-initials").textContent =
+            `${firstNameLetter}.${lastNameLetter}`;
+
+    } else {
+
+        document.getElementById("profile-initials").textContent = "؟.؟";
+
+    }
+})
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+    const registerSuccess = localStorage.getItem("register-success");
+
+if (registerSuccess === "true") {
+
+    Swal.fire({
+        toast: true,
+        position: "top-end",
+        icon: "success",
+        title: "ثبت نام با موفقیت انجام شد",
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true
+    });
+
+    localStorage.removeItem("register-success");
+}
+</script>
+
+<script src="/js/request.js"></script>
+<script src="/js/calanaci.js"></script>
+<script src="/js/eco2.js"></script>
+<script src="/js/abooutus.js"></script>
+<script src="/js/footer.js"></script>
+<script src="/js/articels2.js"></script>
+<script src="/js/articels.js"></script>
+<script src="/js/faq.js"></script>
+<script src="/js/research.js"></script>
+<script src="/js/servis.js"></script>
+<script src="/js/eco.js"></script>
+<script src="/js/navbar.js"></script>
+<script src="/js/card.js"></script>    
+<script src="/js/search.js"></script>
+<script src="/js/main.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded",function(){
+        const vorbtn = document.getElementById("vorodbtn")
+
+        if (!vorbtn) {
+            return
+        }
+
+    const token = localStorage.getItem("accessToken")
+
+
+    if (token) {
+        vorbtn.style.display = "none"
+    }
+    else{
+        vorbtn.style.display="flex"
+    }
+    })
+</script>
 </body>
 </html>

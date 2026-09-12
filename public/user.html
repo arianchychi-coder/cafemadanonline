@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+<title>تماس با ما | پنل مدیریت کافه مدن</title>
+<link rel="stylesheet" href="/css/base.css">
+<link rel="stylesheet" href="/css/layout (1).css">
+<link rel="stylesheet" href="/css/components.css">
+<link rel="stylesheet" href="/css/dashboard (1).css">
+</head>
+<body>
+
+
+  <style>
+    .edit-modal{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.55);
+    backdrop-filter:blur(6px);
+    justify-content:center;
+    align-items:center;
+    z-index:9999;
+    animation:fadeIn .25s ease;
+}
+
+.edit-modal-content{
+    width:500px;
+    max-width:90%;
+    background:#fff;
+    border-radius:18px;
+    padding:28px;
+    box-shadow:0 20px 45px rgba(0,0,0,.2);
+    animation:pop .3s ease;
+}
+
+.edit-modal-content h3{
+    margin:0 0 20px;
+    text-align:center;
+    font-size:24px;
+    color:#222;
+}
+
+.edit-modal-content input,
+.edit-modal-content textarea{
+    width:100%;
+    padding:13px 15px;
+    margin:10px 0;
+    border:1px solid #ddd;
+    border-radius:12px;
+    font-size:15px;
+    transition:.25s;
+    outline:none;
+    box-sizing:border-box;
+}
+
+.edit-modal-content textarea{
+    min-height:120px;
+    resize:vertical;
+}
+
+.edit-modal-content input:focus,
+.edit-modal-content textarea:focus{
+    border-color:#F3B300;
+    box-shadow:0 0 0 4px rgba(243,179,0,.18);
+}
+
+.buttons{
+    display:flex;
+    justify-content:flex-end;
+    gap:12px;
+    margin-top:20px;
+}
+
+.btn-save,
+.btn-cancel{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    border:none;
+    border-radius:10px;
+    padding:11px 20px;
+    font-size:15px;
+    font-weight:600;
+    cursor:pointer;
+    transition:.25s;
+}
+
+.btn-save{
+    background:linear-gradient(135deg,#F3B300,#d89b00);
+    color:#111;
+    box-shadow:0 8px 18px rgba(243,179,0,.35);
+}
+
+.btn-save:hover{
+    transform:translateY(-2px);
+    box-shadow:0 12px 24px rgba(243,179,0,.45);
+}
+
+.btn-cancel{
+    background:#202020;
+    color:#fff;
+    box-shadow:0 8px 18px rgba(0,0,0,.25);
+}
+
+.btn-cancel:hover{
+    transform:translateY(-2px);
+    background:#111;
+    box-shadow:0 12px 24px rgba(0,0,0,.35);
+}
+
+.btn-save i,
+.btn-cancel i{
+    font-size:17px;
+}
+
+@keyframes fadeIn{
+    from{opacity:0;}
+    to{opacity:1;}
+}
+
+@keyframes pop{
+    from{
+        opacity:0;
+        transform:translateY(20px) scale(.95);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0) scale(1);
+    }
+}
+  </style>
+
+<div class="app">
+  <aside class="sidebar" id="sidebar-root"></aside>
+  <div class="overlay"></div>
+
+  <div class="main">
+    <header class="topbar" id="topbar-root"></header>
+
+    <div class="content">
+      <div class="page-head fade-up">
+        <div>
+          <h1 class="page-head__title">درخواست‌های تماس با ما</h1>
+          <p style="font-size: 1rem;" class="page-head__desc">پیام‌های ارسالی از فرم تماس با ما را مشاهده و پیگیری کنید.</p>
+        </div>
+      </div>
+
+      <div class="chip-group fade-up" id="status-chips" style="margin-bottom: var(--sp-5);">
+        <button style="font-size: 1rem;" class="chip is-active" data-status="all">همه</button>
+        <button style="font-size: 1rem;" class="chip" data-status="جدید">جدید</button>
+        <button style="font-size: 1rem;" class="chip" data-status="بررسی شده">بررسی شده</button>
+      </div>
+
+      <div class="table-wrap fade-up">
+        <div class="table-toolbar">
+          <div class="search-box">
+            <svg viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/><path d="M21 21l-4.3-4.3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            <input style="font-size: 1rem;" type="text" id="search-input" placeholder="جستجو بر اساس نام، شرکت یا ایمیل...">
+          </div>
+          <div class="table-toolbar__filters">
+            <select class="select-box" id="sort-select">
+              <option value="newest">جدیدترین</option>
+              <option value="oldest">قدیمی‌ترین</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="table-wrap__scroll">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th style="font-size: 1rem;" style="width:56px;">ردیف</th>
+                <th style="font-size: 1rem;">نام</th>
+                <th style="font-size: 1rem;">نام خانوداگی</th>
+                <th style="font-size: 1rem;">ایمیل</th>
+                <th style="font-size: 1rem;">شماره تماس</th>
+                <th style="font-size: 1rem;">تاریخ</th>
+                <th style="font-size: 1rem;">نقش</th>
+                <th style="font-size: 1rem;">ویرایش</th>
+                <th style="font-size: 1rem;">حذف</th>
+              </tr>
+            </thead>
+            <tbody id="users-tbody"></tbody>
+          </table>
+        </div>
+        <div id="user-empty" style="display:none;"></div>
+        <div class="pagination" id="user-pagination"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- View detail modal -->
+<div class="modal-layer" id="view-contact-modal">
+  <div class="modal-backdrop"></div>
+  <div class="modal" role="dialog" aria-modal="true">
+    <div class="modal__head">
+      <div class="modal__title">جزئیات پیام</div>
+      <button class="modal__close" data-modal-close>
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none"><path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+    <div class="modal__body" id="contact-detail-body"></div>
+    <div class="modal__foot">
+      <button class="btn btn--outline" data-modal-close>بستن</button>
+      <a class="btn btn--primary" id="contact-call-btn" href="#">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+        تماس با کاربر
+      </a>
+    </div>
+  </div>
+</div>
+
+<div id="editModal" class="edit-modal">
+    <div class="edit-modal-content">
+        <h3>ویرایش اطلاعات</h3>
+
+        <input type="hidden" id="edit-id">
+
+        <input type="text" id="edit-name" placeholder="نام">
+        <input type="text" id="edit-company" placeholder="نام شرکت">
+        <input type="text" id="edit-phone" placeholder="شماره تماس">
+        <input type="email" id="edit-email" placeholder="ایمیل">
+
+        <textarea id="edit-message" placeholder="پیام"></textarea>
+
+        <div class="buttons">
+
+    <button class="btn-save" onclick="saveEdit()">
+        <i class="bi bi-check-circle-fill"></i>
+        ذخیره تغییرات
+    </button>
+
+    <button
+        class="btn-save"
+        onclick="markAsReviewed()"
+        type="button"
+    >
+        <i class="bi bi-check-circle-fill"></i>
+        بررسی شده
+    </button>
+
+    <button class="btn-cancel" onclick="closeModal()" type="button">
+        <i class="bi bi-x-circle-fill"></i>
+        انصراف
+    </button>
+
+</div>
+    </div>
+</div>
+
+
+
+<script src="/js/utils (1).js"></script>
+<script src="/js/store (1).js"></script>
+<script src="/js/shell (1).js"></script>
+<script src="/js/ui (1).js"></script>
+<script src="/js/user.js"></script>
+</body>
+</html>

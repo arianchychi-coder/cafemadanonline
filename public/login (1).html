@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ورود به پنل مدیریت | کافه مدن</title>
+<link rel="stylesheet" href="/css/base.css">
+<link rel="stylesheet" href="/css/layout (1).css">
+<link rel="stylesheet" href="/css/components.css">
+<link rel="stylesheet" href="/css/dashboard (1).css">
+<style>
+  /* Login page layout */
+  body { background: var(--color-black); display:flex; align-items:center; justify-content:center; min-height:100vh; padding: var(--sp-5); }
+  .login-card { width:100%; max-width: 420px; background: var(--color-surface); border-radius: var(--radius-lg); padding: var(--sp-8); box-shadow: var(--shadow-lg); }
+  .login-logo { width:56px; height:56px; border-radius: var(--radius-md); background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark)); display:flex; align-items:center; justify-content:center; color:var(--color-black); font-weight:800; margin: 0 auto var(--sp-5); box-shadow: var(--shadow-primary); }
+  .login-title { text-align:center; font-size: var(--fs-xl); margin-bottom: var(--sp-1); }
+  .login-sub { text-align:center; color: var(--color-gray-500); font-size: var(--fs-sm); margin-bottom: var(--sp-7); }
+
+  .logtoast{
+    position: fixed;
+    top: 20px;
+    right: -400px;
+    background: #0a0a0a;
+    border-right: 1px solid var(--realGold, #d4af37);
+    color: #fff;
+    padding: 15px 25px;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0,0,0,.2);
+    transition: right .4s ease, opacity .3s ease;
+    z-index: 9999;
+    font-family: inherit;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .logtoast.show{
+    right: 20px;
+    opacity: 1;
+    pointer-events: auto;
+  }
+</style>
+</head>
+<body>
+  <div class="login-card fade-up">
+    <div class="login-logo">CM</div>
+    <h1 class="login-title">ورود به پنل مدیریت</h1>
+    <p class="login-sub">کافه مدن — به حساب مدیریتی خود وارد شوید</p>
+
+
+<form id="login-form" novalidate>
+    <div class="form-field" style="margin-bottom: var(--sp-4);">
+        <label class="form-label">نام کاربری</label>
+        <input
+            type="email"
+            class="form-control"
+            id="l-user"
+            dir="ltr"
+            name="email"
+            placeholder="cafemadan_admin"
+        >
+    </div>
+
+    <div class="form-field" style="margin-bottom: var(--sp-6);">
+        <label class="form-label">رمز عبور</label>
+        <input
+            type="password"
+            name="password"
+            class="form-control"
+            id="l-pass"
+            placeholder="••••••••"
+        >
+    </div>
+
+    <button
+        type="submit"
+        class="btn btn--primary btn--block"
+        id="enterbtn"
+    >
+        ورود به پنل
+    </button>
+</form>
+
+<div id="logtoast" class="logtoast"></div>
+
+
+
+<script>
+
+const form = document.getElementById("login-form");
+const btn = document.getElementById("enterbtn");
+const userInput = document.getElementById("l-user");
+const passInput = document.getElementById("l-pass");
+const toast = document.getElementById("logtoast");
+
+// =====================================
+// تنظیمات محدودیت ورود
+// =====================================
+
+const MAX_ATTEMPTS = 3;
+const LOCK_TIME = 10 * 60 * 1000; // 10 دقیقه
+
+const LOGIN_ATTEMPTS_KEY = "loginFailedAttempts";
+const LOGIN_LOCK_KEY = "loginLockedUntil";
+
+
+// =====================================
+// Toast
+// =====================================
+
+function showToast(message) {
+
+    toast.textContent = message;
+    toast.classList.add("show");
+
+    if (toast._hideTimer) {
+        clearTimeout(toast._hideTimer);
+    }
+
+    toast._hideTimer = setTimeout(() => {
+        toast.classList.remove("show");
+    }, 3000);
+}
+
+
+// =====================================
+// بررسی قفل بودن ورود
+// =====================================
+
+function isLoginLocked() {
+
+    const lockedUntil =
+        Number(localStorage.getItem(LOGIN_LOCK_KEY) || 0);
+
+    if (!lockedUntil) {
+        return false;
+    }
+
+    // زمان قفل تمام شده
+    if (Date.now() >= lockedUntil) {
+
+        localStorage.removeItem(LOGIN_LOCK_KEY);
+        localStorage.removeItem(LOGIN_ATTEMPTS_KEY);
+
+        return false;
+    }
+
+    return true;
+}
+
+
+// =====================================
+// نمایش زمان باقی‌مانده
+// =====================================
+
+function getRemainingTime() {
+
+    const lockedUntil =
+        Number(localStorage.getItem(LOGIN_LOCK_KEY) || 0);
+
+    const remaining =
+        Math.max(0, lockedUntil - Date.now());
+
+    const minutes =
+        Math.floor(remaining / 60000);
+
+    const seconds =
+        Math.ceil((remaining % 60000) / 1000);
+
+    return {
+        minutes,
+        seconds
+    };
+}
+
+
+// =====================================
+// اعمال قفل
+// =====================================
+
+function lockLogin() {
+
+    const lockedUntil =
+        Date.now() + LOCK_TIME;
+
+    localStorage.setItem(
+        LOGIN_LOCK_KEY,
+        String(lockedUntil)
+    );
+
+    btn.disabled = true;
+
+    const time = getRemainingTime();
+
+    showToast(
+        `به دلیل ۳ تلاش ناموفق، ورود به مدت ۱۰ دقیقه قفل شد.`
+    );
+
+    return lockedUntil;
+}
+
+
+// =====================================
+// ثبت تلاش ناموفق
+// =====================================
+
+function registerFailedAttempt() {
+
+    let attempts =
+        Number(
+            localStorage.getItem(
+                LOGIN_ATTEMPTS_KEY
+            ) || 0
+        );
+
+    attempts++;
+
+    localStorage.setItem(
+        LOGIN_ATTEMPTS_KEY,
+        String(attempts)
+    );
+
+    console.log(
+        "Failed login attempts:",
+        attempts
+    );
+
+    if (attempts >= MAX_ATTEMPTS) {
+
+        lockLogin();
+
+        return true;
+    }
+
+    const remaining =
+        MAX_ATTEMPTS - attempts;
+
+    showToast(
+        `نام کاربری یا رمز عبور اشتباه است. ${remaining} تلاش دیگر باقی مانده است.`
+    );
+
+    return false;
+}
+
+
+// =====================================
+// فرم ورود
+// =====================================
+
+form.addEventListener("submit", async function (e) {
+
+    e.preventDefault();
+
+
+    // اول بررسی قفل
+    if (isLoginLocked()) {
+
+        const time = getRemainingTime();
+
+        showToast(
+            `ورود موقتاً قفل است. ${time.minutes} دقیقه و ${time.seconds} ثانیه دیگر تلاش کنید.`
+        );
+
+        return;
+    }
+
+
+    const email =
+        userInput.value.trim();
+
+    const password =
+        passInput.value;
+
+
+    if (!email || !password) {
+
+        showToast(
+            "نام کاربری و رمز عبور را وارد کنید"
+        );
+
+        return;
+    }
+
+
+    btn.disabled = true;
+    btn.innerText = "در حال ورود...";
+
+
+    try {
+
+        const response =
+            await fetch("/adminlogin", {
+
+                method: "POST",
+
+                headers: {
+                    "Content-Type":
+                        "application/json"
+                },
+
+                body: JSON.stringify({
+                    email: email,
+                    password: password
+                })
+            });
+
+
+        const data =
+            await response.json();
+
+
+        console.log(
+            "API Status:",
+            response.status
+        );
+
+        console.log(
+            "API Response:",
+            data
+        );
+
+
+        // =================================
+        // ورود ناموفق
+        // =================================
+
+        if (!response.ok) {
+
+            btn.disabled = false;
+            btn.innerText = "ورود به پنل";
+
+            registerFailedAttempt();
+
+            return;
+        }
+
+
+        // =================================
+        // ورود موفق
+        // =================================
+
+        // صفر کردن تلاش‌های ناموفق
+        localStorage.removeItem(
+            LOGIN_ATTEMPTS_KEY
+        );
+
+        localStorage.removeItem(
+            LOGIN_LOCK_KEY
+        );
+
+
+        if (data.id) {
+
+            localStorage.setItem(
+                "userId",
+                data.id
+            );
+        }
+
+
+        if (data.tokens?.accessToken) {
+
+            localStorage.setItem(
+                "accessToken",
+                data.tokens.accessToken
+            );
+        }
+
+
+        if (data.name) {
+
+            localStorage.setItem(
+                "userName",
+                data.name
+            );
+        }
+
+
+        showToast(
+            data.message || "ورود موفق"
+        );
+
+
+        setTimeout(() => {
+
+            window.location.href =
+                "/cafemadan/2f3c4d5e-6f77-4b8d-a222-222222222222/dashboard";
+
+        }, 800);
+
+
+    } catch (error) {
+
+        console.error(
+            "Login API Error:",
+            error
+        );
+
+        btn.disabled = false;
+        btn.innerText = "ورود به پنل";
+
+        showToast(
+            "خطا در ارتباط با سرور"
+        );
+    }
+
+});
+
+
+// =====================================
+// بررسی قفل هنگام باز شدن صفحه
+// =====================================
+
+if (isLoginLocked()) {
+
+    btn.disabled = true;
+
+    const time = getRemainingTime();
+
+    showToast(
+        `ورود قفل است. ${time.minutes} دقیقه و ${time.seconds} ثانیه دیگر تلاش کنید.`
+    );
+}
+
+</script>
+
+
+
+
+
+
+
+
+
+
+<script src="/assets/js/utils.js"></script>
+<script src="/assets/js/ui.js"></script>
+</body>
+</html>
