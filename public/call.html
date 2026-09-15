@@ -98,7 +98,7 @@
 
             <!-- Action Buttons -->
             <div class="nav-actions" style="padding: 0 1rem !important;">
-                  <div class="profile-container">
+                  <div id="profile-container" class="profile-container">
     <button
       type="button"
       class="profile-button"
@@ -730,7 +730,7 @@
         document.getElementById("display-name").textContent = name
     }
     else{
-        document.getElementById("display-name").textContent = "Err"
+        document.getElementById("display-name").textContent =  "ابتدا وارد شوید"
     }
 
 
@@ -738,7 +738,7 @@
         document.getElementById("display-LastName").textContent = lastname
     }
     else{
-                document.getElementById("display-LastName").textContent = "Err"
+                document.getElementById("display-LastName").textContent = ""
     }
 
        if (name && lastname) {
@@ -759,23 +759,51 @@
 
 
 <script>
-    document.addEventListener("DOMContentLoaded",function(){
-        const vorbtn = document.getElementById("vorodbtn")
+document.addEventListener("DOMContentLoaded", function () {
 
-        if (!vorbtn) {
-            return
+    const vorbtn = document.getElementById("vorodbtn");
+    const profile = document.getElementById("profile-container");
+
+    if (!vorbtn || !profile) {
+        return;
+    }
+
+    const token = localStorage.getItem("accessToken");
+
+    function isTokenExpired(token) {
+        if (!token) {
+            return true;
         }
 
-    const token = localStorage.getItem("accessToken")
+        try {
+            const payload = JSON.parse(atob(token.split('.')[1]));
 
+            // exp بر حسب ثانیه است
+            return Date.now() >= payload.exp * 1000;
 
-    if (token) {
-        vorbtn.style.display = "none"
+        } catch (error) {
+            return true;
+        }
     }
-    else{
-        vorbtn.style.display="flex"
+
+    const expired = isTokenExpired(token);
+
+    if (expired) {
+
+        // توکن منقضی شده
+        localStorage.removeItem("accessToken");
+
+        vorbtn.style.display = "flex";
+        profile.style.display = "none";
+
+    } else {
+
+        // توکن هنوز معتبر است
+        vorbtn.style.display = "none";
+        profile.style.display = "flex";
     }
-    })
+
+});
 </script>
 
     <!-- فایل جاوااسکریپت -->

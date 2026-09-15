@@ -377,46 +377,40 @@ console.log("🔥 NEW all-podcasts.js LOADED");
     }
 
 
-    // =========================================================
-    // Edit
-    // =========================================================
-    
-    async function editUser(id) {
+// =========================================================
+// Edit
+// =========================================================
+
+function editUser(id) {
+
     try {
+
         console.log("EDIT ID:", id);
 
-        const response = await fetch("/api/podcast");
-
-        if (!response.ok) {
-            throw new Error(`HTTP ${response.status}`);
-        }
-
-        const data = await response.json();
-
-        const podcast = data.find(
+        // پیدا کردن پادکست از اطلاعات فعلی صفحه
+        const podcast = items.find(
             x => String(x.id) === String(id)
         );
-
-        console.log("FOUND PODCAST:", podcast);
 
         if (!podcast) {
             alert("پادکست پیدا نشد");
             return;
         }
 
-        // ذخیره ID برای saveEdit
+        console.log("FOUND PODCAST:", podcast);
+
+        // ذخیره ID
         document.getElementById("podcast-id").value = podcast.id;
 
-        // پر کردن اطلاعات
+        // اطلاعات
         document.getElementById("edit-title").value =
             podcast.title || "";
 
         document.getElementById("edit-episod").value =
             podcast.episod || "";
 
-        const today = new Date().toLocaleDateString("fa-IR");
-
-document.getElementById("edit-createdAT").value = today;
+        document.getElementById("edit-createdAT").value =
+            podcast.createdAT || "";
 
         document.getElementById("edit-time").value =
             podcast.time || "";
@@ -424,221 +418,559 @@ document.getElementById("edit-createdAT").value = today;
         document.getElementById("edit-status").value =
             podcast.status || "";
 
-        // فایل جدید
+        // فایل‌های جدید
         document.getElementById("edit-audio").value = "";
         document.getElementById("edit-cover").value = "";
 
+        // نمایش نام فایل‌ها
+        const audioFileName =
+            document.getElementById("audio-file-name");
+
+        if (audioFileName) {
+            audioFileName.textContent =
+                "انتخاب فایل صوتی";
+        }
+
+        const coverFileName =
+            document.getElementById("cover-file-name");
+
+        if (coverFileName) {
+            coverFileName.textContent =
+                "انتخاب تصویر کاور";
+        }
+
         // نمایش کاور قبلی
-        const preview = document.getElementById("cover-preview");
+        const preview =
+            document.getElementById("cover-preview");
 
         if (preview) {
+
             if (podcast.cover) {
+
                 preview.src = podcast.cover;
                 preview.style.display = "block";
+
             } else {
+
                 preview.src = "";
                 preview.style.display = "none";
+
             }
         }
 
-        // باز کردن مودال
-        document.getElementById("editPodcastModal").style.display = "flex";
+        // باز کردن Modal
+        document.getElementById(
+            "editPodcastModal"
+        ).style.display = "flex";
 
     } catch (error) {
+
         console.error("Edit error:", error);
+
+        alert("خطا در باز کردن اطلاعات پادکست");
     }
 }
 
 
+// =========================================================
+// Save Edit
+// =========================================================
 
 async function saveEdit() {
-    const id = document.getElementById("podcast-id").value;
+
+    const id =
+        document.getElementById("podcast-id").value;
 
     console.log("FRONTEND ID:", id);
 
+    if (!id) {
+        alert("شناسه پادکست پیدا نشد");
+        return;
+    }
+
     try {
+
         const formData = new FormData();
 
-        formData.append("title", document.getElementById("edit-title").value
+        formData.append(
+            "title",
+            document.getElementById("edit-title").value.trim()
         );
 
-        formData.append("episod", document.getElementById("edit-episod").value
+        formData.append(
+            "episod",
+            document.getElementById("edit-episod").value.trim()
         );
 
-        formData.append("createdAT",document.getElementById("edit-createdAT").value
+        formData.append(
+            "createdAT",
+            document.getElementById("edit-createdAT").value.trim()
         );
 
-        formData.append("time",document.getElementById("edit-time").value
+        formData.append(
+            "time",
+            document.getElementById("edit-time").value.trim()
         );
 
-        formData.append("status", document.getElementById("edit-status").value
+        formData.append(
+            "status",
+            document.getElementById("edit-status").value
         );
 
 
         // فایل صوتی جدید
-        const audioInput = document.getElementById("edit-audio");
+        const audioInput =
+            document.getElementById("edit-audio");
 
-        if (audioInput.files.length > 0) {
-            formData.append("audio", audioInput.files[0]);
+        if (
+            audioInput &&
+            audioInput.files &&
+            audioInput.files.length > 0
+        ) {
+
+            formData.append(
+                "audio",
+                audioInput.files[0]
+            );
         }
 
 
         // کاور جدید
-        const coverInput = document.getElementById("edit-cover");
+        const coverInput =
+            document.getElementById("edit-cover");
 
-        if (coverInput.files.length > 0) {
-            formData.append("cover", coverInput.files[0]);
+        if (
+            coverInput &&
+            coverInput.files &&
+            coverInput.files.length > 0
+        ) {
+
+            formData.append(
+                "cover",
+                coverInput.files[0]
+            );
         }
 
 
-        const response = await fetch(`/api/podcast/${id}`, {
-            method: "PUT",
-            body: formData
-        });
+        const response = await fetch(
+            `/api/podcast/${id}`,
+            {
+                method: "PUT",
+                body: formData
+            }
+        );
 
 
-        const data = await response.json();
+        const data =
+            await response.json().catch(() => ({}));
 
 
         if (!response.ok) {
-            alert(data.message || "Err");
+
+            alert(
+                data.message ||
+                "ویرایش پادکست انجام نشد"
+            );
+
             return;
         }
 
 
-        alert(data.message || "پادکست با موفقیت ویرایش شد.");
+        // ==========================================
+        // آپدیت آرایه فعلی بدون درخواست مجدد
+        // ==========================================
 
+        const index =
+            items.findIndex(
+                x => String(x.id) === String(id)
+            );
+
+
+        if (index !== -1) {
+
+            items[index] = {
+
+                ...items[index],
+
+                title:
+                    document.getElementById(
+                        "edit-title"
+                    ).value.trim(),
+
+                episod:
+                    document.getElementById(
+                        "edit-episod"
+                    ).value.trim(),
+
+                createdAT:
+                    document.getElementById(
+                        "edit-createdAT"
+                    ).value.trim(),
+
+                time:
+                    document.getElementById(
+                        "edit-time"
+                    ).value.trim(),
+
+                status:
+                    document.getElementById(
+                        "edit-status"
+                    ).value
+            };
+
+
+            // اگر API اطلاعات فایل جدید را برگرداند
+            if (data.podcast) {
+
+                items[index] = {
+                    ...items[index],
+                    ...data.podcast
+                };
+
+            } else if (data.data) {
+
+                items[index] = {
+                    ...items[index],
+                    ...data.data
+                };
+            }
+        }
+
+
+        // بستن Modal
         closeModal();
 
-        await loadData();
+
+        // رندر دوباره بدون Refresh
+        render();
+
+
+        if (
+            typeof CafeUI !== "undefined" &&
+            CafeUI.toast
+        ) {
+
+            CafeUI.toast({
+
+                type: "success",
+
+                title: "ویرایش شد",
+
+                desc:
+                    "پادکست با موفقیت ویرایش شد."
+            });
+
+        } else {
+
+            alert(
+                data.message ||
+                "پادکست با موفقیت ویرایش شد."
+            );
+        }
+
 
     } catch (error) {
-        console.error("Error: ", error);
+
+        console.error(
+            "Save Edit Error:",
+            error
+        );
+
+        alert(
+            error.message ||
+            "خطا در ویرایش پادکست"
+        );
     }
 }
 
 
-    // =========================================================
-    // Delete
-    // =========================================================
-    async function deleteUser(id) {
-        if (!confirm("آیا از حذف این پاذکست اطمینان دارید؟")) {
-            return
+// =========================================================
+// Delete
+// =========================================================
+
+async function deleteUser(id) {
+
+    if (
+        !confirm(
+            "آیا از حذف این پادکست اطمینان دارید؟"
+        )
+    ) {
+        return;
+    }
+
+
+    try {
+
+        const response = await fetch(
+            `/api/podcast/${id}`,
+            {
+                method: "DELETE"
+            }
+        );
+
+
+        const data =
+            await response.json().catch(() => ({}));
+
+
+        console.log(
+            "DELETE STATUS:",
+            response.status
+        );
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                data.message ||
+                "حذف پادکست انجام نشد"
+            );
         }
 
-        const response = await fetch(`/api/podcast/${id}`,{
-            method:"Delete"
-        })
 
-        console.log("Respone Status: ",response.status)
+        // ==========================================
+        // حذف از آرایه فعلی
+        // ==========================================
+
+        items = items.filter(
+            x =>
+                String(x.id) !==
+                String(id)
+        );
+
+
+        // ==========================================
+        // رندر بدون Refresh
+        // ==========================================
+
+        render();
+
+
+        // بستن Modal در صورت باز بودن
+        closeModal();
+
+
+        if (
+            typeof CafeUI !== "undefined" &&
+            CafeUI.toast
+        ) {
+
+            CafeUI.toast({
+
+                type: "success",
+
+                title: "حذف شد",
+
+                desc:
+                    "پادکست با موفقیت حذف شد."
+            });
+
+        } else {
+
+            alert(
+                data.message ||
+                "پادکست با موفقیت حذف شد."
+            );
+        }
+
+
+    } catch (error) {
+
+        console.error(
+            "Delete Podcast Error:",
+            error
+        );
+
+        alert(
+            error.message ||
+            "خطا در حذف پادکست"
+        );
+    }
+}
+
+
+// =========================================================
+// Close Modal
+// =========================================================
+
+function closeModal() {
+
+    const modal =
+        document.getElementById(
+            "editPodcastModal"
+        );
+
+    if (modal) {
+
+        modal.style.display = "none";
+    }
+}
+
+
+// =========================================================
+// Mark As Reviewed
+// =========================================================
+
+async function markAsReviewed() {
+
+    const id =
+        document.getElementById(
+            "podcast-id"
+        ).value;
+
+
+    if (!id) {
+        return;
     }
 
 
-        // =========================================================
-    // Close Modal
-    // =========================================================
-    function closeModal() {
-        document.getElementById("editPodcastModal").style.display = "none";
-    }
+    try {
 
-    window.editUser=editUser
-    window.saveEdit=saveEdit
-    window.deleteUser=deleteUser
-    window.closeModal=closeModal
+        // ==========================================
+        // ارسال درخواست تغییر وضعیت
+        // ==========================================
 
+        const response = await fetch(
+            `/api/podcast/${id}`,
+            {
+                method: "PUT",
 
-    document.getElementById("edit-audio")?.addEventListener("change", function () {
-    const file = this.files[0];
+                headers: {
+                    "Content-Type":
+                        "application/json"
+                },
 
-    if (!file) return;
-
-    const audio = document.createElement("audio");
-    audio.preload = "metadata";
-
-    audio.onloadedmetadata = function () {
-        const duration = audio.duration;
-
-        const minutes = Math.floor(duration / 60);
-        const seconds = Math.floor(duration % 60);
-
-        const formattedTime =
-            `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
-
-        document.getElementById("edit-time").value = formattedTime;
-
-        URL.revokeObjectURL(audio.src);
-    };
-
-    audio.src = URL.createObjectURL(file);
-});
-
-
-
-document.getElementById("edit-audio")?.addEventListener("change", function () {
-    const fileName = document.getElementById("audio-file-name");
-
-    if (this.files.length > 0) {
-        fileName.textContent = this.files[0].name;
-    } else {
-        fileName.textContent = "انتخاب فایل صوتی";
-    }
-});
-
-
-document.getElementById("edit-cover")?.addEventListener("change", function () {
-    const fileName = document.getElementById("cover-file-name");
-
-    if (this.files.length > 0) {
-        fileName.textContent = this.files[0].name;
-    } else {
-        fileName.textContent = "انتخاب تصویر کاور";
-    }
-});
-
-
-    // =========================================================
-    // Mark as Reviewed
-    // =========================================================
-    async function markAsReviewed() {
-        const id = document.getElementById("podcast-id").value;
-        if (!id) return;
-
-       
-
-        try {
-            
-
-            if (!response.ok) {
-                throw new Error("تغییر وضعیت انجام نشد");
+                body: JSON.stringify({
+                    status: "بررسی شده"
+                })
             }
+        );
 
-            closeModal();
-            await loadData();
 
-            // رفتن به تب بررسی شده
-            document.querySelectorAll("#status-chips .chip").forEach(chip => {
-                chip.classList.remove("is-active");
-                if (chip.dataset.status === "بررسی شده") {
-                    chip.classList.add("is-active");
+        const data =
+            await response.json().catch(() => ({}));
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                data.message ||
+                "تغییر وضعیت انجام نشد"
+            );
+        }
+
+
+        // ==========================================
+        // تغییر وضعیت داخل آرایه
+        // ==========================================
+
+        const index =
+            items.findIndex(
+                x =>
+                    String(x.id) ===
+                    String(id)
+            );
+
+
+        if (index !== -1) {
+
+            items[index].status =
+                "بررسی شده";
+        }
+
+
+        // بستن Modal
+        closeModal();
+
+
+        // ==========================================
+        // انتخاب تب بررسی شده
+        // ==========================================
+
+        document
+            .querySelectorAll(
+                "#status-chips .chip"
+            )
+            .forEach(chip => {
+
+                chip.classList.remove(
+                    "is-active"
+                );
+
+
+                if (
+                    chip.dataset.status ===
+                    "بررسی شده"
+                ) {
+
+                    chip.classList.add(
+                        "is-active"
+                    );
                 }
             });
 
-            state.status = "بررسی شده";
-            state.page = 1;
-            render();
 
-        } catch (error) {
-            console.error(error);
-            alert("تغییر وضعیت انجام نشد.");
+        state.status =
+            "بررسی شده";
+
+        state.page = 1;
+
+
+        // رندر بدون Refresh
+        render();
+
+
+        if (
+            typeof CafeUI !== "undefined" &&
+            CafeUI.toast
+        ) {
+
+            CafeUI.toast({
+
+                type: "success",
+
+                title: "تغییر کرد",
+
+                desc:
+                    "وضعیت پادکست به «بررسی شده» تغییر کرد."
+            });
         }
+
+
+    } catch (error) {
+
+        console.error(
+            "Mark As Reviewed Error:",
+            error
+        );
+
+        alert(
+            error.message ||
+            "تغییر وضعیت انجام نشد."
+        );
     }
+}
 
 
-    // =========================================================
-    // Global functions
-    // =========================================================
-    window.closeModal     = closeModal;
-    window.markAsReviewed = markAsReviewed;
+// =========================================================
+// Global functions
+// =========================================================
+
+window.editUser =
+    editUser;
+
+window.saveEdit =
+    saveEdit;
+
+window.deleteUser =
+    deleteUser;
+
+window.closeModal =
+    closeModal;
+
+window.markAsReviewed =
+    markAsReviewed;
+
 
 
     // =========================================================

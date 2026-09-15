@@ -2,6 +2,39 @@
    Analytics Page Script
    ========================================================================== */
 
+
+
+   function renderDonut(canvasId, legendId, segments) {
+
+    const canvas = document.getElementById(canvasId);
+    const legend = document.getElementById(legendId);
+
+    if (!canvas) return;
+
+    CafeCharts.drawDonutChart(canvas, segments);
+
+    if (legend) {
+
+        legend.innerHTML = segments.map(seg => `
+            <div class="donut-legend-item">
+
+                <span
+                    class="donut-legend-dot"
+                    style="background:${seg.color}"
+                ></span>
+
+                <span>${seg.label}</span>
+
+                <strong>${seg.value}%</strong>
+
+            </div>
+        `).join('');
+
+    }
+}
+
+
+
 document.addEventListener('DOMContentLoaded', () => {
   CafeShell.mount({ page: 'analytics', title: 'آمار بازدید', breadcrumb: 'کافه مدن / آمار بازدید' });
   renderStats();

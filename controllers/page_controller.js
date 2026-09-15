@@ -2,7 +2,6 @@ const path = require("node:path")
 const {v4 : uuid} = require("uuid")
 
 const frogs = [
-    { id: "1d2b2b3e-4e55-4f5c-a31d-111111111111", name: "admin", file: "login (1).html" },
     { id: "2f3c4d5e-6f77-4b8d-a222-222222222222", name: "dashboard", file: "admin.html" },
     { id: "3a4b5c6d-7e88-4c9f-b333-333333333333", name: "articles", file: "articles (1).html" },
     { id: "4b5c6d7e-8f99-4dab-c444-444444444444", name: "article-form", file: "article-form.html" },
@@ -44,17 +43,6 @@ const getPage = (req, res) => {
     res.sendFile(path.join(__dirname, "..", "public", frog.file.trim()));
 };
 
-const getAdminPage = (req, res) => {
-    const frog = frogs.find(f => f.name === "admin");
-
-    if (!frog) {
-        return res.status(404).send("Page not found");
-    }
-
-    res.sendFile(path.join(__dirname, "..", "public", frog.file.trim()));
-};
-
 module.exports = {
-    getPage,
-    getAdminPage
+    getPage
 }

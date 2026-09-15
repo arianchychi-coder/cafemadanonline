@@ -12,6 +12,7 @@ const loginRegisterRouter = require("./routes/login-register_route")
 const authRouter = require("./routes/auth_route")
 const podcastRouter = require("./routes/podcast_route")
 const khabarnameRouter = require("./routes/khabarname_route")
+const adminpageRoutr = require("./routes/adminpage_route")
 
 const app = express()
 
@@ -32,6 +33,7 @@ app.use("/",loginRegisterRouter)
 app.use("/api/protected",authRouter)
 app.use("/api/podcast",podcastRouter)
 app.use("/",khabarnameRouter)
+app.use("/admin",adminpageRoutr)
 const PORT = process.env.APP_PORT
 app.listen(PORT , ()=>{
     console.log(`Listen to ${PORT}`)

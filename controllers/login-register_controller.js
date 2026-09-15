@@ -45,7 +45,7 @@ const generateAndSaveToken = async(user)=>{
         name:user.name,
         email:user.email,
         role:user.role
-        },secretkey,{expiresIn:"1h"})
+        },secretkey,{expiresIn:"24h"})
 
 
         const refreshToken = crypto.randomBytes(32).toString('hex')

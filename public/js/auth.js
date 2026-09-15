@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", async()=>{
                 position:"top-end",
                 icon:"warning",
                 title:"توجه",
-                text:"توکن شما منقضی شده است ،لطفا دوباره وارد شوید",
+                text:"لطفا ذوباره وارد شوید",
                 confirmButtonText:"باشه",
                 allowOutsideClick: false,
             allowEscapeKey: false
@@ -39,7 +39,7 @@ document.addEventListener("DOMContentLoaded", async()=>{
                 position:"top-end",
                 icon:"warning",
                 title:"توجه",
-                text:"توکن شما منقضی شده است ،لطفا دوباره وارد شوید",
+                text:"لطفا ذوباره وارد شوید",
                 confirmButtonText:"باشه",
                 allowOutsideClick: false,
             allowEscapeKey: false

@@ -559,232 +559,209 @@ Contact Requests Page Script
     }
 
 
-    // =========================================================
-    // Edit
-    // =========================================================
-        async function editUser(id) {
+// =========================================================
+// Edit
+// =========================================================
+async function editUser(id) {
 
-            try {
+    const token = localStorage.getItem("accessToken");
 
-                const res =
-                    await fetch("/api/admin",{
-                        headers:{
-                            "Authorization" : `Bearer ${token}`
-                        }
-                    });
+    if (!token) {
+        alert("توکن پیدا نشد");
+        window.location.href = "login (1).html";
+        return;
+    }
 
-                const users =
-                    await res.json();
+    try {
 
+        // اطلاعات را از آرایه فعلی پیدا کن
+        const user = contacts.find(x => x.id == id);
 
-                const user =
-                    users.find(x => x.id == id);
-
-
-                if (!user) return;
-
-
-                document.getElementById(
-                    "edit-id"
-                ).value = user.id;
-
-
-                document.getElementById(
-                    "edit-name"
-                ).value = user.name || '';
-
-
-                document.getElementById(
-                    "edit-company"
-                ).value =
-                    user.compenyname || '';
-
-
-                document.getElementById(
-                    "edit-phone"
-                ).value =
-                    user.phone || '';
-
-
-                document.getElementById(
-                    "edit-email"
-                ).value =
-                    user.email || '';
-
-
-                document.getElementById(
-                    "edit-message"
-                ).value =
-                    user.message || '';
-
-
-                document.getElementById(
-                    "editModal"
-                ).style.display = "flex";
-
-
-            } catch (error) {
-
-                console.error(error);
-
-            }
-        }
-
-
-    // =========================================================
-    // Delete
-    // =========================================================
-    async function deleteUser(id) {
-
-        if (!confirm( "آیا از حذف حساب مطمئن هستید؟")) {
+        if (!user) {
+            alert("اطلاعات مورد نظر پیدا نشد");
             return;
         }
 
+        document.getElementById("edit-id").value = user.id;
 
-        try {
+        document.getElementById("edit-name").value =
+            user.name || "";
 
-            const response =
-                await fetch(
-                    `/api/admin/${id}`,
-                    {
-                        method: "DELETE",
-                         headers: {
-        "Authorization": `Bearer ${token}`
+        document.getElementById("edit-company").value =
+            user.compenyname || "";
+
+        document.getElementById("edit-phone").value =
+            user.phone || "";
+
+        document.getElementById("edit-email").value =
+            user.email || "";
+
+        document.getElementById("edit-message").value =
+            user.message || "";
+
+        document.getElementById("editModal").style.display = "flex";
+
+    } catch (error) {
+
+        console.error("Edit User Error:", error);
+
+        alert("خطا در باز کردن اطلاعات");
     }
-                    }
-                );
+}
 
 
-            console.log(
-                response.status
+// =========================================================
+// Delete
+// =========================================================
+async function deleteUser(id) {
+
+    if (!confirm("آیا از حذف حساب مطمئن هستید؟")) {
+        return;
+    }
+
+    const token = localStorage.getItem("accessToken");
+
+    if (!token) {
+        alert("توکن پیدا نشد");
+        window.location.href = "login (1).html";
+        return;
+    }
+
+    try {
+
+        const response = await fetch(
+            `/api/admin/${id}`,
+            {
+                method: "DELETE",
+
+                headers: {
+                    "Authorization": `Bearer ${token}`
+                }
+            }
+        );
+
+        console.log("DELETE STATUS:", response.status);
+
+        if (response.status === 401 || response.status === 403) {
+
+            alert("شما اجازه حذف این اطلاعات را ندارید");
+
+            window.location.href = "login (1).html";
+
+            return;
+        }
+
+        if (!response.ok) {
+
+            const errorData =
+                await response.json().catch(() => ({}));
+
+            throw new Error(
+                errorData.message || "حذف انجام نشد"
             );
-
-
-            if (response.ok) {
-
-                // حذف از آرایه فعلی
-                contacts =
-                    contacts.filter(
-                        item => item.id != id
-                    );
-
-                render();
-
-            } else {
-
-                alert("حذف انجام نشد.");
-
-            }
-
-        } catch (error) {
-
-            console.error(error);
-
-            alert("خطا در حذف اطلاعات");
         }
-    }
 
 
-    // =========================================================
-    // Save Edit
-    // =========================================================
-    async function saveEdit() {
+        // ==========================================
+        // حذف از آرایه بدون درخواست مجدد به API
+        // ==========================================
 
-        const id =
-            document.getElementById(
-                "edit-id"
-            ).value;
-
-                const token = localStorage.getItem("accessToken");
-        try {
-
-            const response =
-                await fetch(
-                    `/api/admin/${id}`,
-                    {
-                        method: "PUT",
-
-                        headers: {
-                            "Content-Type":
-                                "application/json",
-                                "Authorization" : `Bearer ${token}`
-                        },
-
-                        body: JSON.stringify({
-
-                            name:
-                                document.getElementById(
-                                    "edit-name"
-                                ).value,
-
-                            compenyname:
-                                document.getElementById(
-                                    "edit-company"
-                                ).value,
-
-                            phone:
-                                document.getElementById(
-                                    "edit-phone"
-                                ).value,
-
-                            email:
-                                document.getElementById(
-                                    "edit-email"
-                                ).value,
-
-                            message:
-                                document.getElementById(
-                                    "edit-message"
-                                ).value
-                        })
-                    }
-                );
+        contacts = contacts.filter(
+            item => item.id != id
+        );
 
 
-            if (response.ok) {
+        // ==========================================
+        // نمایش دوباره جدول بدون Refresh
+        // ==========================================
 
-                closeModal();
-
-                // دوباره اطلاعات را از API بگیر
-                await loadContacts();
-
-            } else {
-
-                alert("ویرایش انجام نشد.");
-            }
+        render();
 
 
-        } catch (error) {
+        // اگر مودال باز بود، ببند
+        closeModal();
 
-            console.error(error);
 
-            alert("خطا در ویرایش اطلاعات");
+        // پیام موفقیت
+        if (typeof CafeUI !== "undefined" && CafeUI.toast) {
+
+            CafeUI.toast({
+                type: "success",
+                title: "حذف شد",
+                desc: "پیام مورد نظر حذف گردید."
+            });
+
+        } else {
+
+            console.log("اطلاعات با موفقیت حذف شد.");
+
         }
+
+    } catch (error) {
+
+        console.error("Delete User Error:", error);
+
+        alert(
+            error.message || "خطا در حذف اطلاعات"
+        );
     }
+}
 
 
-    // =========================================================
-    // Close Modal
-    // =========================================================
-    function closeModal() {
-
-        document.getElementById(
-            "editModal"
-        ).style.display = "none";
-    }
-
-
-
-    
-async function markAsReviewed() {
+// =========================================================
+// Save Edit
+// =========================================================
+async function saveEdit() {
 
     const id =
         document.getElementById("edit-id").value;
 
-    if (!id) {
+    const token =
+        localStorage.getItem("accessToken");
+
+
+    if (!token) {
+
+        alert("توکن پیدا نشد");
+
+        window.location.href =
+            "login (1).html";
+
         return;
     }
-                const token = localStorage.getItem("accessToken");
+
+
+    if (!id) {
+
+        alert("شناسه اطلاعات پیدا نشد");
+
+        return;
+    }
+
+
+    // ==========================================
+    // اطلاعات جدید فرم
+    // ==========================================
+
+    const updatedData = {
+
+        name:
+            document.getElementById("edit-name").value.trim(),
+
+        compenyname:
+            document.getElementById("edit-company").value.trim(),
+
+        phone:
+            document.getElementById("edit-phone").value.trim(),
+
+        email:
+            document.getElementById("edit-email").value.trim(),
+
+        message:
+            document.getElementById("edit-message").value.trim()
+    };
+
+
     try {
 
         const response = await fetch(
@@ -793,49 +770,315 @@ async function markAsReviewed() {
                 method: "PUT",
 
                 headers: {
-                    "Content-Type": "application/json"
+                    "Content-Type": "application/json",
+
+                    "Authorization":
+                        `Bearer ${token}`
+                },
+
+                body: JSON.stringify(updatedData)
+            }
+        );
+
+
+        console.log(
+            "UPDATE STATUS:",
+            response.status
+        );
+
+
+        if (response.status === 401 ||
+            response.status === 403) {
+
+            alert(
+                "شما اجازه ویرایش این اطلاعات را ندارید"
+            );
+
+            window.location.href =
+                "login (1).html";
+
+            return;
+        }
+
+
+        if (!response.ok) {
+
+            const errorData =
+                await response.json()
+                    .catch(() => ({}));
+
+            throw new Error(
+                errorData.message ||
+                "ویرایش انجام نشد"
+            );
+        }
+
+
+        // ==========================================
+        // پیدا کردن آیتم داخل آرایه فعلی
+        // ==========================================
+
+        const index =
+            contacts.findIndex(
+                item => item.id == id
+            );
+
+
+        if (index !== -1) {
+
+            // اطلاعات جدید را روی همان آیتم اعمال کن
+
+            contacts[index] = {
+
+                ...contacts[index],
+
+                ...updatedData
+            };
+        }
+
+
+        // ==========================================
+        // بستن Modal
+        // ==========================================
+
+        closeModal();
+
+
+        // ==========================================
+        // رندر مجدد جدول بدون Refresh
+        // ==========================================
+
+        render();
+
+
+        // ==========================================
+        // پیام موفقیت
+        // ==========================================
+
+        if (
+            typeof CafeUI !== "undefined" &&
+            CafeUI.toast
+        ) {
+
+            CafeUI.toast({
+
+                type: "success",
+
+                title: "ویرایش شد",
+
+                desc:
+                    "اطلاعات با موفقیت ویرایش شد."
+            });
+
+        } else {
+
+            console.log(
+                "اطلاعات با موفقیت ویرایش شد."
+            );
+        }
+
+
+    } catch (error) {
+
+        console.error(
+            "Save Edit Error:",
+            error
+        );
+
+        alert(
+            error.message ||
+            "خطا در ویرایش اطلاعات"
+        );
+    }
+}
+
+
+// =========================================================
+// Close Modal
+// =========================================================
+function closeModal() {
+
+    const modal =
+        document.getElementById("editModal");
+
+    if (modal) {
+
+        modal.style.display = "none";
+    }
+}
+
+
+// =========================================================
+// Mark As Reviewed
+// =========================================================
+async function markAsReviewed() {
+
+    const id =
+        document.getElementById("edit-id").value;
+
+    const token =
+        localStorage.getItem("accessToken");
+
+
+    if (!id) {
+        return;
+    }
+
+
+    if (!token) {
+
+        alert("توکن پیدا نشد");
+
+        window.location.href =
+            "login (1).html";
+
+        return;
+    }
+
+
+    try {
+
+        const response = await fetch(
+            `/api/admin/${id}`,
+            {
+                method: "PUT",
+
+                headers: {
+
+                    "Content-Type":
+                        "application/json",
+
+                    "Authorization":
+                        `Bearer ${token}`
                 },
 
                 body: JSON.stringify({
+
                     status: "بررسی شده"
                 })
             }
         );
 
-        if (!response.ok) {
-            throw new Error("تغییر وضعیت انجام نشد");
+
+        if (
+            response.status === 401 ||
+            response.status === 403
+        ) {
+
+            alert(
+                "شما اجازه تغییر وضعیت را ندارید"
+            );
+
+            window.location.href =
+                "login (1).html";
+
+            return;
         }
 
-        // بستن مودال
+
+        if (!response.ok) {
+
+            const errorData =
+                await response.json()
+                    .catch(() => ({}));
+
+            throw new Error(
+                errorData.message ||
+                "تغییر وضعیت انجام نشد"
+            );
+        }
+
+
+        // ==========================================
+        // تغییر وضعیت داخل آرایه بدون API مجدد
+        // ==========================================
+
+        const index =
+            contacts.findIndex(
+                item => item.id == id
+            );
+
+
+        if (index !== -1) {
+
+            contacts[index].status =
+                "بررسی شده";
+        }
+
+
+        // بستن Modal
         closeModal();
 
-        // دوباره گرفتن اطلاعات
-        await loadContacts();
 
-        // رفتن به تب بررسی شده
+        // ==========================================
+        // تغییر تب به "بررسی شده"
+        // ==========================================
+
         document
-            .querySelectorAll("#status-chips .chip")
+            .querySelectorAll(
+                "#status-chips .chip"
+            )
             .forEach(chip => {
 
-                chip.classList.remove("is-active");
+                chip.classList.remove(
+                    "is-active"
+                );
+
 
                 if (
-                    chip.dataset.status === "بررسی شده"
+                    chip.dataset.status ===
+                    "بررسی شده"
                 ) {
-                    chip.classList.add("is-active");
+
+                    chip.classList.add(
+                        "is-active"
+                    );
                 }
             });
 
-        state.status = "بررسی شده";
+
+        state.status =
+            "بررسی شده";
+
         state.page = 1;
+
+
+        // ==========================================
+        // رندر بدون Refresh
+        // ==========================================
 
         render();
 
+
+        // پیام موفقیت
+        if (
+            typeof CafeUI !== "undefined" &&
+            CafeUI.toast
+        ) {
+
+            CafeUI.toast({
+
+                type: "success",
+
+                title: "تغییر کرد",
+
+                desc:
+                    "وضعیت پیام به «بررسی شده» تغییر کرد."
+            });
+        }
+
+
     } catch (error) {
 
-        console.error(error);
+        console.error(
+            "Mark As Reviewed Error:",
+            error
+        );
 
-        alert("تغییر وضعیت انجام نشد.");
+        alert(
+            error.message ||
+            "تغییر وضعیت انجام نشد."
+        );
     }
 }
 

@@ -390,6 +390,129 @@ if (!audioFile) {
     }
 
 
+
+    function resetPodcastForm() {
+
+    const form = document.getElementById('podcast-form');
+
+    if (form) {
+        form.reset();
+    }
+
+    // -------------------------
+    // Reset JS state
+    // -------------------------
+
+    coverImage = '';
+    audioFile = null;
+    currentStatus = 'draft';
+
+
+    // -------------------------
+    // Reset status buttons
+    // -------------------------
+
+    document.querySelectorAll('.status-toggle__btn').forEach(btn => {
+        btn.classList.remove('is-active');
+
+        if (btn.dataset.value === 'draft') {
+            btn.classList.add('is-active');
+        }
+    });
+
+    const statusInput = document.getElementById('status');
+
+    if (statusInput) {
+        statusInput.value = 'draft';
+    }
+
+
+    // -------------------------
+    // Reset audio UI
+    // -------------------------
+
+    const audioInput = document.getElementById('audio-input');
+    const audioFileInfo = document.getElementById('audio-file-info');
+    const audioFileName = document.getElementById('audio-file-name');
+    const durationInput = document.getElementById('f-duration');
+
+    if (audioInput) {
+        audioInput.value = '';
+    }
+
+    if (audioFileInfo) {
+        audioFileInfo.style.display = 'none';
+    }
+
+    if (audioFileName) {
+        audioFileName.textContent = '';
+    }
+
+    if (durationInput) {
+        durationInput.value = '';
+    }
+
+
+    // -------------------------
+    // Reset cover UI
+    // -------------------------
+
+    const coverInput = document.getElementById('cover-input');
+    const coverPreview = document.getElementById('cover-preview');
+
+    if (coverInput) {
+        coverInput.value = '';
+    }
+
+    if (coverPreview) {
+        coverPreview.innerHTML = '';
+    }
+
+
+    // -------------------------
+    // Reset date
+    // -------------------------
+
+    if (!editId) {
+
+        const today = new Date();
+
+        const shamsiDate = gregorianToJalali(
+            today.getFullYear(),
+            today.getMonth() + 1,
+            today.getDate()
+        );
+
+        const dateInput = document.getElementById('f-date');
+
+        if (dateInput) {
+            dateInput.value =
+                `${shamsiDate[0]}/` +
+                `${String(shamsiDate[1]).padStart(2, '0')}/` +
+                `${String(shamsiDate[2]).padStart(2, '0')}`;
+        }
+    }
+
+
+    // -------------------------
+    // Reset validation errors
+    // -------------------------
+
+    document.querySelectorAll('.has-error').forEach(el => {
+        el.classList.remove('has-error');
+    });
+
+    document.querySelectorAll('.is-valid').forEach(el => {
+        el.classList.remove('is-valid');
+    });
+
+    document.querySelectorAll('.form-error').forEach(el => {
+        el.style.display = 'none';
+    });
+
+}
+
+
 async function save() {
 
     if (!validate()) {
@@ -487,6 +610,8 @@ async function save() {
             'پادکست با موفقیت ذخیره شد',
             'پادکست جدید اضافه شد.'
         );
+
+        resetPodcastForm();
 
         
 

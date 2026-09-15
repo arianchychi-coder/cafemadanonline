@@ -5441,7 +5441,7 @@ input:-webkit-autofill:active {
   font-size: 14px;
   font-weight: 500;
   line-height: 1.2;
-  cursor: pointer;
+  cursor:default;
   transition:
     background 240ms ease,
     border-color 240ms ease,
@@ -5597,4 +5597,92 @@ input:-webkit-autofill:active {
     max-width: 110px;
   }
 }
-    
+    /* ===== فقط آواتار در موبایل ===== */
+@media (max-width: 768px) {
+
+    /* خود دکمه پروفایل */
+    .profile-button {
+        padding: 0 !important;
+        gap: 0 !important;
+        background: transparent !important;
+        border: none !important;
+        box-shadow: none !important;
+        border-radius: 50% !important;
+    }
+
+    /* مخفی کردن همه چیز به جز آواتار */
+    .profile-divider,
+    .profile-name,
+    .profile-LastName {
+        display: none !important;
+    }
+
+    /* فقط آواتار نمایش داده شود */
+    .profile-avatar {
+        display: inline-flex !important;
+        width: 40px !important;
+        height: 40px !important;
+    }
+
+    .profile-initials {
+        font-size: 14px !important;
+    }
+
+    /* دکمه ورود را هم در موبایل کمی کوچک‌تر می‌کنیم (اختیاری) */
+    #vorodbtn {
+        padding: 0.5rem 1.1rem !important;
+        font-size: 0.9rem !important;
+    }
+}
+
+/* گوشی‌های خیلی کوچک */
+@media (max-width: 480px) {
+    .profile-avatar {
+        width: 36px !important;
+        height: 36px !important;
+    }
+}
+
+
+
+/* ===== لوگو در موبایل ===== */
+@media (max-width: 768px) {
+    .logo-wrapper {
+        gap: 0.55rem !important;
+    }
+
+    .logo-wrapper img {
+        width: 36px !important;
+        height: 50px !important;
+    }
+
+    .logo-fa {
+        font-size: 1.05rem !important;
+    }
+
+    .logo-en {
+        font-size: 0.5rem !important;
+        letter-spacing: 1px !important;
+    }
+}
+
+/* گوشی‌های خیلی کوچک */
+@media (max-width: 480px) {
+    .logo-wrapper img {
+        width: 32px !important;
+        height: 44px !important;
+    }
+
+    .logo-fa {
+        font-size: 0.95rem !important;
+    }
+
+    .logo-en {
+        font-size: 0.45rem !important;
+    }
+    .logo-fa{
+        margin-top: 0.8rem !important;
+    }
+}
+
+

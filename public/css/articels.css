@@ -1529,3 +1529,71 @@ body.modal-open .article-card {
 .article-views:hover small{
     color: #F3B300;
 }
+
+
+/* ===== دکمه مشاهده جزئیات ===== */
+.article-detail-btn {
+    background: #FAB900;
+    border: none;
+    border-radius: 0.8rem;
+    padding: 0.55rem 1.2rem;
+    font-size: 1rem;
+    color: #111;
+    font-family: 'Vazirmatn', sans-serif;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-block;
+    margin-top: 12px;
+}
+
+.article-detail-btn:hover {
+    background: #e0a800;
+    transform: translateY(-2px);
+}
+
+/* ریسپانسیو */
+@media (max-width: 768px) {
+    .article-detail-btn {
+        width: 100%;
+        text-align: center;
+        padding: 0.7rem 1rem;
+        font-size: 0.95rem;
+        margin-top: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .article-detail-btn {
+        font-size: 0.9rem;
+        padding: 0.65rem 0.9rem;
+    }
+}
+
+
+
+/* ===== Filter Section - Fixed ===== */
+.filter-outer-section {
+    position: sticky;
+    top: 90px;                 /* ارتفاع navbar */
+    z-index: 900;
+    background: #f1f1f1 !important;
+    padding: 18px 0;
+    border-bottom: 1px solid #e0e0e0;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+}
+
+/* تنظیم در موبایل */
+@media (max-width: 768px) {
+    .filter-outer-section {
+        top: 75px;             /* ارتفاع navbar در موبایل */
+        padding: 14px 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .filter-outer-section {
+        top: 70px;
+        padding: 12px 0;
+    }
+}

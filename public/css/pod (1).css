@@ -43,7 +43,7 @@ body {
    ============================================ */
 .cafemadan-podcast-section {
     width: 100%;
-    height: 85vh;
+    height: 90vh;
     background: var(--cm-bg);
     padding: 64px 0 56px;
     direction: rtl;
@@ -491,3 +491,709 @@ body {
 }
 
 
+/* ============================================
+   STICKY PLAYER VISIBILITY
+   ============================================ */
+
+/* Sticky player: hidden until podcast is played */
+.cm-sticky-player {
+    display: none !important;
+    position: fixed !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    z-index: 2147483647 !important;
+}
+
+.cm-sticky-player.is-visible {
+    display: block !important;
+}
+
+.cm-sticky-player * {
+    pointer-events: auto;
+}
+
+
+/* =====================================================
+   Podcast Cards - Fully Responsive
+   ===================================================== */
+
+/* Grid Container */
+#podcastGrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+    width: 100%;
+}
+
+/* Card Base */
+.cafemadan-podcast-card {
+    background: #0a0a0a !important;
+    border-radius: 16px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.cafemadan-podcast-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
+    border-color: rgba(243, 179, 0, 0.35);
+}
+
+/* Media Section */
+.cafemadan-podcast-card__media {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+    background: #111;
+}
+
+.cafemadan-podcast-card__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s ease;
+}
+
+.cafemadan-podcast-card:hover .cafemadan-podcast-card__image {
+    transform: scale(1.05);
+}
+
+.cafemadan-podcast-card__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        to top,
+        rgba(0, 0, 0, 0.85) 0%,
+        rgba(0, 0, 0, 0.3) 50%,
+        rgba(0, 0, 0, 0.15) 100%
+    );
+    pointer-events: none;
+}
+
+/* Top Labels */
+.cafemadan-podcast-card__top-labels {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    left: 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 5;
+}
+
+.cafemadan-podcast-card__episode {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(0, 0, 0, 0.55);
+    backdrop-filter: blur(6px);
+    padding: 5px 12px;
+    border-radius: 30px;
+    color: #fff;
+    font-size: 0.85rem;
+}
+
+.cafemadan-podcast-card__episode-number {
+    color: #F3B300;
+    font-weight: 700;
+}
+
+.cafemadan-podcast-card__brand {
+    background: rgba(243, 179, 0, 0.9);
+    color: #111;
+    font-size: 0.8rem;
+    font-weight: 700;
+    padding: 5px 12px;
+    border-radius: 30px;
+}
+
+/* Waveform */
+.cafemadan-podcast-card__waveform {
+    position: absolute;
+    bottom: 70px;
+    left: 16px;
+    right: 16px;
+    opacity: 0.7;
+    z-index: 4;
+    pointer-events: none;
+}
+
+.cafemadan-podcast-card__waveform svg {
+    width: 100%;
+    height: 36px;
+}
+
+/* Player */
+.cafemadan-podcast-card__player {
+    position: absolute;
+    bottom: 14px;
+    left: 14px;
+    right: 14px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    z-index: 6;
+}
+
+.cafemadan-podcast-card__play-btn {
+    width: 42px;
+    height: 42px;
+    min-width: 42px;
+    border-radius: 50%;
+    background: #F3B300;
+    border: none;
+    color: #111;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    flex-shrink: 0;
+}
+
+.cafemadan-podcast-card__play-btn:hover {
+    background: #ffc933;
+    transform: scale(1.08);
+}
+
+.cafemadan-podcast-card__play-icon,
+.cafemadan-podcast-card__pause-icon {
+    width: 18px;
+    height: 18px;
+}
+
+.cafemadan-podcast-card__seek-wrapper {
+    flex: 1;
+    position: relative;
+    height: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.cafemadan-podcast-card__seek-bar {
+    position: relative;
+    width: 100%;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.25);
+    border-radius: 10px;
+    overflow: visible;
+}
+
+.cafemadan-podcast-card__seek-progress {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    background: #F3B300;
+    border-radius: 10px;
+    transition: width 0.1s linear;
+}
+
+.cafemadan-podcast-card__seek-thumb {
+    position: absolute;
+    top: 50%;
+    width: 12px;
+    height: 12px;
+    background: #F3B300;
+    border-radius: 50%;
+    transform: translate(50%, -50%);
+    box-shadow: 0 0 0 3px rgba(243, 179, 0, 0.3);
+}
+
+.cafemadan-podcast-card__seek-input {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+    margin: 0;
+}
+
+.cafemadan-podcast-card__time {
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 0.78rem;
+    white-space: nowrap;
+    min-width: 70px;
+    text-align: left;
+}
+
+/* Content */
+.cafemadan-podcast-card__content {
+    padding: 18px 18px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    flex: 1;
+}
+
+.cafemadan-podcast-card__title {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: #fff !important;
+    line-height: 1.5;
+    margin: 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.cafemadan-podcast-card__meta {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.cafemadan-podcast-card__date,
+.cafemadan-podcast-card__duration {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.85rem;
+    color: #999 !important;
+}
+
+.cafemadan-podcast-card__icon {
+    width: 15px;
+    height: 15px;
+    flex-shrink: 0;
+}
+
+/* Platforms */
+.cafemadan-podcast-card__platforms {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 4px;
+    flex-wrap: wrap;
+}
+
+.cafemadan-podcast-card__platforms-label {
+    font-size: 0.82rem;
+    color: #888 !important;
+}
+
+.cafemadan-podcast-card__platforms-list {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.cm-platform {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ccc;
+    transition: all 0.25s ease;
+    position: relative;
+    text-decoration: none;
+}
+
+.cm-platform:hover {
+    background: #F3B300;
+    color: #111;
+    border-color: #F3B300;
+    transform: translateY(-2px);
+}
+
+.cm-platform__icon {
+    width: 16px;
+    height: 16px;
+}
+
+.cm-platform__tooltip {
+    position: absolute;
+    bottom: calc(100% + 8px);
+    left: 50%;
+    transform: translateX(-50%);
+    background: #222;
+    color: #fff;
+    font-size: 0.72rem;
+    padding: 4px 8px;
+    border-radius: 6px;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+}
+
+.cm-platform:hover .cm-platform__tooltip {
+    opacity: 1;
+}
+
+/* =====================================================
+   RESPONSIVE
+   ===================================================== */
+
+/* Laptop */
+@media (max-width: 1200px) {
+    #podcastGrid {
+        gap: 22px;
+    }
+
+    .cafemadan-podcast-card__title {
+        font-size: 1.08rem;
+    }
+    
+}
+
+/* Tablet */
+@media (max-width: 992px) {
+    #podcastGrid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+
+    .cafemadan-podcast-card__media {
+        aspect-ratio: 16 / 9;
+    }
+
+    .cafemadan-podcast-card__play-btn {
+        width: 40px;
+        height: 40px;
+        min-width: 40px;
+    }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+    #podcastGrid {
+        grid-template-columns: 1fr;
+        gap: 18px;
+        max-width: 480px;
+        margin: 0 auto;
+    }
+
+    .cafemadan-podcast-card__media {
+        aspect-ratio: 16 / 9;
+    }
+
+    .cafemadan-podcast-card__top-labels {
+        top: 12px;
+        right: 12px;
+        left: 12px;
+    }
+
+    .cafemadan-podcast-card__episode,
+    .cafemadan-podcast-card__brand {
+        font-size: 0.78rem;
+        padding: 4px 10px;
+    }
+
+    .cafemadan-podcast-card__player {
+        bottom: 12px;
+        left: 12px;
+        right: 12px;
+        gap: 10px;
+    }
+
+    .cafemadan-podcast-card__play-btn {
+        width: 38px;
+        height: 38px;
+        min-width: 38px;
+    }
+
+    .cafemadan-podcast-card__time {
+        font-size: 0.72rem;
+        min-width: 65px;
+    }
+
+    .cafemadan-podcast-card__content {
+        padding: 16px;
+        gap: 10px;
+    }
+
+    .cafemadan-podcast-card__title {
+        font-size: 1.05rem;
+    }
+
+    .cafemadan-podcast-card__meta {
+        gap: 14px;
+    }
+
+    .cafemadan-podcast-card__date,
+    .cafemadan-podcast-card__duration {
+        font-size: 0.8rem;
+    }
+
+    .cafemadan-podcast-card__waveform {
+        bottom: 62px;
+    }
+}
+
+/* Small Phones */
+@media (max-width: 480px) {
+    #podcastGrid {
+        gap: 16px;
+    }
+
+    .cafemadan-podcast-card {
+        border-radius: 14px;
+    }
+
+    .cafemadan-podcast-card__media {
+        aspect-ratio: 16 / 10;
+    }
+
+    .cafemadan-podcast-card__play-btn {
+        width: 36px;
+        height: 36px;
+        min-width: 36px;
+    }
+
+    .cafemadan-podcast-card__play-icon,
+    .cafemadan-podcast-card__pause-icon {
+        width: 16px;
+        height: 16px;
+    }
+
+    .cafemadan-podcast-card__time {
+        font-size: 0.7rem;
+        min-width: 60px;
+    }
+
+    .cafemadan-podcast-card__title {
+        font-size: 1rem;
+    }
+
+    .cafemadan-podcast-card__content {
+        padding: 14px;
+    }
+
+    .cm-platform {
+        width: 30px;
+        height: 30px;
+    }
+
+    .cm-platform__icon {
+        width: 14px;
+        height: 14px;
+    }
+
+    .cafemadan-podcast-card__platforms-label {
+        font-size: 0.78rem;
+    }
+}
+
+/* Very Small */
+@media (max-width: 360px) {
+    .cafemadan-podcast-card__title {
+        font-size: 0.95rem;
+    }
+
+    .cafemadan-podcast-card__player {
+        gap: 8px;
+    }
+
+    .cafemadan-podcast-card__time {
+        display: none; /* در گوشی خیلی کوچک زمان را مخفی می‌کند تا جا باز شود */
+    }
+}
+
+/* ===== Podcast Section - Fix Overlap ===== */
+.cafemadan-podcast-section {
+    background: #1A1A1A !important;
+    padding: 80px 5% 70px;
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+    clear: both;
+}
+
+/* هدر */
+.cafemadan-podcast-header {
+    text-align: center;
+    margin-bottom: 50px;
+    position: relative;
+}
+
+.cafemadan-podcast-header__accent {
+    width: 60px;
+    height: 3px;
+    background: #F3B300;
+    margin: 0 auto 18px;
+    border-radius: 2px;
+}
+
+.cafemadan-podcast-header__title {
+    font-size: 2.4rem;
+    font-weight: 800;
+    color: #fff !important;
+    margin-bottom: 12px;
+}
+
+.cafemadan-podcast-header__subtitle {
+    font-size: 1.1rem;
+    color: #999 !important;
+}
+
+/* گرید */
+.cafemadan-podcast-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+    max-width: 1400px;
+    margin: 0 auto 50px;
+    width: 100%;
+}
+
+/* دکمه مشاهده همه */
+.cafemadan-podcast-all {
+    text-align: center;
+    margin-top: 10px;
+    padding-bottom: 10px;
+}
+
+.cafemadan-podcast-all__button {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    color: #F3B300;
+    text-decoration: none;
+    font-size: 1.1rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    padding: 12px 24px;
+    border-radius: 50px;
+}
+
+.cafemadan-podcast-all__button:hover {
+    background: rgba(243, 179, 0, 0.1);
+    border-color: #F3B300;
+    gap: 14px;
+}
+
+.cafemadan-podcast-all__arrow {
+    width: 18px;
+    height: 18px;
+    transition: transform 0.3s ease;
+}
+
+.cafemadan-podcast-all__button:hover .cafemadan-podcast-all__arrow {
+    transform: translateX(-4px);
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 1200px) {
+    .cafemadan-podcast-section {
+        padding: 70px 4% 60px;
+    }
+
+    .cafemadan-podcast-grid {
+        gap: 22px;
+    }
+}
+
+@media (max-width: 992px) {
+    .cafemadan-podcast-section {
+        padding: 60px 4% 50px;
+    }
+
+    .cafemadan-podcast-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+        margin-bottom: 40px;
+    }
+
+    .cafemadan-podcast-header__title {
+        font-size: 2rem;
+    }
+
+    .cafemadan-podcast-header {
+        margin-bottom: 40px;
+    }
+}
+
+@media (max-width: 768px) {
+    .cafemadan-podcast-section {
+        padding: 50px 4% 45px;
+    }
+
+    .cafemadan-podcast-grid {
+        grid-template-columns: 1fr;
+        max-width: 480px;
+        gap: 18px;
+        margin-bottom: 35px;
+    }
+
+    .cafemadan-podcast-header__title {
+        font-size: 1.75rem;
+    }
+
+    .cafemadan-podcast-header__subtitle {
+        font-size: 1rem;
+    }
+
+    .cafemadan-podcast-header {
+        margin-bottom: 35px;
+    }
+
+    .cafemadan-podcast-all__button {
+        font-size: 1rem;
+        padding: 11px 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .cafemadan-podcast-section {
+        padding: 40px 4% 40px;
+        height: 85rem !important;
+    }
+
+    .cafemadan-podcast-header__title {
+        font-size: 1.55rem;
+    }
+
+    .cafemadan-podcast-grid {
+        margin-bottom: 30px;
+    }
+
+    .cafemadan-podcast-all__button{
+        border: none;
+        margin-top: 2rem;
+    }
+}
+
+
+
+.cafemadan-podcast-header {
+    text-align: right;
+    direction: rtl;
+    margin-bottom: 50px;
+    padding-right: 0;
+}
+
+.cafemadan-podcast-header__accent {
+    width: 60px;
+    height: 3px;
+    background: #F3B300;
+    border-radius: 2px;
+    margin: 0 0 18px 0;   /* سمت راست */
+}
+
+.cafemadan-podcast-header__title {
+    font-size: 2.4rem;
+    font-weight: 800;
+    color: #fff !important;
+    margin-bottom: 12px;
+    text-align: right;
+}
+
+.cafemadan-podcast-header__subtitle {
+    font-size: 1.1rem;
+    color: #999 !important;
+    text-align: right;
+}

@@ -25,13 +25,19 @@ async function getChart(range) {
     const visits = db.collection("visit");
 
 
+    const now = new Date();
+
+    let startDate;
     let format;
 
 
-
-
-
     if (range === "daily") {
+
+        startDate = new Date(
+            now.getFullYear(),
+            now.getMonth(),
+            now.getDate()
+        );
 
         format = "%H";
 
@@ -39,11 +45,20 @@ async function getChart(range) {
 
     else if (range === "weekly") {
 
+        startDate = new Date();
+        startDate.setDate(now.getDate() - 7);
+
         format = "%Y-%m-%d";
 
     }
 
     else if (range === "monthly") {
+
+        startDate = new Date(
+            now.getFullYear(),
+            now.getMonth(),
+            1
+        );
 
         format = "%d";
 
@@ -51,17 +66,30 @@ async function getChart(range) {
 
     else if (range === "yearly") {
 
+        startDate = new Date(
+            now.getFullYear(),
+            0,
+            1
+        );
+
         format = "%m";
 
     }
 
 
-
-
     const data = await visits.aggregate([
 
         {
+            $match: {
+                visitTime: {
+                    $gte: startDate
+                }
+            }
+        },
+
+        {
             $group: {
+
                 _id: {
                     $dateToString: {
                         format: format,
@@ -72,6 +100,7 @@ async function getChart(range) {
                 count: {
                     $sum: 1
                 }
+
             }
         },
 
@@ -82,7 +111,6 @@ async function getChart(range) {
         }
 
     ]).toArray();
-
 
 
     return {

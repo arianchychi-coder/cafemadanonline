@@ -9,8 +9,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
-
-
         <script src="https://cdn.tailwindcss.com"></script>
 
 
@@ -21,8 +19,6 @@
 </head>
 
 <body>
-
-
         <nav class="navbar" id="navbar">
 
             
@@ -107,7 +103,7 @@
 
 
                 <!-- Profile Button Component (Scoped) -->
-  <div class="profile-container">
+  <div id="profile-container" class="profile-container">
     <button
       type="button"
       class="profile-button"
@@ -145,7 +141,7 @@
     </nav>
 
 
-    <section class="home" style="background: url('/images/view-heavy-machinery-used-construction-industry.jpg') no-repeat;    display: flex;
+    <section class="home" style="background: url('/images/تغیر\ سایز\ داده\ شدخ.jpg') no-repeat;    display: flex;
     align-items: center;
     min-height: 100vh;
     background-position: center;
@@ -639,8 +635,8 @@
                 <img src="/images/sp2.jpg" alt="">
             </div>
             <div class="inf">
-                <div style="width: 55px; height: 55px;background: #0a0a0a;color: #FAB900; border-radius: 50px;display: flex;align-items: center;text-align: center;justify-content: center;position: relative;right: 22rem;bottom: 4rem;font-size: 1.7rem;">
-                <i class="bi bi-suitcase-lg" style="position: relative; top: .3rem;"></i>
+                <div style="width: 55px; height: 55px;background: transparent;color: #FAB900; border-radius: 50px;display: flex;align-items: center;text-align: center;justify-content: center;position: relative;right: 22rem;bottom: 4rem;font-size: 1.7rem;">
+                
             </div>
                 <h3 style="position: relative;bottom: 3rem;">مشاوره و خدمات فنی</h3>
             <span style="position: relative;bottom: 3rem;">ارائه خدمات و مشاور های فنی در پروژه معدنی طبق دهده های روز دنیا</span>
@@ -652,8 +648,8 @@
             <div class="img">
                 <img src="/images/GE_4530_Shutterstock_1077721433_RV.jpg" alt="">
             </div>
-            <div style="width: 55px; height: 55px;background: #0a0a0a;color: #FAB900;border-radius: 50px;display: flex;align-items: center;text-align: center;justify-content: center;position: relative;right: 22rem;bottom: 4rem;font-size: 1.7rem;">
-                <i class="bi bi-train-front" style="position: relative; top: .3rem;"></i>
+            <div style="width: 55px; height: 55px;background: transparent;color: #FAB900;border-radius: 50px;display: flex;align-items: center;text-align: center;justify-content: center;position: relative;right: 22rem;bottom: 4rem;font-size: 1.7rem;">
+                
             </div>
             <h3 style="position: relative;bottom: 3rem;">بازرگانی و صادرات </h3>
             <span style="position: relative;bottom: 3rem;">بازاریابی و صادرات مواد معدنی با رعایت استاندارد های جهانی و بین المللی</span>
@@ -664,8 +660,8 @@
             <div class="img">
                 <img src="/images/pexels-tomfisk-6542371.jpg" alt="">
             </div>
-            <div style="width: 55px; height: 55px;background: #0a0a0a;color: #FAB900;border-radius: 50px;display: flex;align-items: center;text-align: center;justify-content: center;position: relative;right: 22rem;bottom: 4rem;font-size: 1.7rem;">
-                <i class="bi bi-sign-yield" style="position: relative; top: .3rem;"></i>
+            <div style="width: 55px; height: 55px;background: transparent;color: #FAB900;border-radius: 50px;display: flex;align-items: center;text-align: center;justify-content: center;position: relative;right: 22rem;bottom: 4rem;font-size: 1.7rem;">
+               
             </div>
             <h3 style="position: relative;bottom: 3rem;">فرآوری</h3>
             <span style="position: relative;bottom: 3rem;">تبدیل مواد معدنی به محصولات با ارزش افزوده بالا تکنولوژِی روز دنیا</span>
@@ -1034,6 +1030,8 @@
 </div>
 
 
+
+
 <script>
 
     fetch("/api/visit",{
@@ -1058,7 +1056,7 @@
         document.getElementById("display-name").textContent = name
     }
     else{
-        document.getElementById("display-name").textContent = "Err"
+        document.getElementById("display-name").textContent = "ابتدا وارد شوید"
     }
 
 
@@ -1066,7 +1064,7 @@
         document.getElementById("display-LastName").textContent = lastname
     }
     else{
-                document.getElementById("display-LastName").textContent = "Err"
+                document.getElementById("display-LastName").textContent = ""
     }
 
        if (name && lastname) {
@@ -1122,23 +1120,52 @@ if (registerSuccess === "true") {
 <script src="/js/search.js"></script>
 <script src="/js/main.js"></script>
 <script>
-    document.addEventListener("DOMContentLoaded",function(){
-        const vorbtn = document.getElementById("vorodbtn")
+document.addEventListener("DOMContentLoaded", function () {
 
-        if (!vorbtn) {
-            return
+    const vorbtn = document.getElementById("vorodbtn");
+    const profile = document.getElementById("profile-container");
+
+    if (!vorbtn || !profile) {
+        return;
+    }
+
+    const token = localStorage.getItem("accessToken");
+
+    function isTokenExpired(token) {
+        if (!token) {
+            return true;
         }
 
-    const token = localStorage.getItem("accessToken")
+        try {
+            const payload = JSON.parse(atob(token.split('.')[1]));
 
+            // exp بر حسب ثانیه است
+            return Date.now() >= payload.exp * 1000;
 
-    if (token) {
-        vorbtn.style.display = "none"
+        } catch (error) {
+            return true;
+        }
     }
-    else{
-        vorbtn.style.display="flex"
+
+    const expired = isTokenExpired(token);
+
+    if (expired) {
+
+        // توکن منقضی شده
+        localStorage.removeItem("accessToken");
+
+        vorbtn.style.display = "flex";
+        profile.style.display = "none";
+
+    } else {
+
+        // توکن هنوز معتبر است
+        vorbtn.style.display = "none";
+        profile.style.display = "flex";
     }
-    })
+
+});
 </script>
+
 </body>
 </html>
