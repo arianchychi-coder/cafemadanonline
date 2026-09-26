@@ -1,8 +1,9 @@
+require("dotenv").config()
 const SettingModel = require("../models/setting_model");
 const bcrypt = require("bcrypt");
 const nodemailer = require("nodemailer");
 const jwt = require("jsonwebtoken")
-const secretkey = "12345"
+const secretkey = process.env.jwrPassword
 const crypto = require("crypto")
 
 

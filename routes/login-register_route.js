@@ -8,5 +8,5 @@ router.get("/me", authOrizationToken, loginRegisteController.getMe);
 router.post("/register",loginRegisteController.register)
 router.post("/login",loginRegisteController.login)
 router.post("/adminlogin",loginRegisteController.adminlog)
-router.put("/userrole/:id",authOrizationToken,adminAuthOrization,loginRegisteController.updateInfo)
+router.delete("/userrole/:id",authOrizationToken,adminAuthOrization,loginRegisteController.deleteInfo)
 module.exports = router

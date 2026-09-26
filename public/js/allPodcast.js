@@ -125,11 +125,14 @@ console.log("🔥 NEW all-podcasts.js LOADED");
             list = list.filter(item => {
                 const title    = String(item.title || '').toLowerCase();
                 const episod = String(item.episod || '').toLowerCase();
-                const createdAt   = String(item.createdAT || '').toLowerCase();
+                const createdAT = String(item.createdAT || '').toLowerCase();
                 const time   = String(item.time || '').toLowerCase();
                 const status = String(item.status || '').toLowerCase();
                 const audio = String(item.audio || '').toLowerCase();
                 const cover = String(item.cover || '').toLowerCase();
+                const appleMusic = String(item.apple_music || '').toLowerCase();
+                const castbox = String(item.castbox || '').toLowerCase();
+                const soundcloud = String(item.soundcloud || '').toLowerCase();
 
                 return (
                     title.includes(state.search) ||
@@ -138,7 +141,11 @@ console.log("🔥 NEW all-podcasts.js LOADED");
                     time.includes(state.search) ||
                     status.includes(state.search) ||
                     audio.includes(state.search) ||
-                    cover.includes(state.search)
+                    cover.includes(state.search) ||
+                    link.includes(state.search) ||
+                    appleMusic.includes(state.search) ||
+                    castbox.includes(state.search) ||
+                    soundcloud.includes(state.search)
                 )
             });
         }
@@ -263,6 +270,53 @@ console.log("🔥 NEW all-podcasts.js LOADED");
                         : '—'
                 }
             </td>
+
+            <td style="font-size:1rem;">
+    <div style="display:flex;flex-direction:column;gap:8px;">
+
+        ${
+            item.apple_music
+                ? `<a href="${CafeUtils.escapeHtml(item.apple_music)}"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      style="text-decoration:none;">
+                        🎵 Apple Music
+                   </a>`
+                : ''
+        }
+
+        ${
+            item.castbox
+                ? `<a href="${CafeUtils.escapeHtml(item.castbox)}"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      style="text-decoration:none;">
+                        📦 Castbox
+                   </a>`
+                : ''
+        }
+
+        ${
+            item.soundcloud
+                ? `<a href="${CafeUtils.escapeHtml(item.soundcloud)}"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      style="text-decoration:none;">
+                        ☁️ SoundCloud
+                   </a>`
+                : ''
+        }
+
+        ${
+            !item.apple_music &&
+            !item.castbox &&
+            !item.soundcloud
+                ? '—'
+                : ''
+        }
+
+    </div>
+</td>
 
 
             <td style="display:flex;gap:8px;">
@@ -439,6 +493,16 @@ function editUser(id) {
                 "انتخاب تصویر کاور";
         }
 
+
+        document.getElementById("edit-apple-music").value =
+    podcast.apple_music || "";
+
+document.getElementById("edit-castbox").value =
+    podcast.castbox || "";
+
+document.getElementById("edit-soundcloud").value =
+    podcast.soundcloud || "";
+
         // نمایش کاور قبلی
         const preview =
             document.getElementById("cover-preview");
@@ -478,6 +542,7 @@ function editUser(id) {
 
 async function saveEdit() {
 
+    const token = localStorage.getItem("accessToken")
     const id =
         document.getElementById("podcast-id").value;
 
@@ -552,10 +617,27 @@ async function saveEdit() {
         }
 
 
+        formData.append(
+    "apple_music",
+    document.getElementById("edit-apple-music")?.value.trim() || ""
+);
+
+formData.append(
+    "castbox",
+    document.getElementById("edit-castbox")?.value.trim() || ""
+);
+
+formData.append(
+    "soundcloud",
+    document.getElementById("edit-soundcloud")?.value.trim() || ""
+);
+
+
         const response = await fetch(
             `/api/podcast/${id}`,
             {
                 method: "PUT",
+                headers:{"Authorization" : `Bearer ${token}`},
                 body: formData
             }
         );
@@ -690,6 +772,9 @@ async function saveEdit() {
 
 async function deleteUser(id) {
 
+
+    const token = localStorage.getItem("accessToken")
+
     if (
         !confirm(
             "آیا از حذف این پادکست اطمینان دارید؟"
@@ -704,7 +789,8 @@ async function deleteUser(id) {
         const response = await fetch(
             `/api/podcast/${id}`,
             {
-                method: "DELETE"
+                method: "DELETE",
+                headers:{"Authorization" : `Bearer ${token}`}
             }
         );
 
@@ -812,137 +898,127 @@ function closeModal() {
 // =========================================================
 
 async function markAsReviewed() {
+    const id = document.getElementById("podcast-id")?.value?.trim();
 
-    const id =
-        document.getElementById(
-            "podcast-id"
-        ).value;
-
+    const token = localStorage.getItem("accessToken")
 
     if (!id) {
+        alert("شناسه پادکست پیدا نشد");
         return;
     }
 
-
     try {
+        const formData = new FormData();
 
-        // ==========================================
-        // ارسال درخواست تغییر وضعیت
-        // ==========================================
+        formData.append("title",
+            document.getElementById("edit-title")?.value.trim() || ""
+        );
 
-        const response = await fetch(
-            `/api/podcast/${id}`,
-            {
-                method: "PUT",
+        formData.append("episod",
+            document.getElementById("edit-episod")?.value.trim() || ""
+        );
 
-                headers: {
-                    "Content-Type":
-                        "application/json"
-                },
+        formData.append("createdAT",
+            document.getElementById("edit-createdAT")?.value.trim() || ""
+        );
 
-                body: JSON.stringify({
-                    status: "بررسی شده"
-                })
-            }
+        formData.append("time",
+            document.getElementById("edit-time")?.value.trim() || ""
         );
 
 
-        const data =
-            await response.json().catch(() => ({}));
+        formData.append(
+    "apple_music",
+    document.getElementById("edit-apple-music")?.value.trim() || ""
+);
 
+formData.append(
+    "castbox",
+    document.getElementById("edit-castbox")?.value.trim() || ""
+);
+
+formData.append(
+    "soundcloud",
+    document.getElementById("edit-soundcloud")?.value.trim() || ""
+);
+
+        // مقدار واقعی وضعیت
+        formData.append("status", "published");
+
+        const response = await fetch(`/api/podcast/${id}`, {
+            method: "PUT",
+            headers:{"Authorization" : `Bearer ${token}`},
+            body: formData
+        });
+
+        const data = await response.json().catch(() => ({}));
+
+        console.log("MARK AS REVIEWED:", response.status, data);
 
         if (!response.ok) {
-
             throw new Error(
-                data.message ||
-                "تغییر وضعیت انجام نشد"
+                data.message || "تغییر وضعیت انجام نشد"
             );
         }
 
-
-        // ==========================================
-        // تغییر وضعیت داخل آرایه
-        // ==========================================
-
-        const index =
-            items.findIndex(
-                x =>
-                    String(x.id) ===
-                    String(id)
-            );
-
+        // آپدیت آرایه
+        const index = items.findIndex(
+            x => String(x.id) === String(id)
+        );
 
         if (index !== -1) {
+            items[index] = {
+                ...items[index],
+                status: "published"
+            };
 
-            items[index].status =
-                "بررسی شده";
+            if (data.podcast) {
+                items[index] = {
+                    ...items[index],
+                    ...data.podcast,
+                    status: "published"
+                };
+            }
+
+            if (data.data) {
+                items[index] = {
+                    ...items[index],
+                    ...data.data,
+                    status: "published"
+                };
+            }
         }
 
-
-        // بستن Modal
-        closeModal();
-
-
-        // ==========================================
-        // انتخاب تب بررسی شده
-        // ==========================================
-
+        // انتخاب تب «بررسی شده»
         document
-            .querySelectorAll(
-                "#status-chips .chip"
-            )
+            .querySelectorAll("#status-chips .chip")
             .forEach(chip => {
+                chip.classList.remove("is-active");
 
-                chip.classList.remove(
-                    "is-active"
-                );
-
-
-                if (
-                    chip.dataset.status ===
-                    "بررسی شده"
-                ) {
-
-                    chip.classList.add(
-                        "is-active"
-                    );
+                if (chip.dataset.status === "published") {
+                    chip.classList.add("is-active");
                 }
             });
 
-
-        state.status =
-            "بررسی شده";
-
+        state.status = "published";
         state.page = 1;
 
-
-        // رندر بدون Refresh
+        closeModal();
         render();
-
 
         if (
             typeof CafeUI !== "undefined" &&
             CafeUI.toast
         ) {
-
             CafeUI.toast({
-
                 type: "success",
-
                 title: "تغییر کرد",
-
-                desc:
-                    "وضعیت پادکست به «بررسی شده» تغییر کرد."
+                desc: "وضعیت پادکست به «بررسی شده» تغییر کرد."
             });
         }
 
-
     } catch (error) {
-
-        console.error(
-            "Mark As Reviewed Error:",
-            error
-        );
+        console.error("Mark As Reviewed Error:", error);
 
         alert(
             error.message ||
@@ -950,7 +1026,6 @@ async function markAsReviewed() {
         );
     }
 }
-
 
 // =========================================================
 // Global functions

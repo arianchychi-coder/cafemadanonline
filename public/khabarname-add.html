@@ -3,12 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>افزودن پادکست | پنل مدیریت کافه مدن</title>
+    <title>افزودن خبرنامه | پنل مدیریت کافه مدن</title>
 <link rel="stylesheet" href="/css/base.css">
 <link rel="stylesheet" href="/css/layout (1).css">
 <link rel="stylesheet" href="/css/components.css">
 <link rel="stylesheet" href="/css/dashboard (1).css">
     <link rel="stylesheet" href="/css/podcast-add.css">
+    <link rel="stylesheet" href="/css/add.css">
+      <link rel="icon" type="image/png" href="/images/Asset 1.png">
 </head>
 
 <style>
@@ -150,7 +152,7 @@ grid-template-columns: 1fr;
                 </div>
             </div>
 
-            <form id="podcast-form" action="/khabarname" method="post">
+            <form id="podcast-form">
                 <div class="form-grid">
                     
                     <!-- بخش اطلاعات اصلی -->
@@ -266,11 +268,537 @@ grid-template-columns: 1fr;
                         </div>
                     </div>
 
+    </div>
+                                <div class="editor-page">
+
+        <div class="card editor-card>
+            <div class="editor-header">
+                <label class="section-label">متن کامل مقاله <span class="required">*</span></label>
+                <div class="editor-meta">
+                    <span class="word-count" id="wordCount">۰ کلمه</span>
+                    <span class="char-count" id="charCount"> حرف</span>
+                    <button class="meta-btn" id="btnFullscreen" title="تمام صفحه">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="15 3 21 3 21 9"/>
+                            <polyline points="9 21 3 21 3 15"/>
+                            <line x1="21" y1="3" x2="14" y2="10"/>
+                            <line x1="3" y1="21" x2="10" y2="14"/>
+                        </svg>
+                    </button>
+                    <button class="meta-btn" id="btnThemeToggle" title="تغییر تم">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                        </svg>
+                    </button>
                 </div>
-                <button type="submit" form="podcast-form" class="btn btn--primary">
+            </div>
+
+            <div class="editor-wrapper" id="editorWrapper">
+
+                <!-- Toolbar Row 1: Text Formatting -->
+                <div class="editor-toolbar" id="toolbar1">
+                    <div class="toolbar-group">
+                        <button class="toolbar-btn" data-command="undo" title="بازگشت (Ctrl+Z)">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="1 4 1 10 7 10"/>
+                                <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/>
+                            </svg>
+                        </button>
+                        <button class="toolbar-btn" data-command="redo" title="باز انجام (Ctrl+Y)">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="23 4 23 10 17 10"/>
+                                <path d="M20.49 15a9 9 0 1 1-2.13-9.36L23 10"/>
+                            </svg>
+                        </button>
+                    </div>
+
+                    <div class="toolbar-divider"></div>
+
+                    <div class="toolbar-group">
+                        <button class="toolbar-btn" data-command="bold" title="درشت (Ctrl+B)">
+                            <strong>B</strong>
+                        </button>
+                        <button class="toolbar-btn" data-command="italic" title="کج (Ctrl+I)">
+                            <em>I</em>
+                        </button>
+                        <button class="toolbar-btn" data-command="underline" title="زیرخط (Ctrl+U)">
+                            <u>U</u>
+                        </button>
+                        <button class="toolbar-btn" data-command="strikeThrough" title="خط‌خورده">
+                            <s>S</s>
+                        </button>
+                        <button class="toolbar-btn" data-command="subscript" title="زیرنویس">
+                            X<sub>2</sub>
+                        </button>
+                        <button class="toolbar-btn" data-command="superscript" title="بالانویس">
+                            X<sup>2</sup>
+                        </button>
+                    </div>
+
+                    <div class="toolbar-divider"></div>
+
+                    <div class="toolbar-group">
+                        <button class="toolbar-btn" data-command="formatBlock" data-value="H1" title="عنوان ۱">
+                            H1
+                        </button>
+                        <button class="toolbar-btn" data-command="formatBlock" data-value="H2" title="عنوان ۲">
+                            H2
+                        </button>
+                        <button class="toolbar-btn" data-command="formatBlock" data-value="H3" title="عنوان ۳">
+                            H3
+                        </button>
+                        <button class="toolbar-btn" data-command="formatBlock" data-value="H4" title="عنوان ۴">
+                            H4
+                        </button>
+                        <button class="toolbar-btn" data-command="formatBlock" data-value="P" title="پاراگراف">
+                            P
+                        </button>
+                    </div>
+
+                    <div class="toolbar-divider"></div>
+
+                    <div class="toolbar-group">
+                        <select class="toolbar-select" id="fontSizeSelect" title="اندازه فونت">
+                            <option value="1">خیلی کوچک</option>
+                            <option value="2">کوچک</option>
+                            <option value="3" selected>متوسط</option>
+                            <option value="4">بزرگ</option>
+                            <option value="5">خیلی بزرگ</option>
+                            <option value="6">بزرگ‌تر</option>
+                            <option value="7">بزرگ‌ترین</option>
+                        </select>
+                    </div>
+
+                    <div class="toolbar-divider"></div>
+
+                    <div class="toolbar-group">
+                        <div class="color-picker-wrapper" title="رنگ متن">
+                            <button class="toolbar-btn color-btn" id="btnFontColor">
+                                <span class="color-indicator" id="fontColorIndicator" style="background:#333"></span>
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+                                    <path d="M12 2L4 20h16L12 2z"/>
+                                </svg>
+                            </button>
+                            <input type="color" id="fontColorPicker" value="#333333">
+                        </div>
+                        <div class="color-picker-wrapper" title="رنگ پس‌زمینه">
+                            <button class="toolbar-btn color-btn" id="btnBgColor">
+                                <span class="color-indicator" id="bgColorIndicator" style="background:#ffff00"></span>
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                                    <rect x="3" y="3" width="18" height="18" rx="2"/>
+                                </svg>
+                            </button>
+                            <input type="color" id="bgColorPicker" value="#ffff00">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Toolbar Row 2: Alignment & Lists -->
+                <div class="editor-toolbar" id="toolbar2">
+                    <div class="toolbar-group">
+                        <button class="toolbar-btn" data-command="justifyRight" title="راست‌چین">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                                <line x1="21" y1="6" x2="3" y2="6"/>
+                                <line x1="21" y1="12" x2="9" y2="12"/>
+                                <line x1="21" y1="18" x2="15" y2="18"/>
+                            </svg>
+                        </button>
+                        <button class="toolbar-btn" data-command="justifyCenter" title="وسط‌چین">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                                <line x1="21" y1="6" x2="3" y2="6"/>
+                                <line x1="17" y1="12" x2="7" y2="12"/>
+                                <line x1="19" y1="18" x2="5" y2="18"/>
+                            </svg>
+                        </button>
+                        <button class="toolbar-btn" data-command="justifyLeft" title="چپ‌چین">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                                <line x1="21" y1="6" x2="3" y2="6"/>
+                                <line x1="15" y1="12" x2="3" y2="12"/>
+                                <line x1="9" y1="18" x2="3" y2="18"/>
+                            </svg>
+                        </button>
+                        <button class="toolbar-btn" data-command="justifyFull" title="هم‌تراز">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                                <line x1="21" y1="6" x2="3" y2="6"/>
+                                <line x1="21" y1="12" x2="3" y2="12"/>
+                                <line x1="21" y1="18" x2="3" y2="18"/>
+                            </svg>
+                        </button>
+                    </div>
+
+                    <div class="toolbar-divider"></div>
+
+                    <div class="toolbar-group">
+                        <button class="toolbar-btn" data-command="insertUnorderedList" title="لیست نقطه‌ای">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                                <line x1="9" y1="6" x2="20" y2="6"/>
+                                <line x1="9" y1="12" x2="20" y2="12"/>
+                                <line x1="9" y1="18" x2="20" y2="18"/>
+                                <circle cx="5" cy="6" r="1" fill="currentColor"/>
+                                <circle cx="5" cy="12" r="1" fill="currentColor"/>
+                                <circle cx="5" cy="18" r="1" fill="currentColor"/>
+                            </svg>
+                        </button>
+                        <button class="toolbar-btn" data-command="insertOrderedList" title="لیست شماره‌دار">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                                <line x1="10" y1="6" x2="21" y2="6"/>
+                                <line x1="10" y1="12" x2="21" y2="12"/>
+                                <line x1="10" y1="18" x2="21" y2="18"/>
+                                <text x="3" y="8" font-size="7" fill="currentColor" stroke="none" font-weight="bold">1</text>
+                                <text x="3" y="14" font-size="7" fill="currentColor" stroke="none" font-weight="bold">2</text>
+                                <text x="3" y="20" font-size="7" fill="currentColor" stroke="none" font-weight="bold">3</text>
+                            </svg>
+                        </button>
+                        <button class="toolbar-btn" data-command="indent" title="تورفتگی بیشتر">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                                <line x1="21" y1="6" x2="3" y2="6"/>
+                                <line x1="21" y1="12" x2="11" y2="12"/>
+                                <line x1="21" y1="18" x2="15" y2="18"/>
+                                <polyline points="7 14 11 18 7 22"/>
+                            </svg>
+                        </button>
+                        <button class="toolbar-btn" data-command="outdent" title="تورفتگی کمتر">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                                <line x1="21" y1="6" x2="3" y2="6"/>
+                                <line x1="21" y1="12" x2="11" y2="12"/>
+                                <line x1="21" y1="18" x2="15" y2="18"/>
+                                <polyline points="11 14 7 18 11 22"/>
+                            </svg>
+                        </button>
+                    </div>
+
+                    <div class="toolbar-divider"></div>
+
+                    <div class="toolbar-group">
+                        <button class="toolbar-btn" data-command="formatBlock" data-value="BLOCKQUOTE" title="نقل قول">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                                <path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V21z"/>
+                                <path d="M15 21c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h.75c0 2.25.25 4-2.75 4v3z"/>
+                            </svg>
+                        </button>
+                        <button class="toolbar-btn" data-command="formatBlock" data-value="PRE" title="بلوک کد">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="16 18 22 12 16 6"/>
+                                <polyline points="8 6 2 12 8 18"/>
+                            </svg>
+                        </button>
+                        <button class="toolbar-btn" id="btnInsertLink" title="درج لینک">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>
+                                <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
+                            </svg>
+                        </button>
+                        <button class="toolbar-btn" id="btnUnlink" title="حذف لینک">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M18.84 12.25l1.72-1.71a5 5 0 0 0-7.07-7.07l-1.71 1.71"/>
+                                <path d="M5.17 11.75l-1.71 1.71a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
+                                <line x1="2" y1="2" x2="22" y2="22"/>
+                            </svg>
+                        </button>
+                        <button class="toolbar-btn" id="btnInsertImage" title="درج تصویر">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                                <circle cx="8.5" cy="8.5" r="1.5"/>
+                                <polyline points="21 15 16 10 5 21"/>
+                            </svg>
+                        </button>
+                        <button class="toolbar-btn" id="btnInsertTable" title="درج جدول">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="3" y="3" width="18" height="18" rx="2"/>
+                                <line x1="3" y1="9" x2="21" y2="9"/>
+                                <line x1="3" y1="15" x2="21" y2="15"/>
+                                <line x1="9" y1="3" x2="9" y2="21"/>
+                                <line x1="15" y1="3" x2="15" y2="21"/>
+                            </svg>
+                        </button>
+                        <button class="toolbar-btn" data-command="insertHorizontalRule" title="خط افقی">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+                                <line x1="3" y1="12" x2="21" y2="12"/>
+                            </svg>
+                        </button>
+                    </div>
+
+                    <div class="toolbar-divider"></div>
+
+                    <div class="toolbar-group">
+                        <button class="toolbar-btn" id="btnFindReplace" title="جستجو و جایگزینی">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="11" cy="11" r="8"/>
+                                <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                            </svg>
+                        </button>
+                        <button class="toolbar-btn" id="btnClearFormat" title="حذف فرمت">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M4 7V4h16v3"/>
+                                <path d="M9 20h6"/>
+                                <path d="M12 4v16"/>
+                                <line x1="3" y1="3" x2="21" y2="21" stroke-width="2.5"/>
+                            </svg>
+                        </button>
+                        <button class="toolbar-btn" id="btnPrint" title="چاپ">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="6 9 6 2 18 2 18 9"/>
+                                <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/>
+                                <rect x="6" y="14" width="12" height="8"/>
+                            </svg>
+                        </button>
+                        <button class="toolbar-btn" id="btnExportHTML" title="خروجی HTML">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                                <polyline points="7 10 12 15 17 10"/>
+                                <line x1="12" y1="15" x2="12" y2="3"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Editor Content Area -->
+                <div class="editor-content" id="editorContent" name="txt" contenteditable="true" spellcheck="true" placeholder="متن مقاله خود را اینجا بنویسید...">
+
+                </div>
+            </div>
+        </div>
+
+    <!-- Link Modal -->
+    <div class="modal-overlay" id="linkModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3>درج لینک</h3>
+                <button class="modal-close" id="closeLinkModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>عنوان لینک (اختیاری)</label>
+                    <input type="text" id="linkText" placeholder="متن لینک">
+                </div>
+                <div class="form-group">
+                    <label>آدرس URL</label>
+                    <input type="url" id="linkUrl" placeholder="https://example.com" dir="ltr">
+                </div>
+                <div class="form-group checkbox-group">
+                    <label>
+                        <input type="checkbox" id="linkNewTab" checked>
+                        باز شدن در تب جدید
+                    </label>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="modal-btn modal-btn-secondary" id="cancelLink">انصراف</button>
+                <button class="modal-btn modal-btn-primary" id="insertLinkBtn">درج لینک</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Image Modal -->
+    <div class="modal-overlay" id="imageModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3>درج تصویر</h3>
+                <button class="modal-close" id="closeImageModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>آدرس تصویر (URL)</label>
+                    <input type="url" id="imageUrl" placeholder="https://example.com/image.jpg" dir="ltr">
+                </div>
+                <div class="form-group">
+                    <label>متن جایگزین (Alt)</label>
+                    <input type="text" id="imageAlt" placeholder="توضیح تصویر">
+                </div>
+                <div class="form-group">
+                    <label>عرض (اختیاری)</label>
+                    <input type="number" id="imageWidth" placeholder="مثلاً 600" dir="ltr">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="modal-btn modal-btn-secondary" id="cancelImage">انصراف</button>
+                <button class="modal-btn modal-btn-primary" id="insertImageBtn">درج تصویر</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Table Modal -->
+    <div class="modal-overlay" id="tableModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3>درج جدول</h3>
+                <button class="modal-close" id="closeTableModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="table-grid-selector">
+                    <div class="grid-preview" id="gridPreview"></div>
+                    <div class="grid-info">
+                        <span id="gridInfo">۰ × ۰</span>
+                    </div>
+                </div>
+                <div class="form-group" style="margin-top:12px">
+                    <label>تعداد سطرها</label>
+                    <input type="number" id="tableRows" value="3" min="1" max="20" dir="ltr">
+                </div>
+                <div class="form-group">
+                    <label>تعداد ستون‌ها</label>
+                    <input type="number" id="tableCols" value="3" min="1" max="10" dir="ltr">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="modal-btn modal-btn-secondary" id="cancelTable">انصراف</button>
+                <button class="modal-btn modal-btn-primary" id="insertTableBtn">درج جدول</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Find & Replace Modal -->
+    <div class="modal-overlay" id="findReplaceModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3>جستجو و جایگزینی</h3>
+                <button class="modal-close" id="closeFindModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>جستجو برای</label>
+                    <input type="text" id="findText" placeholder="متن مورد نظر...">
+                </div>
+                <div class="form-group">
+                    <label>جایگزینی با</label>
+                    <input type="text" id="replaceText" placeholder="متن جایگزین...">
+                </div>
+                <div class="find-result" id="findResult"></div>
+            </div>
+            <div class="modal-footer">
+                <button class="modal-btn modal-btn-secondary" id="findBtn">جستجو</button>
+                <button class="modal-btn modal-btn-secondary" id="replaceOneBtn">جایگزینی</button>
+                <button class="modal-btn modal-btn-primary" id="replaceAllBtn">جایگزینی همه</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast -->
+    <div class="toast" id="toast"></div>
+
+    <!-- Link Modal -->
+    <div class="modal-overlay" id="linkModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3>درج لینک</h3>
+                <button class="modal-close" id="closeLinkModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>عنوان لینک (اختیاری)</label>
+                    <input type="text" id="linkText" placeholder="متن لینک">
+                </div>
+                <div class="form-group">
+                    <label>آدرس URL</label>
+                    <input type="url" id="linkUrl" placeholder="https://example.com" dir="ltr">
+                </div>
+                <div class="form-group checkbox-group">
+                    <label>
+                        <input type="checkbox" id="linkNewTab" checked>
+                        باز شدن در تب جدید
+                    </label>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="modal-btn modal-btn-secondary" id="cancelLink">انصراف</button>
+                <button class="modal-btn modal-btn-primary" id="insertLinkBtn">درج لینک</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Image Modal -->
+    <div class="modal-overlay" id="imageModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3>درج تصویر</h3>
+                <button class="modal-close" id="closeImageModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>آدرس تصویر (URL)</label>
+                    <input type="url" id="imageUrl" placeholder="https://example.com/image.jpg" dir="ltr">
+                </div>
+                <div class="form-group">
+                    <label>متن جایگزین (Alt)</label>
+                    <input type="text" id="imageAlt" placeholder="توضیح تصویر">
+                </div>
+                <div class="form-group">
+                    <label>عرض (اختیاری)</label>
+                    <input type="number" id="imageWidth" placeholder="مثلاً 600" dir="ltr">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="modal-btn modal-btn-secondary" id="cancelImage">انصراف</button>
+                <button class="modal-btn modal-btn-primary" id="insertImageBtn">درج تصویر</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Table Modal -->
+    <div class="modal-overlay" id="tableModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3>درج جدول</h3>
+                <button class="modal-close" id="closeTableModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="table-grid-selector">
+                    <div class="grid-preview" id="gridPreview"></div>
+                    <div class="grid-info">
+                        <span id="gridInfo">۰ × ۰</span>
+                    </div>
+                </div>
+                <div class="form-group" style="margin-top:12px">
+                    <label>تعداد سطرها</label>
+                    <input type="number" id="tableRows" value="3" min="1" max="20" dir="ltr">
+                </div>
+                <div class="form-group">
+                    <label>تعداد ستون‌ها</label>
+                    <input type="number" id="tableCols" value="3" min="1" max="10" dir="ltr">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="modal-btn modal-btn-secondary" id="cancelTable">انصراف</button>
+                <button class="modal-btn modal-btn-primary" id="insertTableBtn">درج جدول</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Find & Replace Modal -->
+    <div class="modal-overlay" id="findReplaceModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3>جستجو و جایگزینی</h3>
+                <button class="modal-close" id="closeFindModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>جستجو برای</label>
+                    <input type="text" id="findText" placeholder="متن مورد نظر...">
+                </div>
+                <div class="form-group">
+                    <label>جایگزینی با</label>
+                    <input type="text" id="replaceText" placeholder="متن جایگزین...">
+                </div>
+                <div class="find-result" id="findResult"></div>
+            </div>
+            <div class="modal-footer">
+                <button class="modal-btn modal-btn-secondary" id="findBtn">جستجو</button>
+                <button class="modal-btn modal-btn-secondary" id="replaceOneBtn">جایگزینی</button>
+                <button class="modal-btn modal-btn-primary" id="replaceAllBtn">جایگزینی همه</button>
+            </div>
+        </div>
+    </div>
+
+    <button type="submit" form="podcast-form" class="btn btn--primary">
                         <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
                         انتشار پادکست
                     </button>
+
+    <!-- Toast -->
+    <div class="toast" id="toast"></div>
+
+                </div>
             </form>
         </main>
     </div>
@@ -306,6 +834,8 @@ grid-template-columns: 1fr;
 <script src="/js/store (1).js"></script>
 <script src="/js/shell (1).js"></script>
 <script src="/js/ui (1).js"></script>
+
+<script src="/js/khabarname-add.js"></script>
 
 
 <script>

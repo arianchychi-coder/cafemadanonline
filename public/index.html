@@ -4,14 +4,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
           <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/bot.css">
 
         <script src="https://cdn.tailwindcss.com"></script>
 
-
+<link rel="icon" type="image/png" href="/images/Asset 1.png">
 
     <title>کافه معدن</title>
 
@@ -130,7 +132,7 @@
                  <a href="/cafemadan/p45596s87-9999-48ef-a606-707070707070/login" id="vorodbtn" class="relative inline-flex items-center justify-center p-4 px-6 py-3 overflow-hidden font-medium text-yellow-600 transition duration-300 ease-out border-2 border-yellow-500 rounded-full shadow-md group">
         <span class="absolute inset-0 flex items-center justify-center w-full h-full text-white duration-300 -translate-x-full bg-yellow-500 group-hover:translate-x-0 ease">
             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
             </svg>
         </span>
         <span class="absolute flex items-center justify-center w-full h-full text-yellow-500 transition-all duration-300 transform group-hover:translate-x-full ease">ورود</span>
@@ -790,7 +792,7 @@
             <!-- Contact CTA -->
             <div class="faq-cta">
                 <p>سوال دیگری دارید؟</p>
-                <a href="call.html" class="cta-btn">
+                <a href="/cafemadan/d3445566-8899-46de-f404-404040404040/call" class="cta-btn">
                     <i class="fas fa-comments"></i>
                     با کارشناسان ما صحبت کنید
                 </a>
@@ -989,6 +991,72 @@
 </a>
 
 
+<!-- Floating Launcher -->
+<!--button class="bot-launcher" id="botLauncher" aria-label="راهنمای دیجیتال کافه معدن" title="چت‌بات کافه معدن">
+    <span class="bot-launcher__text">چطور می‌تونم کمکتون کنم؟</span>
+    <span class="bot-launcher__icon">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M20 2H4C2.9 2 2 2.9 2 4V18C2 19.1 2.9 20 4 20H8L12 22L16 20H20C21.1 20 22 19.1 22 18V4C22 2.9 21.1 2 20 2Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            <circle cx="8" cy="9" r="0.8" fill="#222"/>
+            <circle cx="12" cy="9" r="0.8" fill="#222"/>
+            <circle cx="16" cy="9" r="0.8" fill="#222"/>
+        </svg>
+    </span>
+</button-->
+
+<div class="bot-window" id="botWindow" role="dialog" aria-label="راهنمای دیجیتال کافه معدن" aria-hidden="true">
+    
+    <div class="bot-header">
+        <div class="bot-header__identity">
+            <div class="bot-header__avatar">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M20 2H4C2.9 2 2 2.9 2 4V18C2 19.1 2.9 20 4 20H8L12 22L16 20H20C21.1 20 22 19.1 22 18V4C22 2.9 21.1 2 20 2Z" fill="#F3B300"/>
+                    <circle cx="8" cy="9" r="0.8" fill="#222"/>
+                    <circle cx="12" cy="9" r="0.8" fill="#222"/>
+                    <circle cx="16" cy="9" r="0.8" fill="#222"/>
+                </svg>
+            </div>
+            <div class="bot-header__info">
+                <h2 class="bot-header__title">راهنمای دیجیتال کافه معدن</h2>
+                <div class="bot-header__status">
+                    <span class="bot-header__dot"></span>
+                    <span class="bot-header__status-text">در دسترس</span>
+                </div>
+            </div>
+        </div>
+        <button class="bot-header__close" id="botClose" aria-label="بستن راهنما">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+            </svg>
+        </button>
+    </div>
+
+    <div class="bot-messages" id="botMessages"></div>
+
+    <div class="bot-suggestions" id="botSuggestions"></div>
+
+    <div class="bot-input-area">
+        <label for="botInput" class="visually-hidden">پیام شما</label>
+        <div class="bot-input-container">
+            <input 
+                type="text" 
+                id="botInput" 
+                class="bot-input" 
+                placeholder="سؤال خود را بنویسید..." 
+                autocomplete="off"
+                aria-describedby="botInputDesc"
+            />
+            <span id="botInputDesc" class="visually-hidden">سؤال خود را درباره کافه معدن وارد کنید</span>
+            <button class="bot-send" id="botSend" aria-label="ارسال">
+                <svg class="w-5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+            </button>
+        </div>
+    </div>
+</div>
+
+
 
 <section class="consultation" id="consultation">
     <div class="content" style="display: flex;align-items: center;justify-content: center;">
@@ -1119,6 +1187,7 @@ if (registerSuccess === "true") {
 <script src="/js/card.js"></script>    
 <script src="/js/search.js"></script>
 <script src="/js/main.js"></script>
+<script src="/js/bot.js"></script>
 <script>
 document.addEventListener("DOMContentLoaded", function () {
 
@@ -1166,6 +1235,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
 });
 </script>
+
+
+
 
 </body>
 </html>

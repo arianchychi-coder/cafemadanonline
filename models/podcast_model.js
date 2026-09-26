@@ -108,12 +108,62 @@ class PodcastModel {
     }
 
 
+    getByAppleMusic = async (apple_music) => {
+        try {
+            const db = await connectPodcastMongo();
+            const collection = db.collection("podcast");
 
-    addInfo = async(episod,title,time,audio,status,cover)=>{
+            const result = await collection.findOne({
+                apple_music
+            });
+
+            return result;
+        } catch (error) {
+            console.log("Error: ", error);
+            return null;
+        }
+    };
+
+
+    getByCastbox = async (castbox) => {
+        try {
+            const db = await connectPodcastMongo();
+            const collection = db.collection("podcast");
+
+            const result = await collection.findOne({
+                castbox
+            });
+
+            return result;
+        } catch (error) {
+            console.log("Error: ", error);
+            return null;
+        }
+    };
+
+
+    getBySoundcloud = async (soundcloud) => {
+        try {
+            const db = await connectPodcastMongo();
+            const collection = db.collection("podcast");
+
+            const result = await collection.findOne({
+                soundcloud
+            });
+
+            return result;
+        } catch (error) {
+            console.log("Error: ", error);
+            return null;
+        }
+    };
+
+
+    addInfo = async(episod,title,time,audio,status,cover,apple_music,castbox,soundcloud)=>{
         try {
             const db = await connectPodcastMongo()
             const collection = db.collection("podcast")
-            const result = await collection.insertOne({episod,title,time,audio,status,cover,createdAT: new Date()})
+            const result = await collection.insertOne({episod,title,time,audio,status,cover,apple_music,castbox,soundcloud,createdAT: new Date()})
             return result
         } catch (error) {
             console.log("Error: ",error)
@@ -122,7 +172,7 @@ class PodcastModel {
     }
 
 
-    updateInfo = async(id,episod,title,time,status,audio,cover)=>{
+    updateInfo = async(id,episod,title,time,status,audio,cover,apple_music,castbox,soundcloud)=>{
         try {
 
             const db = await connectPodcastMongo()
@@ -152,6 +202,20 @@ class PodcastModel {
 
             if (cover) {
                 updateData.cover = cover
+            }
+
+            if (apple_music) {
+                updateData.apple_music = apple_music
+            }
+
+
+            if (castbox) {
+                updateData.castbox = castbox
+            }
+
+
+            if (soundcloud) {
+                updateData.soundcloud = soundcloud
             }
 
             const result = await collection.updateOne(

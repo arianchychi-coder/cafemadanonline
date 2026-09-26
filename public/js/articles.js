@@ -110,12 +110,15 @@
         return;
     }
 
+    const token = localStorage.getItem("accessToken")
+
     try {
 
         const response = await fetch(
             `/api/articels/${id}`,
             {
-                method: "DELETE"
+                method: "DELETE",
+                headers:{"Authorization" : `Bearer ${token}`}
             }
         );
 
@@ -173,6 +176,8 @@ function getTodayISODate() {
 
           async function saveArticels() {
 
+            const token = localStorage.getItem("accessToken")
+
     const id =
         document.getElementById("edit-ids").value;
 
@@ -226,10 +231,12 @@ function getTodayISODate() {
 
     try {
 
+
         const response = await fetch(
             `/api/articels/${id}`,
             {
                 method: "PUT",
+                headers:{"Authorization" : `Bearer ${token}`},
                 body: formData
             }
         );

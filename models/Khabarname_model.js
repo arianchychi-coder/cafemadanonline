@@ -125,11 +125,11 @@ class KhabarnameModel {
     }
 
 
-    addInfo = async(title,desc,number,tag,time,status,image)=>{
+     getByTxt = async(txt)=>{
         try {
             const db = await connectKhabarname()
             const collection = db.collection("khabarname")
-            const result = await collection.insertOne({title,desc,number,tag,time,status,image,CreatedAt: new Date()})
+            const result = await collection.findOne({txt})
             return result
         } catch (error) {
             console.log("Error: ",error)
@@ -138,7 +138,20 @@ class KhabarnameModel {
     }
 
 
-    updateInfo = async(id,title,desc,number,tag,time,status,image) =>{
+    addInfo = async(title,desc,number,tag,time,status,image,txt)=>{
+        try {
+            const db = await connectKhabarname()
+            const collection = db.collection("khabarname")
+            const result = await collection.insertOne({title,desc,number,tag,time,status,image,txt,CreatedAt: new Date()})
+            return result
+        } catch (error) {
+            console.log("Error: ",error)
+            return null
+        }
+    }
+
+
+    updateInfo = async(id,title,desc,number,tag,time,status,image,txt) =>{
         try {
             const db = await connectKhabarname()
             const collection = db.collection("khabarname")
@@ -181,6 +194,11 @@ class KhabarnameModel {
             }
 
 
+            if (txt) {
+                updateData.txt = txt
+            }
+
+
 
             const result = await collection.updateOne(
                 {_id:new ObjectId(id)},
@@ -188,7 +206,7 @@ class KhabarnameModel {
             )
 
 
-            return result.modifiedCount > 0
+            return result.matchedCount > 0
         } catch (error) {
             console.log("Error: ",error)
             return null

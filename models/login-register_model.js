@@ -152,30 +152,17 @@ class LoginAndRegisterModels {
     }
 
 
-    updateInfo = async(id , role)=>{
+    deleteInfo = async(id)=>{
         try {
             const db = await loginandregisterconnect()
             const collection = db.collection("loginregister")
-
-
-            const updateData = {}
-
-
-            if (role) {
-                updateData.role = role
-            }
-
-
-
-            const result = await collection.updateOne(
-                {_id: new ObjectId(id)},
-                {$set:updateData}
+            const result = await collection.deleteOne(
+                {_id:new ObjectId(id)}
             )
-
-
-            return result.modifiedCount > 0
+            return result.deletedCount > 0
         } catch (error) {
             console.log("Error: ",error)
+            return false
         }
     }
 }

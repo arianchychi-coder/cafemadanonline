@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>همه پادکست‌ها — کافه معدن</title>
+    <link rel="icon" type="image/png" href="/images/Asset 1.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -83,13 +84,7 @@
             </div>
 
             <!-- Filter Chips -->
-            <div class="cm-allpodcasts__filters" role="tablist">
-                <button class="cm-allpodcasts__chip cm-allpodcasts__chip--active" data-filter="all" role="tab" aria-selected="true">همه</button>
-                <button class="cm-allpodcasts__chip" data-filter="market" role="tab" aria-selected="false">بازار و اقتصاد</button>
-                <button class="cm-allpodcasts__chip" data-filter="tech" role="tab" aria-selected="false">فناوری</button>
-                <button class="cm-allpodcasts__chip" data-filter="management" role="tab" aria-selected="false">مدیریت</button>
-                <button class="cm-allpodcasts__chip" data-filter="environment" role="tab" aria-selected="false">محیط زیست</button>
-            </div>
+            
 
             <!-- Results Count -->
             <div class="cm-allpodcasts__results">
@@ -330,7 +325,14 @@ async function loadAllPodcasts() {
             );
 
 
-        console.log("PUBLISHED:", publishedPodcasts);
+       console.log("PUBLISHED:", publishedPodcasts);
+
+const resultsCount = document.getElementById("resultsCount");
+
+if (resultsCount) {
+    resultsCount.textContent =
+        `${toPersianDigits(publishedPodcasts.length)} پادکست`;
+}
 
 
         podcastGrid.innerHTML = "";

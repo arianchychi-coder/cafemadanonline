@@ -15,7 +15,8 @@ const CafeShell = (() => {
     { page: 'settings', href: '/cafemadan/8f901122-3344-41ef-a888-888888888888/settings', label: 'تنظیمات', icon: 'settings' },
     { page: 'podcast-add', href: '/cafemadan/7f902565-8899-82ef-a409-207656b976789/podcast-add', label: 'افزودن پادکست', icon: 'file' },
     { page: 'allPodcast', href: '/cafemadan/lf892565-1010-102ef-a609-7982793782905/allPodcast', label: 'پادکست ها', icon: 'mic' },
-    { page: 'khabarname-add', href: '/cafemadan/fhieu418-1122-122ef-a809-9494217183980/khabarname-add', label: 'افزودن خبرنامه', icon: 'mic' },
+    { page: 'khabarname-add', href: '/cafemadan/fhieu418-1122-122ef-a809-9494217183980/khabarname-add', label: 'افزودن خبرنامه', icon: 'newspaper' },
+    { page: 'khabarname', href: '/cafemadan/gfdy738f-2233-132ef-a909-6781246587190/khabarname', label: ' خبرنامه ها', icon: 'newspapers' },
   ];
 
   const ICONS = {
@@ -69,7 +70,10 @@ mic: `
         stroke-linecap="round"
     />
 `,
+newspaper: '<rect x="3" y="4" width="18" height="16" rx="1.5" stroke="currentColor" stroke-width="1.8"/><path d="M7 8h10M7 12h6M7 16h4M16 12h2.5v4H16z" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>',
+newspapers: '<rect x="3" y="5" width="18" height="15" rx="1.5" stroke="currentColor" stroke-width="1.8"/><path d="M7 8h10M7 11h10M7 14h4M7 17h6M15 14h2v3h-2z" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>'
   };
+  
 
   function renderSidebar(activePage) {
     const consultCount = CafeStore.Consultations.all().filter(c => c.status === 'در انتظار تماس').length;

@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>افزودن پادکست | پنل مدیریت کافه مدن</title>
+    <link rel="icon" type="image/png" href="/images/Asset 1.png">
 <link rel="stylesheet" href="/css/base.css">
 <link rel="stylesheet" href="/css/layout (1).css">
 <link rel="stylesheet" href="/css/components.css">
@@ -101,6 +102,17 @@ grid-template-columns: 1fr;
 }
 }
 
+
+.podcast-link-input {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+}
+
+.podcast-link-input .form-control {
+    flex: 1;
+}
 </style>
 <body>
 
@@ -336,36 +348,67 @@ grid-template-columns: 1fr;
     </div>
 
 
-    <div class="podcast-url-input">
+   <div class="podcast-url-input">
 
+    <!-- Apple Music -->
+    <div class="podcast-link-input" id="link-input-apple_music">
         <div class="podcast-url-input__icon">
-            <svg width="17" height="17" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/>
-                <path stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/>
-            </svg>
+            <span>🎵</span>
         </div>
 
         <input
             type="url"
-            name="url"
-            id="url"
+            name="apple_music"
+            id="f-apple-music"
             class="form-control"
             placeholder="https://music.apple.com/..."
             autocomplete="off"
         >
-
     </div>
 
-    <input type="hidden"
-           name="urlType"
-           id="urlType"
-           value="apple_music">
+
+    <!-- Castbox -->
+    <div
+        class="podcast-link-input"
+        id="link-input-castbox"
+        style="display:none;"
+    >
+        <div class="podcast-url-input__icon">
+            <span>📦</span>
+        </div>
+
+        <input
+            type="url"
+            name="castbox"
+            id="f-castbox"
+            class="form-control"
+            placeholder="https://castbox.fm/..."
+            autocomplete="off"
+        >
+    </div>
+
+
+    <!-- SoundCloud -->
+    <div
+        class="podcast-link-input"
+        id="link-input-soundcloud"
+        style="display:none;"
+    >
+        <div class="podcast-url-input__icon">
+            <span>☁️</span>
+        </div>
+
+        <input
+            type="url"
+            name="soundcloud"
+            id="f-soundcloud"
+            class="form-control"
+            placeholder="https://soundcloud.com/..."
+            autocomplete="off"
+        >
+    </div>
+
+</div>
 
 </div>
 
@@ -549,56 +592,51 @@ grid-template-columns: 1fr;
 </script>
 
 
-
 <script>
-    document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", function () {
 
+    const platformButtons =
+        document.querySelectorAll(".podcast-url-type");
 
-const buttons = document.querySelectorAll(".podcast-url-type");
-const urlInput = document.getElementById("url");
-const urlType = document.getElementById("urlType");
+    const inputContainers = {
+        apple_music: document.getElementById("link-input-apple_music"),
+        castbox: document.getElementById("link-input-castbox"),
+        soundcloud: document.getElementById("link-input-soundcloud")
+    };
 
-const placeholders = {
-    apple_music: "https://music.apple.com/...",
-    castbox: "https://castbox.fm/...",
-    soundcloud: "https://soundcloud.com/...",
-    publish: "https://example.com/..."
-};
+    platformButtons.forEach(button => {
 
-buttons.forEach(button => {
+        button.addEventListener("click", function () {
 
-    button.addEventListener("click", function () {
+            const type = this.dataset.type;
 
-        // همه غیرفعال
-        buttons.forEach(btn => {
-            btn.classList.remove("is-active");
+            // حذف active از همه دکمه‌ها
+            platformButtons.forEach(btn => {
+                btn.classList.remove("is-active");
+            });
+
+            // فعال کردن دکمه انتخاب‌شده
+            this.classList.add("is-active");
+
+            // نمایش input مربوط به همان پلتفرم
+            Object.keys(inputContainers).forEach(key => {
+
+                const container = inputContainers[key];
+
+                if (!container) return;
+
+                if (key === type) {
+                    container.style.display = "flex";
+                } else {
+                    container.style.display = "none";
+                }
+            });
+
         });
-
-        // گزینه انتخاب‌شده فعال
-        this.classList.add("is-active");
-
-        // نوع لینک
-        const type = this.dataset.type;
-
-        if (urlType) {
-            urlType.value = type;
-        }
-
-        // placeholder
-        if (urlInput) {
-            urlInput.placeholder =
-                placeholders[type] || "https://example.com/...";
-
-            urlInput.focus();
-        }
 
     });
 
 });
-
-
-});
-
 </script>
 
 

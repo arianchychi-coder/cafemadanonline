@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>خبرنامه شماره ۱ — کافه معدن</title>
+    <link rel="icon" type="image/png" href="/images/Asset 1.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -32,7 +33,7 @@
     <!-- Top Bar -->
     <div class="cm-newsletter-detail__topbar">
         <div class="cm-newsletter-detail__container">
-            <a href="khabar.html" class="cm-newsletter-detail__back" aria-label="بازگشت به خبرنامه‌ها">
+            <a href="/cafemadan/vf902156-6677-62ef-a309-8765689349380/pocast" class="cm-newsletter-detail__back" aria-label="بازگشت به خبرنامه‌ها">
                 <svg viewBox="0 0 24 24" fill="none" width="18" height="18">
                     <path d="M9 6L15 12L9 18" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
@@ -74,124 +75,63 @@
 
             <!-- Article Header -->
             <header class="cm-newsletter-detail__header">
-                <div class="cm-newsletter-detail__header-accent" aria-hidden="true"></div>
+               <div class="cm-newsletter-detail__header-meta">
+    <span class="cm-newsletter-detail__header-issue" id="articleNumber"></span>
+    <span class="cm-newsletter-detail__header-category" id="articleCategory"></span>
+</div>
 
-                <div class="cm-newsletter-detail__header-meta">
-                    <span class="cm-newsletter-detail__header-issue">شماره ۱۸</span>
-                    <span class="cm-newsletter-detail__header-category">تحلیل</span>
-                </div>
+<h1 class="cm-newsletter-detail__header-title" id="articleTitle"></h1>
 
-                <h1 class="cm-newsletter-detail__header-title">چشم‌انداز صنعت معدن ۴۰۳</h1>
+<p class="cm-newsletter-detail__header-subtitle" id="articleDescription"></p>
 
-                <p class="cm-newsletter-detail__header-subtitle">بررسی روندها و پیش‌بینی‌های صنعت معدن در سال جدید</p>
+<div class="cm-newsletter-detail__header-info">
 
-                <div class="cm-newsletter-detail__header-info">
-                    <span class="cm-newsletter-detail__header-date">
-                        <svg viewBox="0 0 24 24" fill="none" width="14" height="14">
-                            <rect x="3" y="5" width="18" height="16" rx="2" stroke="currentColor" stroke-width="1.6"/>
-                            <path d="M3 10H21" stroke="currentColor" stroke-width="1.6"/>
-                            <path d="M8 3V7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
-                            <path d="M16 3V7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
-                        </svg>
-                        ۱ فروردین ۴۰۳
-                    </span>
-                    <span class="cm-newsletter-detail__header-read-time">
-                        <svg viewBox="0 0 24 24" fill="none" width="14" height="14">
-                            <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.6"/>
-                            <path d="M12 7V12L15 14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
-                        </svg>
-                        ۵ دقیقه مطالعه
-                    </span>
-                </div>
+    <span class="cm-newsletter-detail__header-date">
+        <svg viewBox="0 0 24 24" fill="none" width="14" height="14">
+            <rect x="3" y="5" width="18" height="16" rx="2"
+                  stroke="currentColor" stroke-width="1.6"/>
+            <path d="M3 10H21" stroke="currentColor" stroke-width="1.6"/>
+            <path d="M8 3V7" stroke="currentColor" stroke-width="1.6"
+                  stroke-linecap="round"/>
+            <path d="M16 3V7" stroke="currentColor" stroke-width="1.6"
+                  stroke-linecap="round"/>
+        </svg>
+
+        <span id="articleDate"></span>
+    </span>
+
+    <span class="cm-newsletter-detail__header-read-time">
+        <svg viewBox="0 0 24 24" fill="none" width="14" height="14">
+            <circle cx="12" cy="12" r="9"
+                    stroke="currentColor" stroke-width="1.6"/>
+            <path d="M12 7V12L15 14"
+                  stroke="currentColor"
+                  stroke-width="1.6"
+                  stroke-linecap="round"/>
+        </svg>
+
+        <span id="articleTime"></span>
+    </span>
+
+</div>
             </header>
 
             <!-- Cover Image -->
             <div class="cm-newsletter-detail__cover">
-                <img src="assets/images/newsletter-18.webp" alt="خبرنامه شماره ۱۸ — چشم‌انداز صنعت معدن ۱۴۰۳"/>
+                <img id="articleImage" src="" alt="">
                 <div class="cm-newsletter-detail__cover-caption">تصویر: چشم‌انداز صنعت معدن ایران در سال ۱۴۰۳</div>
             </div>
 
             <!-- Article Body -->
-            <div class="cm-newsletter-detail__body">
-
-                <div class="cm-newsletter-detail__body-section">
-                    <h2 class="cm-newsletter-detail__body-heading">مقدمه</h2>
-                    <p class="cm-newsletter-detail__body-text">
-                        صنعت معدن ایران در آستانه سال ۱۴۰ با تحولات مهمی روبرو است. از یک سو، رشد تقاضای جهانی برای مواد معدنی و از سوی دیگر، چالش‌های داخلی در حوزه فناوری و سرمایه‌گذاری، چشم‌انداز جدیدی را برای فعالان این صنعت ترسیم کرده‌اند.
-                    </p>
-                </div>
-
-                <div class="cm-newsletter-detail__body-section">
-                    <h2 class="cm-newsletter-detail__body-heading">روندهای کلیدی</h2>
-                    <p class="cm-newsletter-detail__body-text">
-                        بر اساس تحلیل‌های انجام‌شده، سه روند اصلی در سال پیش رو قابل مشاهده است: نخست، افزایش استفاده از فناوری‌های هوشمند در اکتشاف و استخراج؛ دوم، توجه بیشتر به مسائل زیست‌محیطی و پایداری؛ و سوم، رشد سرمایه‌گذاری‌های خارجی در بخش معدن.
-                    </p>
-                </div>
-
-                <!-- Pull Quote -->
-                <blockquote class="cm-newsletter-detail__body-quote">
-                    <svg class="cm-newsletter-detail__body-quote-icon" viewBox="0 0 24 24" fill="none" width="24" height="24">
-                        <path d="M3 21C3 17 6 13 10 12V9C6 9 3 12 3 21ZM13 21C13 17 16 13 20 12V9C16 9 13 12 13 21Z" fill="currentColor" opacity="0.3"/>
-                    </svg>
-                    <p>صنعت معدن ایران پتانسیل تبدیل شدن به یکی از قطب‌های منطقه‌ای را دارد، مشروط بر اینکه سرمایه‌گذاری در فناوری و نیروی انسانی متخصص افزایش یابد.</p>
-                </blockquote>
-
-                <div class="cm-newsletter-detail__body-section">
-                    <h2 class="cm-newsletter-detail__body-heading">چالش‌ها و فرصت‌ها</h2>
-                    <p class="cm-newsletter-detail__body-text">
-                        یکی از مهم‌ترین چالش‌های پیش رو، کمبود زیرساخت‌های حمل‌ونقل و فرآوری است. با این حال، فرصت‌های بی‌شماری نیز وجود دارد. بازارهای نوظهور در آسیا و آفریقا، تقاضای فزاینده‌ای برای مواد معدنی ایران ایجاد کرده‌اند.
-                    </p>
-                    <p class="cm-newsletter-detail__body-text">
-                        علاوه بر این، توسعه معادن کوچک‌مقیاس و حمایت از شرکت‌های دانش‌بنیان می‌تواند به تنوع‌بخشی صنعت کمک کند.
-                    </p>
-                </div>
-
-                <div class="cm-newsletter-detail__body-section">
-                    <h2 class="cm-newsletter-detail__body-heading">پیش‌بینی‌ها</h2>
-                    <p class="cm-newsletter-detail__body-text">
-                        کارشناسان پیش‌بینی می‌کنند که در سال ۱۴۳، رشد ۱۵ تا ۲۰ درصدی در صادرات مواد معدنی ایران اتفاق بیفتد. همچنین، انتظار می‌رود سرمایه‌گذاری در بخش فناوری‌های معدنی افزایش قابل‌توجهی داشته باشد.
-                    </p>
-                </div>
-
-                <!-- Divider -->
-                <div class="cm-newsletter-detail__body-divider" aria-hidden="true">
-                    <span></span>
-                    <svg width="16" height="16" viewBox="0 0 16 11" fill="none">
-                        <polygon points="0,11 5,0 8,4 11,0 16,11" fill="var(--nd-orange)" opacity="0.6"/>
-                    </svg>
-                    <span></span>
-                </div>
-
-                <div class="cm-newsletter-detail__body-section">
-                    <h2 class="cm-newsletter-detail__body-heading">نتیجه‌گیری</h2>
-                    <p class="cm-newsletter-detail__body-text">
-                        سال ۱۴۰۳ می‌تواند سال تحول صنعت معدن ایران باشد. با برنامه‌ریزی درست، سرمایه‌گذاری هوشمند و استفاده از فناوری‌های روز، ایران می‌تواند جایگاه خود را در بازار جهانی مواد معدنی ارتقا دهد.
-                    </p>
-                </div>
-
-            </div>
+            <div class="cm-newsletter-detail__body" id="articleContent"></div>
 
             <!-- Article Footer -->
             <footer class="cm-newsletter-detail__footer">
-                <div class="cm-newsletter-detail__footer-tags">
-                    <span class="cm-newsletter-detail__footer-tag">معدن</span>
-                    <span class="cm-newsletter-detail__footer-tag">تحلیل</span>
-                    <span class="cm-newsletter-detail__footer-tag">۱۴۰۳</span>
-                    <span class="cm-newsletter-detail__footer-tag">صنعت</span>
-                </div>
+              
 
                 <div class="cm-newsletter-detail__footer-share">
                     <span class="cm-newsletter-detail__footer-share-label">اشتراک‌گذاری:</span>
                     <div class="cm-newsletter-detail__footer-share-links">
-                        <a href="#" class="cm-nd-share cm-nd-share--twitter" aria-label="توییتر">
-                            <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-                        </a>
-                        <a href="#" class="cm-nd-share cm-nd-share--linkedin" aria-label="لینکدین">
-                            <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-                        </a>
-                        <a href="#" class="cm-nd-share cm-nd-share--telegram" aria-label="تلگرام">
-                            <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
-                        </a>
                         <a href="#" class="cm-nd-share cm-nd-share--copy" aria-label="کپی لینک" id="copyLinkBtn">
                             <svg viewBox="0 0 24 24" fill="none" width="16" height="16">
                                 <rect x="9" y="9" width="11" height="11" rx="2" stroke="currentColor" stroke-width="1.6"/>
@@ -203,26 +143,6 @@
             </footer>
 
             <!-- Navigation: Previous / Next -->
-            <nav class="cm-newsletter-detail__nav">
-                <a href="newsletter-detail.html?issue=17" class="cm-newsletter-detail__nav-item cm-newsletter-detail__nav-item--prev">
-                    <svg viewBox="0 0 24 24" fill="none" width="18" height="18">
-                        <path d="M9 6L15 12L9 18" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                    <div class="cm-newsletter-detail__nav-content">
-                        <span class="cm-newsletter-detail__nav-label">قبلی</span>
-                        <span class="cm-newsletter-detail__nav-title">بازار جهانی فلزات پایه</span>
-                    </div>
-                </a>
-                <a href="newsletter-detail.html?issue=19" class="cm-newsletter-detail__nav-item cm-newsletter-detail__nav-item--next">
-                    <div class="cm-newsletter-detail__nav-content">
-                        <span class="cm-newsletter-detail__nav-label">بعدی</span>
-                        <span class="cm-newsletter-detail__nav-title">سرمایه‌گذاری در معادن ایران</span>
-                    </div>
-                    <svg viewBox="0 0 24 24" fill="none" width="18" height="18">
-                        <path d="M15 6L9 12L15 18" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                </a>
-            </nav>
 
         </div>
     </article>

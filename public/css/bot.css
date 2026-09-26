@@ -1,0 +1,521 @@
+/* ============================================
+   Café Madan Bot — Modern UI (2025 Inspired)
+   ============================================ */
+:root {
+    --bot-gold: #F3B300;
+    --bot-gold-light: #FFF9E6;
+    --bot-gold-hover: #DFAA00;
+    --bot-dark: #222222;
+    --bot-white: #FFFFFF;
+    --bot-bg-light: #FCFCFC;
+    --bot-border: #ECECEC;
+    --bot-text: #222222;
+    --bot-text-secondary: #666666;
+    --bot-shadow-sm: 0 2px 10px rgba(0,0,0,0.06);
+    --bot-shadow-md: 0 6px 24px rgba(0,0,0,0.08);
+    --bot-shadow-lg: 0 12px 40px rgba(0,0,0,0.12);
+    --bot-radius: 18px;
+    --bot-radius-sm: 12px;
+    --bot-transition: all 0.28s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* ============================================
+   Utility: Visually Hidden
+   ============================================ */
+.visually-hidden {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    padding: 0 !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    clip: rect(0, 0, 0, 0) !important;
+    white-space: nowrap !important;
+    border: 0 !important;
+}
+
+/* ============================================
+   Launcher — Micro-interaction Focused
+   ============================================ */
+.bot-launcher {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    left: auto;
+    z-index: 99999;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 24px;
+    background: var(--bot-white);
+    color: var(--bot-dark);
+    border-radius: 32px;
+    box-shadow: var(--bot-shadow-md);
+    font-family: system-ui, 'Segoe UI', Tahoma, sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    border: 1px solid var(--bot-border);
+    transition: var(--bot-transition);
+    will-change: transform, box-shadow;
+}
+
+.bot-launcher:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--bot-shadow-lg);
+    border-color: var(--bot-gold);
+}
+
+.bot-launcher:active {
+    transform: translateY(0) scale(0.98);
+}
+
+.bot-launcher__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    background: var(--bot-gold);
+    border-radius: 50%;
+    color: var(--bot-dark);
+    flex-shrink: 0;
+    transition: var(--bot-transition);
+}
+
+.bot-launcher__icon svg {
+    width: 20px;
+    height: 20px;
+    stroke: var(--bot-dark);
+    stroke-width: 1.6;
+}
+
+/* ============================================
+   Chat Window — Depth & Clarity
+   ============================================ */
+.bot-window {
+    position: fixed;
+
+    bottom: calc(env(safe-area-inset-bottom, 24px) + 90px);
+
+    right: 24px;
+    left: auto;
+
+    z-index: 99998;
+
+    width: 400px;
+    height: 620px;
+    max-height: calc(100vh - 120px);
+
+    background: var(--bot-white);
+    border-radius: var(--bot-radius);
+    box-shadow: var(--bot-shadow-lg);
+
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+
+    font-family: system-ui, 'Segoe UI', Tahoma, sans-serif;
+
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(16px) scale(0.96);
+
+    transition: var(--bot-transition);
+
+    border: 1px solid var(--bot-border);
+}
+
+.bot-window.bot-window--open {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0) scale(1);
+}
+
+/* ============================================
+   Header — Minimal but Meaningful
+   ============================================ */
+.bot-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 20px;
+    background: var(--bot-dark);
+    color: var(--bot-white);
+    flex-shrink: 0;
+}
+
+.bot-header__identity {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.bot-header__avatar {
+    width: 44px;
+    height: 44px;
+    background: rgba(243, 179, 0, 0.18);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.bot-header__avatar svg {
+    width: 24px;
+    height: 24px;
+    fill: var(--bot-gold);
+}
+
+.bot-header__info {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.bot-header__title {
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.3;
+    margin: 0;
+}
+
+.bot-header__status {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    color: #aaa;
+}
+
+.bot-header__dot {
+    width: 8px;
+    height: 8px;
+    background: #4CAF50;
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+}
+
+.bot-header__close {
+    width: 34px;
+    height: 34px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    color: #ccc;
+    cursor: pointer;
+    border-radius: 50%;
+    transition: var(--bot-transition);
+}
+
+.bot-header__close:hover {
+    background: rgba(255,255,255,0.12);
+    color: var(--bot-white);
+}
+
+/* ============================================
+   Messages — Human-like Flow
+   ============================================ */
+.bot-messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    background: var(--bot-bg-light);
+    scroll-behavior: smooth;
+    font-feature-settings: "liga" 1, "calt" 1;
+}
+
+.bot-message {
+    max-width: 85%;
+    animation: fadeInUp 0.32s ease;
+}
+
+.bot-message--bot {
+    align-self: flex-start;
+}
+
+.bot-message--user {
+    align-self: flex-end;
+}
+
+.bot-message__bubble {
+    padding: 14px 18px;
+    font-size: 15px;
+    line-height: 1.65;
+    word-wrap: break-word;
+    border-radius: 16px;
+    font-weight: 400;
+    position: relative;
+}
+
+.bot-message--bot .bot-message__bubble {
+    background: var(--bot-white);
+    color: var(--bot-text);
+    border: 1px solid var(--bot-border);
+    box-shadow: var(--bot-shadow-sm);
+    border-bottom-left-radius: 4px;
+}
+
+.bot-message--user .bot-message__bubble {
+    background: var(--bot-gold);
+    color: var(--bot-dark);
+    border-bottom-right-radius: 4px;
+    font-weight: 500;
+}
+
+.bot-message__time {
+    font-size: 11px;
+    color: var(--bot-text-secondary);
+    margin-top: 6px;
+    padding: 0 4px;
+    text-align: right;
+}
+
+.bot-message--user .bot-message__time {
+    text-align: left;
+}
+
+/* ============================================
+   Suggestions — Interactive Chips
+   ============================================ */
+.bot-suggestions {
+    padding: 10px 16px 8px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    background: var(--bot-bg-light);
+    border-top: 1px solid var(--bot-border);
+    flex-shrink: 0;
+    max-height: 130px;
+    overflow-y: auto;
+}
+
+.bot-suggestion-btn {
+    padding: 10px 18px;
+    background: var(--bot-white);
+    border: 1px solid var(--bot-border);
+    border-radius: 24px;
+    font-family: inherit;
+    font-size: 13px;
+    color: var(--bot-text);
+    cursor: pointer;
+    transition: var(--bot-transition);
+    white-space: nowrap;
+    line-height: 1.4;
+    box-shadow: var(--bot-shadow-sm);
+}
+
+.bot-suggestion-btn:hover {
+    border-color: var(--bot-gold);
+    background: var(--bot-gold-light);
+    transform: translateY(-1px);
+}
+
+/* ============================================
+   Input Area — Always Accessible
+   ============================================ */
+.bot-input-area {
+    padding: 16px;
+    background: var(--bot-white);
+    border-top: 1px solid var(--bot-border);
+    flex-shrink: 0;
+}
+
+.bot-input-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--bot-bg-light);
+    border: 1px solid var(--bot-border);
+    border-radius: 20px;
+    padding: 8px 12px;
+    transition: var(--bot-transition);
+}
+
+.bot-input-container:focus-within {
+    border-color: var(--bot-gold);
+    box-shadow: 0 0 0 3px rgba(243, 179, 0, 0.15);
+}
+
+.bot-input {
+    flex: 1;
+    border: none;
+    background: transparent;
+    font-family: inherit;
+    font-size: 15px;
+    color: var(--bot-text);
+    outline: none;
+    padding: 6px 0;
+    direction: rtl;
+}
+
+.bot-input::placeholder {
+    color: var(--bot-text-secondary);
+}
+
+.bot-send {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bot-gold);
+    border: none;
+    border-radius: 50%;
+    color: var(--bot-dark);
+    cursor: pointer;
+    transition: var(--bot-transition);
+    flex-shrink: 0;
+}
+
+.bot-send:hover {
+    background: var(--bot-gold-hover);
+    transform: scale(1.06);
+}
+
+.bot-send:active {
+    transform: scale(0.94);
+}
+
+/* ============================================
+   Typing Indicator — Subtle Motion
+   ============================================ */
+.bot-typing {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 14px 18px;
+    background: var(--bot-white);
+    border: 1px solid var(--bot-border);
+    border-radius: 16px;
+    box-shadow: var(--bot-shadow-sm);
+    align-self: flex-start;
+    max-width: 80px;
+    border-bottom-left-radius: 4px;
+    animation: fadeInUp 0.32s ease;
+}
+
+.bot-typing__dot {
+    width: 8px;
+    height: 8px;
+    background: var(--bot-text-secondary);
+    border-radius: 50%;
+    animation: bounce 1.4s infinite ease-in-out;
+}
+
+.bot-typing__dot:nth-child(1) { animation-delay: 0s; }
+.bot-typing__dot:nth-child(2) { animation-delay: 0.2s; }
+.bot-typing__dot:nth-child(3) { animation-delay: 0.4s; }
+
+/* ============================================
+   Animations
+   ============================================ */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(10px) scale(0.98);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes bounce {
+    0%, 60%, 100% { transform: translateY(0); }
+    30% { transform: translateY(-6px); }
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.6; }
+}
+
+/* ============================================
+   Responsive — Device-Specific
+   ============================================ */
+
+/* Tablet */
+@media (max-width: 768px) {
+    .bot-window {
+        width: calc(100vw - 48px);
+        height: calc(100vh - 120px);
+        bottom: calc(env(safe-area-inset-bottom, 24px) + 80px);
+        left: 24px;
+        right: 24px;
+    }
+}
+
+/* Mobile Portrait */
+@media (max-width: 480px) {
+    .bot-window {
+        width: 100vw;
+        height: 100vh;
+        max-height: 100vh;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        border-radius: 0;
+        border: none;
+    }
+
+    .bot-launcher {
+        bottom: env(safe-area-inset-bottom, 16px);
+        left: 16px;
+        padding: 14px 20px;
+        font-size: 14px;
+        gap: 10px;
+    }
+
+    .bot-launcher__icon {
+        width: 32px;
+        height: 32px;
+    }
+
+    .bot-header {
+        padding: 16px;
+    }
+
+    .bot-messages {
+        padding: 16px 12px;
+    }
+
+    .bot-message__bubble {
+        font-size: 14px;
+        padding: 12px 16px;
+    }
+
+    .bot-suggestion-btn {
+        font-size: 12px;
+        padding: 8px 16px;
+    }
+
+    .bot-input {
+        font-size: 14px;
+    }
+}
+
+/* Mobile Landscape */
+@media (max-width: 768px) and (orientation: landscape) {
+    .bot-window {
+        height: 70vh;
+        max-height: 70vh;
+    }
+}
+
+/* Reduce Motion */
+@media (prefers-reduced-motion: reduce) {
+    .bot-window,
+    .bot-launcher,
+    .bot-message,
+    .bot-typing {
+        animation: none !important;
+        transition: none !important;
+    }
+}

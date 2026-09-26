@@ -12,7 +12,8 @@ const postKhabarnamee = Joi.object({
     time:Joi.string().required(),
     status:Joi.string().valid("draft", "published"),
     CreatedAt:Joi.string().required(),
-    image: Joi.string().allow(null, "")
+    image: Joi.string().allow(null, ""),
+    txt:Joi.string().min(3).required(),
 })
 
 
@@ -24,7 +25,8 @@ const updateKhabarnamee = Joi.object({
     time:Joi.string().required(),
     status:Joi.string().valid("draft", "published"),
     CreatedAt:Joi.string().required(),
-    image: Joi.string().allow(null, "")
+    image: Joi.string().allow(null, ""),
+    txt:Joi.string().allow("").optional()
 })
 
 
@@ -43,6 +45,7 @@ const getAll = async(req,res)=>{
             time:user.time,
             status:user.status,
             image:user.image,
+            txt:user.txt,
             CreatedAt:user.CreatedAt
         }))
 
@@ -65,19 +68,17 @@ const addInfo = async(req,res)=>{
     }
     
 
-    const {title,desc,number,tag,time,status,CreatedAt} = req.body
+    const {title,desc,number,tag,time,status,txt,CreatedAt} = req.body
 
 
      // کد اصلی //
-      //  const image = req.file ? req.file.filename : null//
+       const image = req.files?.image?.[0]?.filename || null
 
-
-        const image = req.body.image || null;
 
 
     try {
 
-        const result = await KhabarnameModel.addInfo(title,desc,number,tag,time,status,image,CreatedAt)
+        const result = await KhabarnameModel.addInfo(title,desc,number,tag,time,status,image,txt,CreatedAt)
 
         if (!result) {
             return res.status(400).json({message:"Ere in save information"})
@@ -108,11 +109,13 @@ const updateInfo = async(req,res)=>{
 
     const {id} = req.params;
 
-    const{title,desc,number,tag,time,status,CreatedAt} = req.body
+    const{title,desc,number,tag,time,status,txt,CreatedAt} = req.body
+
+    const image = req.files?.image?.[0]?.filename || null
 
 
     try {
-        const result = await KhabarnameModel.updateInfo(id,title,desc,number,tag,time,status,CreatedAt)
+        const result = await KhabarnameModel.updateInfo(id,title,desc,number,tag,time,status,image,txt,CreatedAt)
 
 
         if (!result) {
@@ -135,7 +138,7 @@ const deleteInfo = async(req,res)=>{
 
 
     try {
-        const result = await KhabarnameModel.addInfo(id)
+        const result = await KhabarnameModel.deleteInfo(id)
 
         if (!result) {
             return res.status(404).json({message:"خبر نامه پیدا نشد"})

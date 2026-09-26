@@ -2,7 +2,7 @@ require("dotenv").config();
 
 const { MongoClient } = require("mongodb");
 
-const client = new MongoClient(process.env.MONGODB_URI2);
+const client = new MongoClient(process.env.MONGO_URL);
 
 let db = null;
 

@@ -1,5 +1,6 @@
+require("dotenv").config(   )
 const jwt = require("jsonwebtoken")
-const secretkey = "12345"
+const secretkey = process.env.jwrPassword
 
 
 const authOrizationToken = async(req,res,next)=>{

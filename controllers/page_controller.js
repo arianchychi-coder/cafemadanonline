@@ -25,6 +25,8 @@ const frogs = [
     { id: "lf892565-1010-102ef-a609-7982793782905", name: "allPodcast", file: "allPodcast.html" },
     { id: "ff890939-1111-112ef-a709-2972442904933", name: "newsletter-detail", file: "newsletter-detail.html" },
     { id: "fhieu418-1122-122ef-a809-9494217183980", name: "khabarname-add", file: "khabarname-add.html" },
+    { id: "gfdy738f-2233-132ef-a909-6781246587190", name: "khabarname", file: "khabarname.html" },
+    { id: "ylhvipe2-3344-142ef-a1009-7459356678504", name: "bot", file: "bot.html" },
 ];
 
 const getPage = (req, res) => {

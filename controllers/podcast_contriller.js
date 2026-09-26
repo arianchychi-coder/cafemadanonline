@@ -13,7 +13,13 @@ const postPodcastSchema = Joi.object({
     title: Joi.string().min(3).required(),
     time: Joi.string().required(),
     createdAT: Joi.string().required(),
-    status: Joi.string().valid("draft", "published")
+    status: Joi.string().valid("draft", "published"),
+
+
+
+    apple_music:Joi.string().allow("").optional(),
+    castbox:Joi.string().allow("").optional(),
+    soundcloud:Joi.string().allow("").optional()
 });
 
 
@@ -22,7 +28,13 @@ const putPodcastSchema = Joi.object({
     title: Joi.string().min(3).required(),
     time: Joi.string().required(),
     createdAT: Joi.string().required(),
-    status: Joi.string().valid("draft", "published")
+    status: Joi.string().valid("draft", "published"),
+    
+
+
+    apple_music:Joi.string().allow("").optional(),
+    castbox:Joi.string().allow("").optional(),
+    soundcloud:Joi.string().allow("").optional()
 });
 
 
@@ -69,6 +81,9 @@ const getAll = async (req, res) => {
             audio: user.audio,
             cover: user.cover,
             status: user.status,
+            apple_music:user.apple_music,
+            castbox:user.castbox,
+            soundcloud:user.soundcloud,
             createdAT: user.createdAT
         }));
 
@@ -112,7 +127,7 @@ const addInfo = async (req, res) => {
         }
 
 
-        const {episod,title,time,status,createdAT } = req.body;
+        const {episod,title,time,status,apple_music,castbox,soundcloud,createdAT } = req.body;
 
 
         const audioFile = getFile(req.files, "audio");
@@ -139,7 +154,7 @@ const addInfo = async (req, res) => {
             : "";
 
 
-        const result = await PodcastModel.addInfo(episod,title,time,audio,status,cover,createdAT)
+        const result = await PodcastModel.addInfo(episod,title,time,audio,status,cover,apple_music,castbox,soundcloud,createdAT)
             if (!result) {
 
             deleteFile(audioFile.path);
@@ -200,7 +215,7 @@ const updateInfo = async (req, res) => {
 
         const { id } = req.params;
 
-        const {episod, title, time,status,createdAT} = req.body;
+        const {episod, title, time,status,apple_music,castbox,soundcloud,createdAT} = req.body;
 
 
         /* =========================
@@ -256,7 +271,7 @@ const updateInfo = async (req, res) => {
            Update Database
         ========================= */
 
-        const result = await PodcastModel.updateInfo( id, episod, title, time, status, audio, cover, createdAT );
+        const result = await PodcastModel.updateInfo( id, episod, title, time, status, audio, cover,apple_music,castbox,soundcloud, createdAT );
 
         if (!result) {
 

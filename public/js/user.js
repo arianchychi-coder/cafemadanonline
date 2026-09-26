@@ -447,10 +447,10 @@ const response = await fetch("/user", {
                 <td style="display:flex;gap:8px;">
 
                     <button
-                        onclick="editUser('${item.id}')"
+                        onclick="deleteUser('${item.id}')"
                         style="
-                            background:#F3B300;
-                            color:black;
+                            background:#0a0a0a;
+                            color:white;
                             border:none;
                             padding:8px 12px;
                             border-radius:8px;
@@ -458,7 +458,7 @@ const response = await fetch("/user", {
                             font-size: 1rem;
                         "
                     >
-                        <i class="bi bi-pencil-square"></i>
+                        <i  class="bi bi-trash"></i>
                     </button>
                 </td>
             `;
@@ -908,6 +908,72 @@ document.addEventListener('click', function () {
     }
 
 
+
+
+
+   async function deleteUser(id) {
+    const token = localStorage.getItem("accessToken");
+
+    if (!confirm("آیا از حذف این مورد اطمینان دارید؟")) {
+        return;
+    }
+
+    try {
+        const response = await fetch(`/userrole/${id}`, {
+            method: "DELETE",
+            headers: {
+                "Authorization": `Bearer ${token}`
+            }
+        });
+
+        const data = await response.json();
+
+        console.log("DELETE response:", response.status, data);
+
+        if (!response.ok) {
+            alert(data.message || "حذف انجام نشد.");
+            return;
+        }
+
+        // حذف از آرایه‌ی اصلی
+        contacts = contacts.filter(
+            item => String(item.id) !== String(id)
+        );
+
+        // اگر صفحه فعلی بعد از حذف خالی شد،
+        // به صفحه قبل برو
+        const filtered = getFiltered();
+
+        const totalPages = Math.max(
+            1,
+            Math.ceil(filtered.length / PAGE_SIZE)
+        );
+
+        if (state.page > totalPages) {
+            state.page = totalPages;
+        }
+
+        // بدون رفرش، جدول را دوباره رسم کن
+        render();
+
+        CafeUI.toast({
+            type: "success",
+            title: "حذف شد",
+            desc: data.message || "کاربر با موفقیت حذف شد."
+        });
+
+    } catch (error) {
+        console.error("Delete Error:", error);
+
+        CafeUI.toast({
+            type: "error",
+            title: "خطا",
+            desc: "حذف اطلاعات انجام نشد."
+        });
+    }
+}
+
+
     // =========================================================
     // Close Modal
     // =========================================================
@@ -992,7 +1058,7 @@ async function markAsReviewed() {
     window.saveEdit = saveEdit;
     window.closeModal = closeModal;
     window.markAsReviewed = markAsReviewed;
-
+    window.deleteUser = deleteUser
 
     // =========================================================
     // View

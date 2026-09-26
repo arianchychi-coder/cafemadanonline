@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    >
+
+    <title>خبرنامه‌ها | پنل مدیریت کافه معدن</title>
+
+    <link rel="stylesheet" href="/css/base.css">
+    <link rel="stylesheet" href="/css/layout (1).css">
+    <link rel="stylesheet" href="/css/components.css">
+    <link rel="stylesheet" href="/css/dashboard (1).css">
+
+</head>
+
+
+<body>
+
+
+<style>
+
+    /* =========================================================
+       Podcast Edit Modal
+    ========================================================= */
+
+    .khabarname-modal {
+
+        display: none;
+
+        position: fixed;
+
+        inset: 0;
+
+        background: rgba(0, 0, 0, .55);
+
+        backdrop-filter: blur(6px);
+
+        justify-content: center;
+
+        align-items: center;
+
+        z-index: 9999;
+    }
+
+
+    .khabarname-modal-content {
+
+        background: #f1f1f1;
+
+        padding: 2rem 2rem;
+
+        border-radius: 1rem;
+
+        width: min(600px, 90vw);
+
+        max-height: 90vh;
+
+        overflow-y: auto;
+
+        overflow-x: hidden;
+
+        box-sizing: border-box;
+    }
+
+
+    .khabarname-modal-content h3 {
+
+        margin: 0 0 20px;
+
+        text-align: center;
+
+        font-size: 24px;
+
+        color: #222;
+    }
+
+
+    .khabarname-modal-content input,
+    .khabarname-modal-content textarea {
+
+        width: 100%;
+
+        padding: 13px 15px;
+
+        margin: 10px 0;
+
+        border: 1px solid #ddd;
+
+        border-radius: 12px;
+
+        font-size: 15px;
+
+        transition: .25s;
+
+        outline: none;
+
+        box-sizing: border-box;
+    }
+
+
+    .khabarname-modal-content textarea {
+
+        min-height: 120px;
+
+        resize: vertical;
+    }
+
+
+    .khabarname-modal-content input:focus {
+
+        border-color: #F3B300;
+
+        box-shadow:
+            0 0 0 4px
+            rgba(243, 179, 0, .18);
+    }
+
+
+    /* =========================================================
+       Buttons
+    ========================================================= */
+
+    .buttons {
+
+        display: flex;
+
+        justify-content: flex-end;
+
+        gap: 12px;
+
+        margin-top: 20px;
+
+        flex-wrap: wrap;
+    }
+
+
+    .btn-save,
+    .btn-cancel {
+
+        display: flex;
+
+        align-items: center;
+
+        gap: 8px;
+
+        border: none;
+
+        border-radius: 10px;
+
+        padding: 11px 20px;
+
+        font-size: 15px;
+
+        font-weight: 600;
+
+        cursor: pointer;
+
+        transition: .25s;
+    }
+
+
+    .btn-save {
+
+        background:
+            linear-gradient(
+                135deg,
+                #F3B300,
+                #d89b00
+            );
+
+        color: #111;
+
+        box-shadow:
+            0 8px 18px
+            rgba(243, 179, 0, .35);
+    }
+
+
+    .btn-save:hover {
+
+        transform: translateY(-2px);
+
+        box-shadow:
+            0 12px 24px
+            rgba(243, 179, 0, .45);
+    }
+
+
+    .btn-cancel {
+
+        background: #202020;
+
+        color: #fff;
+
+        box-shadow:
+            0 8px 18px
+            rgba(0, 0, 0, .25);
+    }
+
+
+    .btn-cancel:hover {
+
+        transform: translateY(-2px);
+
+        background: #111;
+
+        box-shadow:
+            0 12px 24px
+            rgba(0, 0, 0, .35);
+    }
+
+
+    .btn-save i,
+    .btn-cancel i {
+
+        font-size: 17px;
+    }
+
+
+    /* =========================================================
+       Podcast Status
+    ========================================================= */
+
+    #khabarname-status {
+
+        width: 100%;
+
+        height: 48px;
+
+        padding: 0 14px;
+
+        border: 1px solid #d8d8d8;
+
+        border-radius: 10px;
+
+        background: #fff;
+
+        color: #222;
+
+        font-size: 1.1rem !important;
+
+        font-family: inherit;
+
+        cursor: pointer;
+
+        outline: none;
+
+        transition: all 0.2s ease;
+
+        direction: rtl;
+
+        box-sizing: border-box;
+    }
+
+
+    #khabarname-status:hover {
+
+        border-color: #F3B300;
+    }
+
+
+    #khabarname-status:focus {
+
+        border-color: #F3B300;
+
+        box-shadow:
+            0 0 0 3px
+            rgba(243, 179, 0, 0.15);
+    }
+
+
+    #khabarname-status option {
+
+        font-family: inherit;
+
+        font-size: 1rem;
+
+        padding: 10px;
+    }
+
+
+    /* =========================================================
+       File Upload
+    ========================================================= */
+
+    .file-upload-group {
+
+        display: flex;
+
+        flex-direction: column;
+
+        gap: 12px;
+
+        margin-top: 10px;
+    }
+
+
+    /* =========================================================
+       Animation
+    ========================================================= */
+
+    @keyframes fadeIn {
+
+        from {
+            opacity: 0;
+        }
+
+        to {
+            opacity: 1;
+        }
+    }
+
+
+    @keyframes pop {
+
+        from {
+
+            opacity: 0;
+
+            transform:
+                translateY(20px)
+                scale(.95);
+        }
+
+        to {
+
+            opacity: 1;
+
+            transform:
+                translateY(0)
+                scale(1);
+        }
+    }
+
+</style>
+
+
+<!-- =========================================================
+     Application
+========================================================= -->
+
+<div class="app">
+
+
+    <!-- Sidebar -->
+
+    <aside
+        class="sidebar"
+        id="sidebar-root"
+    ></aside>
+
+
+    <div class="overlay"></div>
+
+
+    <div class="main">
+
+
+        <!-- Topbar -->
+
+        <header
+            class="topbar"
+            id="topbar-root"
+        ></header>
+
+
+        <div class="content">
+
+
+            <!-- =================================================
+                 Page Header
+            ================================================= -->
+
+            <div class="page-head fade-up">
+
+                <div>
+
+                    <h1 class="page-head__title">
+                        لیست پادکست‌ها
+                    </h1>
+
+                    <p
+                        style="font-size: 1rem;"
+                        class="page-head__desc"
+                    >
+                        پادکست‌ها را مشاهده و مدیریت کنید.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 Status Filters
+            ================================================= -->
+
+            <div
+    class="chip-group fade-up"
+    id="status-chips"
+    style="margin-bottom: var(--sp-5);"
+>
+    <button
+        style="font-size: 1rem;"
+        class="chip is-active"
+        data-status="all"
+    >
+        همه
+    </button>
+
+    <button
+        style="font-size: 1rem;"
+        class="chip"
+        data-status="draft"
+    >
+        جدید
+    </button>
+
+    <button
+        style="font-size: 1rem;"
+        class="chip"
+        data-status="published"
+    >
+        بررسی شده
+    </button>
+</div>
+
+
+            <!-- =================================================
+                 Table
+            ================================================= -->
+
+            <div class="table-wrap fade-up">
+
+
+                <!-- Toolbar -->
+
+                <div class="table-toolbar">
+
+
+                    <!-- Search -->
+
+                    <div class="search-box">
+
+                        <svg
+                            viewBox="0 0 24 24"
+                            fill="none"
+                        >
+
+                            <circle
+                                cx="11"
+                                cy="11"
+                                r="7"
+                                stroke="currentColor"
+                                stroke-width="2"
+                            />
+
+                            <path
+                                d="M21 21l-4.3-4.3"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                            />
+
+                        </svg>
+
+
+                        <input
+                            style="font-size: 1rem;"
+                            type="text"
+                            id="search-input"
+                            placeholder="جستجو بر اساس عنوان، اپیزود، وضعیت..."
+                        >
+
+                    </div>
+
+
+                    <!-- Sort -->
+
+                    <div class="table-toolbar__filters">
+
+                        <select
+                            class="select-box"
+                            id="sort-select"
+                        >
+
+                            <option value="newest">
+                                جدیدترین
+                            </option>
+
+                            <option value="oldest">
+                                قدیمی‌ترین
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+
+                <!-- =================================================
+                     Table Scroll
+                ================================================= -->
+
+                <div class="table-wrap__scroll">
+
+
+                    <table class="data-table">
+
+
+                        <thead>
+
+                            <tr style="text-align: center;">
+
+                                <th
+                                    style="
+                                        font-size: 1rem;
+                                        text-align: center;
+                                        width:56px;
+                                    "
+                                >
+                                    ردیف
+                                </th>
+
+
+                                <th
+                                    style="
+                                        font-size: 1rem;
+                                        text-align: center;
+                                    "
+                                >
+                                    عنوان
+                                </th>
+
+
+                                <th
+                                    style="
+                                        font-size: 1rem;
+                                        text-align: center;
+                                    "
+                                >
+                                    اطلاعات
+                                </th>
+
+
+                                <th
+                                    style="
+                                        font-size: 1rem;
+                                        text-align: center;
+                                    "
+                                >
+                                    شماره
+                                </th>
+
+
+                                <th
+                                    style="
+                                        font-size: 1rem;
+                                        text-align: center;
+                                    "
+                                >
+                                    تگ
+                                </th>
+
+
+                                <th
+                                    style="
+                                        font-size: 1rem;
+                                        text-align: center;
+                                    "
+                                >
+                                    تاریخ
+                                </th>
+
+
+                                <th
+                                    style="
+                                        font-size: 1rem;
+                                        text-align: center;
+                                    "
+                                >
+                                    زمان
+                                </th>
+
+
+                                <th
+                                    style="
+                                        font-size: 1rem;
+                                        text-align: center;
+                                    "
+                                >
+                                    وضعیت
+                                </th>
+
+
+                                <th
+                                    style="
+                                        font-size: 1rem;
+                                        text-align: center;
+                                    "
+                                >
+                                    فایل تصویری
+                                </th>
+
+
+                                <th
+                                    style="
+                                        font-size: 1rem;
+                                        text-align: center;
+                                    "
+                                >
+                                    ویرایش
+                                </th>
+
+
+                                <th
+                                    style="
+                                        font-size: 1rem;
+                                        text-align: center;
+                                    "
+                                >
+                                    حذف
+                                </th>
+
+                            </tr>
+
+                        </thead>
+
+
+                        <tbody
+                            id="podcast-tbody"
+                            style="text-align: center;"
+                        ></tbody>
+
+
+                    </table>
+
+                </div>
+
+
+                <!-- Empty -->
+
+                <div
+                    id="list-empty"
+                    style="display:none;"
+                ></div>
+
+
+                <!-- Pagination -->
+
+                <div
+                    class="pagination"
+                    id="list-pagination"
+                ></div>
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- =========================================================
+     View Detail Modal
+========================================================= -->
+
+<div
+    class="modal-layer"
+    id="view-modal"
+>
+
+
+    <div class="modal-backdrop"></div>
+
+
+    <div
+        class="modal"
+        role="dialog"
+        aria-modal="true"
+    >
+
+
+        <div class="modal__head">
+
+
+            <div class="modal__title">
+                جزئیات پادکست
+            </div>
+
+
+            <button
+                class="modal__close"
+                data-modal-close
+            >
+
+                <svg
+                    viewBox="0 0 24 24"
+                    width="18"
+                    height="18"
+                    fill="none"
+                >
+
+                    <path
+                        d="M18 6L6 18M6 6l12 12"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                    />
+
+                </svg>
+
+            </button>
+
+        </div>
+
+
+        <div
+            class="modal__body"
+            id="detail-body"
+        ></div>
+
+
+        <div class="modal__foot">
+
+
+            <button
+                class="btn btn--outline"
+                data-modal-close
+            >
+                بستن
+            </button>
+
+
+            <a
+                class="btn btn--primary"
+                id="call-btn"
+                href="#"
+            >
+
+                <svg
+                    viewBox="0 0 24 24"
+                    width="16"
+                    height="16"
+                    fill="none"
+                >
+
+                    <path
+                        d="
+                            M22 16.92v3a2 2 0 0 1-2.18 2
+                            19.79 19.79 0 0 1-8.63-3.07
+                            19.5 19.5 0 0 1-6-6
+                            19.79 19.79 0 0 1-3.07-8.67
+                            A2 2 0 0 1 4.11 2h3
+                        "
+                        stroke="currentColor"
+                        stroke-width="1.8"
+                        stroke-linejoin="round"
+                    />
+
+                </svg>
+
+                تماس با کاربر
+
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- =========================================================
+     Edit Podcast Modal
+========================================================= -->
+
+<div id="editKhabarname" class="khabarname-modal">
+    <div class="khabarname-modal-content">
+        <h3>ویرایش اطلاعات</h3>
+
+        <input type="hidden" id="khabarname-id">
+
+        <input type="text" id="khabarname-title" placeholder="نام">
+        <input type="text" id="khabarname-desc" placeholder="نام شرکت">
+        <input type="text" id="khabarname-number" placeholder="شماره تماس">
+        <input type="text" id="khabarname-tag" placeholder="ایمیل">
+        <input type="text" id="khabarname-CreatedAt" placeholder="تاریخ">
+        <input type="text" id="khabarname-time" placeholder="زمان">
+        <select id="khabarname-status">
+    <option value="draft">جدید</option>
+    <option value="published">بررسی شده</option>
+</select>
+
+        <label class="file-upload-box" for="khabarname-image">
+            <div class="file-upload-icon">
+                <i class="bi bi-image"></i>
+            </div>
+
+            <div class="file-upload-text">
+                <strong>تصویر کاور</strong>
+                <span id="image-file-name">انتخاب تصویر کاور</span>
+            </div>
+
+            <i class="bi bi-cloud-arrow-up upload-arrow"></i>
+        </label>
+
+        <input
+            type="file"
+            id="khabarname-image"
+            accept="image/*"
+            hidden
+        >
+
+        <div class="buttons">
+
+            <button
+                class="btn-save"
+                onclick="saveKhabarname()"
+                type="button">
+                <i class="bi bi-check-circle-fill"></i>
+                ذخیره تغییرات
+            </button>
+
+            <button
+                class="btn-save"
+                onclick="markPodcastAsReviewed()"
+                type="button">
+                <i class="bi bi-check-circle-fill"></i>
+                بررسی شده
+            </button>
+
+            <button
+                class="btn-cancel"
+                onclick="closePodcastModal()"
+                type="button">
+                <i class="bi bi-x-circle-fill"></i>
+                انصراف
+            </button>
+
+        </div>
+    </div>
+</div>
+
+
+
+<!-- =========================================================
+     JavaScript
+========================================================= -->
+
+<script src="/js/utils (1).js"></script>
+
+<script src="/js/store (1).js"></script>
+
+<script src="/js/shell (1).js"></script>
+
+<script src="/js/ui (1).js"></script>
+
+<!-- JS مخصوص پادکست -->
+
+<script src="/js/khabarname.js"></script>
+
+
+</body>
+
+</html>

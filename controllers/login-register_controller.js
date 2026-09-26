@@ -1,9 +1,10 @@
+require("dotenv").config()
 const LoginAndRegisterModels = require("../models/login-register_model")
 const bcrypt = require("bcrypt")
 const crypto = require("crypto")
 const Joi = require("joi")
 const jwt = require("jsonwebtoken")
-const secretkey = "12345"
+const secretkey = process.env.jwrPassword
 
 
 
@@ -233,44 +234,24 @@ const register = async(req,res) =>{
 
 }
 
-const updateInfo = async(req,res)=>{
-
-
-    const {error} = validate(updateSchema, req.body)
-
-    if (error) {
-        return res.status(400).json({message: error.details[0].message})
-    }
-
-    const {id} = req.params
-
-    const {role} = req.body 
-
-
-    if (req.user.role !== "admin") {
-    return res.status(403).json({
-        message: "دسترسی ندارید"
-    })
-}
+const deleteInfo = async(req,res)=>{
+    const {id} = req.params;
 
 
     try {
-
-        const result = await LoginAndRegisterModels.updateInfo(id,role)
+        const result = await LoginAndRegisterModels.deleteInfo(id)
 
         if (!result) {
-            return res.status(404).json({message:"کازیز پسدا نشد"})
+            return res.status(400).json({message:"User not find"})
         }
 
         return res.status(200).json({
-            message:"آپدیت موفقیت آمیز بود"
+            message:"Delete succesfull"
         })
-        
     } catch (error) {
         console.error("Error: ",error)
         return res.status(500).json({message:"Err in server"})
     }
-
 }
 
 const getMe = async (req, res) => {
@@ -305,5 +286,5 @@ const getMe = async (req, res) => {
 
 
 module.exports = {
-    getAll,register,login,updateInfo,adminlog,getMe
+    getAll,register,login,deleteInfo,adminlog,getMe
 }

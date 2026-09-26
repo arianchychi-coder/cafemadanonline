@@ -535,6 +535,8 @@ async function save() {
         return;
     }
 
+    const token = localStorage.getItem("accessToken")
+
     const formData = new FormData();
 
     // عنوان
@@ -585,10 +587,27 @@ async function save() {
         );
     }
 
+
+  formData.append(
+    'apple_music',
+    document.getElementById('f-apple-music')?.value.trim() || ''
+);
+
+formData.append(
+    'castbox',
+    document.getElementById('f-castbox')?.value.trim() || ''
+);
+
+formData.append(
+    'soundcloud',
+    document.getElementById('f-soundcloud')?.value.trim() || ''
+);
+
     try {
 
         const response = await fetch('/api/podcast', {
             method: 'POST',
+            headers:{"Authorization" : `Bearer ${token}`},
             body: formData
         });
 
