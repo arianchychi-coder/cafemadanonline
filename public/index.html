@@ -20,6 +20,355 @@
     <link rel="stylesheet" href="/css/style.css">
 </head>
 
+<style>
+    /* =========================================
+   PROCESS SECTION
+========================================= */
+
+.mine {
+    width: 100%;
+    min-height: 400px;
+    height: 400px;
+
+    background: #000;
+
+    direction: ltr;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    overflow: hidden;
+
+    box-sizing: border-box;
+}
+
+
+/* کانتینر اصلی */
+
+.mine .card {
+    width: min(1500px, calc(100% - 80px));
+    height: 100%;
+
+    display: grid;
+
+    grid-template-columns: 250px minmax(0, 1fr);
+
+    align-items: center;
+
+    gap: 35px;
+
+    box-sizing: border-box;
+}
+
+
+/* =========================================
+   HEADER
+========================================= */
+
+.eco-header {
+    direction: rtl;
+
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+
+    height: 100%;
+
+    padding: 0;
+
+    box-sizing: border-box;
+}
+
+
+.eco-label {
+    color: #FAB900 !important;
+
+    font-size: 18px !important;
+
+    font-weight: 600;
+
+    margin-bottom: 12px;
+}
+
+
+.eco-title {
+    color: #f1f1f1;
+
+    font-size: clamp(24px, 2vw, 34px);
+
+    line-height: 1.5;
+
+    margin: 0 0 12px;
+
+    font-weight: 700;
+}
+
+
+.eco-desc {
+    color: #f1f1f1;
+
+    font-size: 16px !important;
+
+    margin: 0 0 8px !important;
+
+    line-height: 1.8;
+}
+
+
+.eco2-desc {
+    color: #f1f1f1;
+
+    opacity: .8;
+
+    font-size: 16px;
+
+    margin: 0 0 20px;
+
+    line-height: 1.8;
+}
+
+
+.eco-btn {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    width: fit-content;
+
+    color: #f1f1f1;
+
+    text-decoration: none;
+
+    font-size: 16px;
+
+    transition: .25s ease;
+}
+
+
+.eco-btn:hover {
+    color: #FAB900;
+}
+
+
+/* =========================================
+   PROCESS FLOW
+========================================= */
+
+.cardinfo {
+    width: 100% !important;
+    height: 100% !important;
+
+    display: flex !important;
+
+    align-items: center !important;
+    justify-content: space-between !important;
+
+    direction: ltr !important;
+
+    min-width: 0 !important;
+
+    box-sizing: border-box !important;
+
+    padding-left: 8rem !important;
+}
+
+
+/* =========================================
+   BOX
+========================================= */
+
+.boxxx {
+    width: 125px;
+    min-width: 125px;
+
+    height: 240px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    text-align: center;
+
+    box-sizing: border-box;
+
+    
+}
+
+
+/* دایره */
+
+.bord {
+    width: 85px;
+    height: 85px;
+
+    flex-shrink: 0;
+
+    border-radius: 50%;
+
+    background: #FAB900;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+}
+
+
+.bord i {
+    font-size: 32px;
+
+    color: #f1f1f1;
+
+    line-height: 1;
+}
+
+
+/* عنوان */
+
+.boxxx > span {
+    color: #f1f1f1;
+
+    font-size: 18px;
+
+    font-weight: 700;
+
+    margin-top: 20px;
+
+    margin-bottom: 4px;
+
+    white-space: nowrap;
+}
+
+
+/* توضیحات */
+
+.boxxx > p {
+    color: #999;
+
+    font-size: 13px;
+
+    line-height: 1.8;
+
+    margin: 0;
+
+    white-space: nowrap;
+}
+
+
+/* =========================================
+   ARROWS
+========================================= */
+
+.process-arrow {
+    color: #f1f1f1;
+
+    font-size: 25px;
+
+    flex-shrink: 1;
+
+    margin: 0 5px;
+
+    position: static !important;
+}
+
+
+/* =========================================
+   LAPTOP
+========================================= */
+
+@media (max-width: 1600px) {
+
+    .mine .card {
+        width: calc(100% - 50px);
+
+        grid-template-columns: 230px minmax(0, 1fr);
+
+        gap: 20px;
+    }
+
+    .boxxx {
+        width: 110px;
+        min-width: 110px;
+    }
+
+    .bord {
+        width: 80px;
+        height: 80px;
+    }
+
+    .bord i {
+        font-size: 30px;
+    }
+
+    .boxxx > span {
+        font-size: 17px;
+    }
+
+    .boxxx > p {
+        font-size: 12px;
+    }
+
+    .process-arrow {
+        font-size: 21px;
+        margin: 0 2px;
+    }
+}
+
+
+/* =========================================
+   SMALL LAPTOP
+========================================= */
+
+@media (max-width: 1400px) {
+
+    .mine .card {
+        width: calc(100% - 35px);
+
+        grid-template-columns: 210px minmax(0, 1fr);
+
+        gap: 15px;
+    }
+
+    .boxxx {
+        width: 100px;
+        min-width: 100px;
+    }
+
+    .bord {
+        width: 75px;
+        height: 75px;
+    }
+
+    .bord i {
+        font-size: 27px;
+    }
+
+    .boxxx > span {
+        font-size: 16px;
+    }
+
+    .boxxx > p {
+        font-size: 11px;
+    }
+
+    .process-arrow {
+        font-size: 18px;
+    }
+
+    .eco-title {
+        font-size: 26px;
+    }
+}
+</style>
+
 <body>
         <nav class="navbar" id="navbar">
 
@@ -464,78 +813,94 @@
 
     
 
-<section class="mine" style="direction: ltr;background: #000;height: 400px;padding-right: 20rem;">
+<section class="mine">
     <div class="card">
-        <div class="eco-header" style=" padding-left: 3rem;">
-                <span class="eco-label" style="color: #FAB900 !important;font-size: 1.2rem !important;">OUR PROcess</span>
-                <h2 class="eco-title">
-                    مسیر توسعه<br>
-                     در صنعت و معدن
-                </h2>
-                <p class="eco-desc" style="font-size: 1.1rem !important;margin-bottom: .7rem !important;">
-                    از اکتشاف تا رشد همراه شما
-                </p>
-                                    <p class="eco2-sesc" style="color: #f1f1f1;margin-left: 1.2rem;    opacity: 0.8; font-size: 1.3rem;padding-bottom: 1.1rem;position: relative; bottom: 1rem;"> در تمام مراحل توسعه</p>
-                <a href="#" style="font-size: 1.1rem;" class="eco-btn">
-                    <i class="fas fa-arrow-left"></i>
-                    <span>مشاهده همه</span>
-                </a>
-            </div>
+
+        <div class="eco-header">
+            <span class="eco-label">OUR PROCESS</span>
+
+            <h2 class="eco-title">
+                مسیر توسعه<br>
+                در صنعت و معدن
+            </h2>
+
+            <p class="eco-desc">
+                از اکتشاف تا رشد همراه شما
+            </p>
+
+            <p class="eco2-desc">
+                در تمام مراحل توسعه
+            </p>
+
+            <a href="#" class="eco-btn">
+                <i class="fas fa-arrow-left"></i>
+                <span>مشاهده همه</span>
+            </a>
+        </div>
 
 
-            <div class="cardinfo" style="background: transparent;display: flex;align-items: center;text-align: center;justify-content: center;position: relative; bottom: 22rem !;left: 18rem;">
-                <div class="boxxx" style=" width: 10rem;height: 18rem;align-items: center;justify-content: center;text-align: center;display: flex;flex-direction: column;">
-                    <div class="bord" style="width: 95px;height: 95px;border-radius: 50%;background: #FAB900;align-items: center;display: flex;justify-content: center;">
-                        <i style="font-size: 35px;color: #f1f1f1;" class="bi bi-graph-up"></i>
-                    </div>
-                    <span style="font-size: 1.5rem;font-weight: bold;padding-top: 2rem;padding-bottom: .2rem;color: #f1f1f1;">رشد</span>
-                    <p style="font-size: 1rem;color: #999;">توسعه پایدار و اقزایش <br>
-                        ارزش افزوده
-                    </p>
+        <div class="cardinfo">
+
+            <div class="boxxx">
+                <div class="bord">
+                    <i class="bi bi-graph-up"></i>
                 </div>
-                <i style="color: #f1f1f1;position: relative;bottom: 3rem;font-size: 2rem;bottom: 4.5rem;    " class="bi bi-arrow-right"></i>
-                <div class="boxxx"style=" width: 10rem;height: 18rem;align-items: center;justify-content: center;text-align: center;display: flex;flex-direction: column;">
-                    <div class="bord" style="width: 95px;height: 95px;border-radius: 50%;background: #FAB900;align-items: center;display: flex;justify-content: center;">
-                        <i style="font-size: 35px;color: #f1f1f1;" class="bi bi-people"></i>
-                    </div>
-                    <span style="font-size: 1.5rem;font-weight: bold;padding-top: 2rem;padding-bottom: .2rem;color: #f1f1f1;">مشاوره</span>
-                    <p style="font-size: 1rem;color: #999;">مشاوره تخصصی در  <br>
-                    کلیه مراحل
-                    </p>
-                </div>
-                                <i style="color: #f1f1f1;position: relative;bottom: 3rem;font-size: 2rem;bottom: 4.5rem;" class="bi bi-arrow-right"></i>
-                <div class="boxxx" style=" width: 10rem;height: 18rem;align-items: center;justify-content: center;text-align: center;display: flex;flex-direction: column;">
-                    <div class="bord" style="width: 95px;height: 95px;border-radius: 50%;background: #FAB900;align-items: center;display: flex;justify-content: center;">
-                        <i style="font-size: 35px;color: #f1f1f1;" class="bi bi-mortarboard"></i>
-                    </div>
-                    <span style="font-size: 1.5rem;font-weight: bold;padding-top: 2rem;padding-bottom: .2rem;color: #f1f1f1;">آموزش</span>
-                    <p style="font-size: 1rem;color: #999;">توسعه سازی نیروی <br> متخصص</p>
-                </div>
-                                <i style="color: #f1f1f1;position: relative;bottom: 3rem;font-size: 2rem; bottom: 4.5rem;" class="bi bi-arrow-right"></i>
-                <div class="boxxx" style=" width: 10rem;height: 18rem;align-items: center;justify-content: center;text-align: center;display: flex;flex-direction: column;">
-                   <div class="bord" style="width: 95px;height: 95px;border-radius: 50%;background: #FAB900;align-items: center;display: flex;justify-content: center;">
-                        <i style="font-size: 35px;color: #f1f1f1;padding-top: 1rem;" class="bi bi-cash-coin"></i>
-                    </div>
-                    <span style="font-size: 1.5rem;font-weight: bold;padding-top: 2rem;padding-bottom: .2rem;color: #f1f1f1;">سرمایه گذاری</span>
-                    <p style="font-size: 1rem;color: #999;">مدیریت سرمایه و <br> تامین مالی</p>
-                </div>
-                                <i style="color: #f1f1f1;position: relative;bottom: 4.5rem;font-size: 2rem;" class="bi bi-arrow-right"></i>
-                <div class="boxxx" style=" width: 10rem;height: 18rem;align-items: center;justify-content: center;text-align: center;display: flex;flex-direction: column;">
-                   <div class="bord" style="width: 95px;height: 95px;border-radius: 50%;background: #FAB900;align-items: center;display: flex;justify-content: center;">
-                        <i style="font-size: 35px;color: #f1f1f1;" class="bi bi-menu-down"></i>
-                    </div>
-                    <span style="font-size: 1.5rem;font-weight: bold;padding-top: 2rem;padding-bottom: .2rem;color: #f1f1f1;">تحلیل</span>
-                    <p style="font-size: 1rem;color: #999;">تحلیل داده ها و <br>معاملات امکتن سنجی</p>
-                </div>
-                                <i style="color: #f1f1f1;position: relative;bottom: 3rem;font-size: 2rem;bottom: 4.5rem;" class="bi bi-arrow-right"></i>
-                <div class="boxxx" style=" width: 10rem;height: 18rem;align-items: center;justify-content: center;text-align: center;display: flex;flex-direction: column;">
-                   <div class="bord" style="width: 95px;height: 95px;border-radius: 50%;background: #FAB900;align-items: center;display: flex;justify-content: center;">
-                        <i style="font-size: 35px;color: #f1f1f1;" class="bi bi-bullseye"></i>
-                    </div>
-                    <span style="font-size: 1.5rem;font-weight: bold;padding-top: 2rem;padding-bottom: .2rem;color: #f1f1f1;">اکتشاف</span>
-                    <p style="font-size: 1rem;color: #999;">شناسایی و ارزیابی <br>پتانسیل های معدنی</p>
-                </div>
+                <span>رشد</span>
+                <p>توسعه پایدار و افزایش<br>ارزش افزوده</p>
             </div>
+
+            <i class="process-arrow bi bi-arrow-right" style="margin-bottom: 5rem;"></i>
+
+            <div class="boxxx">
+                <div class="bord">
+                    <i class="bi bi-people"></i>
+                </div>
+                <span>مشاوره</span>
+                <p>مشاوره تخصصی در<br>کلیه مراحل</p>
+            </div>
+
+            <i class="process-arrow bi bi-arrow-right" style="margin-bottom: 5rem;"></i>
+
+            <div class="boxxx">
+                <div class="bord">
+                    <i class="bi bi-mortarboard"></i>
+                </div>
+                <span>آموزش</span>
+                <p>توسعه سازی نیروی<br>متخصص</p>
+            </div>
+
+            <i class="process-arrow bi bi-arrow-right" style="margin-bottom: 5rem;"></i>
+
+            <div class="boxxx">
+                <div class="bord">
+                    <i class="bi bi-cash-coin"></i>
+                </div>
+                <span>سرمایه گذاری</span>
+                <p>مدیریت سرمایه و<br>تامین مالی</p>
+            </div>
+
+            <i class="process-arrow bi bi-arrow-right" style="margin-bottom: 5rem;"></i>
+
+            <div class="boxxx">
+                <div class="bord">
+                    <i class="bi bi-menu-down"></i>
+                </div>
+                <span>تحلیل</span>
+                <p>تحلیل داده ها و<br>معاملات امکان سنجی</p>
+            </div>
+
+            <i class="process-arrow bi bi-arrow-right" style="margin-bottom: 5rem;"></i>
+
+            <div class="boxxx">
+                <div class="bord">
+                    <i class="bi bi-bullseye"></i>
+                </div>
+                <span>اکتشاف</span>
+                <p>شناسایی و ارزیابی<br>پتانسیل های معدنی</p>
+            </div>
+
+        </div>
+
     </div>
 </section>
 
@@ -1037,22 +1402,58 @@
 
     <div class="bot-input-area">
         <label for="botInput" class="visually-hidden">پیام شما</label>
-        <div class="bot-input-container">
-            <input 
-                type="text" 
-                id="botInput" 
-                class="bot-input" 
-                placeholder="سؤال خود را بنویسید..." 
-                autocomplete="off"
-                aria-describedby="botInputDesc"
-            />
-            <span id="botInputDesc" class="visually-hidden">سؤال خود را درباره کافه معدن وارد کنید</span>
-            <button class="bot-send" id="botSend" aria-label="ارسال">
-                <svg class="w-5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-</svg>
-            </button>
-        </div>
+<div class="bot-input-container">
+
+    <!-- دکمه انتخاب عکس -->
+    <button class="bot-upload" id="botUpload" type="button" aria-label="آپلود عکس">
+        <svg viewBox="0 0 24 24" fill="none">
+            <path d="M4 5C4 3.9 4.9 3 6 3H18C19.1 3 20 3.9 20 5V19C20 20.1 19.1 21 18 21H6C4.9 21 4 20.1 4 19V5Z"
+                  stroke="currentColor"
+                  stroke-width="1.8"/>
+            <circle cx="8.5" cy="8.5" r="1.5"
+                    stroke="currentColor"
+                    stroke-width="1.8"/>
+            <path d="M4 17L9 12L13 16L16 13L20 17"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"/>
+        </svg>
+    </button>
+
+    <!-- فایل مخفی -->
+    <input
+        type="file"
+        id="botImageInput"
+        accept="image/jpeg,image/png,image/webp,image/gif"
+        hidden
+    />
+
+    <input 
+        type="text" 
+        id="botInput" 
+        class="bot-input" 
+        placeholder="سؤال خود را بنویسید..." 
+        autocomplete="off"
+        aria-describedby="botInputDesc"
+    />
+
+    <span id="botInputDesc" class="visually-hidden">
+        سؤال خود را درباره کافه معدن وارد کنید
+    </span>
+
+    <button class="bot-send" id="botSend" aria-label="ارسال">
+        <svg class="w-5" viewBox="0 0 24 24" fill="none">
+            <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"/>
+        </svg>
+    </button>
+
+</div>
+
     </div>
 </div>
 

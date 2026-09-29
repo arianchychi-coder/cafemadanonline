@@ -449,51 +449,60 @@
        DOM ELEMENTS
        ============================================ */
 
-    const elements = {
-        launcher: null,
-        window: null,
-        closeBtn: null,
-        messages: null,
-        suggestions: null,
-        input: null,
-        sendBtn: null
-    };
+ const elements = {
+    launcher: null,
+    window: null,
+    closeBtn: null,
+    messages: null,
+    suggestions: null,
+    input: null,
+    sendBtn: null,
+    uploadBtn: null,
+    imageInput: null
+};
 
     function cacheElements() {
 
-        elements.launcher =
-            document.getElementById('botLauncher');
+    elements.launcher =
+        document.getElementById('botLauncher');
 
-        elements.window =
-            document.getElementById('botWindow');
+    elements.window =
+        document.getElementById('botWindow');
 
-        elements.closeBtn =
-            document.getElementById('botClose');
+    elements.closeBtn =
+        document.getElementById('botClose');
 
-        elements.messages =
-            document.getElementById('botMessages');
+    elements.messages =
+        document.getElementById('botMessages');
 
-        elements.suggestions =
-            document.getElementById('botSuggestions');
+    elements.suggestions =
+        document.getElementById('botSuggestions');
 
-        elements.input =
-            document.getElementById('botInput');
+    elements.input =
+        document.getElementById('botInput');
 
-        elements.sendBtn =
-            document.getElementById('botSend');
+    elements.sendBtn =
+        document.getElementById('botSend');
 
-        return Object.values(elements).every(Boolean);
-    }
+    elements.uploadBtn =
+        document.getElementById('botUpload');
+
+    elements.imageInput =
+        document.getElementById('botImageInput');
+
+    return Object.values(elements).every(Boolean);
+}
 
     /* ============================================
        STATE
        ============================================ */
 
     let state = {
-        isOpen: false,
-        isFirstOpen: true,
-        messages: []
-    };
+    isOpen: false,
+    isFirstOpen: true,
+    messages: [],
+    selectedImage: null
+};
 
     /* ============================================
        TEXT NORMALIZATION
@@ -600,6 +609,124 @@
 
         return normalized;
     }
+
+
+function handleImageSelect(event) {
+
+    const file = event.target.files && event.target.files[0];
+
+    if (!file) {
+        return;
+    }
+
+    // فقط تصویر
+    if (!file.type.startsWith('image/')) {
+
+        alert('لطفاً یک فایل تصویری انتخاب کنید.');
+
+        event.target.value = '';
+
+        return;
+    }
+
+    // حداکثر 5MB
+    const maxSize = 5 * 1024 * 1024;
+
+    if (file.size > maxSize) {
+
+        alert('حجم تصویر نباید بیشتر از ۵ مگابایت باشد.');
+
+        event.target.value = '';
+
+        return;
+    }
+
+    // ذخیره فایل انتخاب شده
+    state.selectedImage = file;
+
+    showSelectedImage(file);
+}
+
+
+    function showSelectedImage(file) {
+
+    const oldPreview =
+        document.getElementById('botImagePreview');
+
+    if (oldPreview) {
+        oldPreview.remove();
+    }
+
+    const preview =
+        document.createElement('div');
+
+    preview.id =
+        'botImagePreview';
+
+    preview.className =
+        'bot-image-preview';
+
+    const image =
+        document.createElement('img');
+
+    image.alt =
+        'تصویر انتخاب شده';
+
+    image.src =
+        URL.createObjectURL(file);
+
+    const removeButton =
+        document.createElement('button');
+
+    removeButton.type =
+        'button';
+
+    removeButton.className =
+        'bot-image-remove';
+
+    removeButton.setAttribute(
+        'aria-label',
+        'حذف تصویر'
+    );
+
+    removeButton.textContent =
+        '×';
+
+    removeButton.addEventListener(
+        'click',
+        clearSelectedImage
+    );
+
+    preview.appendChild(image);
+
+    preview.appendChild(removeButton);
+
+    /*
+     * Preview را بالای بخش پیام‌ها قرار می‌دهیم.
+     * اگر botMessages وجود داشته باشد داخل آن قرار می‌گیرد.
+     */
+    elements.messages.appendChild(preview);
+
+    scrollToBottom();
+}
+
+
+
+function clearSelectedImage() {
+
+    state.selectedImage = null;
+
+    if (elements.imageInput) {
+        elements.imageInput.value = '';
+    }
+
+    const preview =
+        document.getElementById('botImagePreview');
+
+    if (preview) {
+        preview.remove();
+    }
+}
 
     function meaningfulTokens(text) {
 
@@ -1297,60 +1424,107 @@
        RENDER USER MESSAGE
        ============================================ */
 
-    function addUserMessage(text) {
+    function addUserMessage(text, imageFile) {
 
-        const messageEl =
+    const messageEl =
+        document.createElement('div');
+
+    messageEl.className =
+        'bot-message bot-message--user';
+
+
+    const bubble =
+        document.createElement('div');
+
+    bubble.className =
+        'bot-message__bubble';
+
+
+    // متن
+    if (text) {
+
+        const textElement =
             document.createElement('div');
 
-        messageEl.className =
-            'bot-message bot-message--user';
-
-        const bubble =
-            document.createElement('div');
-
-        bubble.className =
-            'bot-message__bubble';
-
-        // Secure: prevents XSS
-        bubble.textContent =
+        textElement.textContent =
             text;
 
-        const time =
-            document.createElement('span');
-
-        time.className =
-            'bot-message__time';
-
-        time.textContent =
-            getCurrentTime();
-
-        messageEl.appendChild(
-            bubble
+        bubble.appendChild(
+            textElement
         );
-
-        messageEl.appendChild(
-            time
-        );
-
-        elements.messages.appendChild(
-            messageEl
-        );
-
-        scrollToBottom();
-
-        state.messages.push({
-
-            type: 'user',
-
-            text: text,
-
-            time:
-                getCurrentTime()
-
-        });
-
-        saveState();
     }
+
+
+    // تصویر
+    if (imageFile) {
+
+        const image =
+            document.createElement('img');
+
+        image.className =
+            'bot-user-image';
+
+        image.alt =
+            'تصویر ارسال شده';
+
+        image.src =
+            URL.createObjectURL(imageFile);
+
+        bubble.appendChild(
+            image
+        );
+    }
+
+
+    const time =
+        document.createElement('span');
+
+    time.className =
+        'bot-message__time';
+
+    time.textContent =
+        getCurrentTime();
+
+
+    messageEl.appendChild(
+        bubble
+    );
+
+    messageEl.appendChild(
+        time
+    );
+
+
+    elements.messages.appendChild(
+        messageEl
+    );
+
+
+    scrollToBottom();
+
+
+    // فقط متن را ذخیره می‌کنیم.
+    // فایل داخل localStorage ذخیره نمی‌شود.
+    state.messages.push({
+
+        type: 'user',
+
+        text: text || '',
+
+        hasImage: !!imageFile,
+
+        imageName:
+            imageFile
+                ? imageFile.name
+                : null,
+
+        time:
+            getCurrentTime()
+    });
+
+
+    saveState();
+}
 
     /* ============================================
        RENDER BOT MESSAGE
@@ -1840,80 +2014,112 @@
        SEND MESSAGE LOGIC
        ============================================ */
 
-    function handleUserInput(
-        text
-    ) {
+async function handleUserInput(text, imageFile) {
 
-        if (
-            !text ||
-            text.trim() === ''
-        ) {
+    if ((!text || text.trim() === '') && !imageFile) {
+        return;
+    }
 
-            return;
-        }
+    const userText = text ? text.trim() : '';
 
-        const userText =
-            text.trim();
+    renderSuggestions([]);
 
-        // پاک‌سازی پیشنهادات قبلی
-        renderSuggestions([]);
+    // نمایش پیام کاربر
+    addUserMessage(userText, imageFile);
 
-        // افزودن پیام کاربر
-        addUserMessage(
-            userText
-        );
+    elements.input.value = '';
 
-        // پاک‌سازی input
-        elements.input.value =
-            '';
+    // اگر عکس داریم
+    if (imageFile) {
 
-        // نمایش typing
+        clearSelectedImage();
+
         showTyping();
 
-        // تأخیر طبیعی
-        const delay =
-            BOT_CONFIG.typingMinDelay +
-            Math.random() *
-            (
-                BOT_CONFIG.typingMaxDelay -
-                BOT_CONFIG.typingMinDelay
+        try {
+
+            const imageDescription = await analyzeUploadedImage(imageFile);
+
+            hideTyping();
+
+            addBotMessage(
+                imageDescription,
+                [],
+                null
             );
 
-        setTimeout(
-            function () {
+        } catch (error) {
 
-                hideTyping();
+            hideTyping();
 
-                const response =
-                    generateResponse(
-                        userText
-                    );
+            addBotMessage(
+                'متأسفانه در تحلیل تصویر مشکلی پیش آمد.',
+                [],
+                null
+            );
 
-                addBotMessage(
-                    response.answer,
-                    response.suggestions,
-                    response.intentId
-                );
-
-            },
-            delay
-        );
-    }
-
-    function sendMessage() {
-
-        const text =
-            elements.input.value.trim();
-
-        if (text === '') {
-
-            return;
+            console.error('Image analysis error:', error);
         }
 
-        handleUserInput(
-            text
-        );
+        return;
     }
+
+    // حالت معمولی پیام متنی
+    showTyping();
+
+    const delay =
+        BOT_CONFIG.typingMinDelay +
+        Math.random() *
+        (BOT_CONFIG.typingMaxDelay - BOT_CONFIG.typingMinDelay);
+
+    setTimeout(function () {
+
+        hideTyping();
+
+        const response = generateResponse(userText);
+
+        addBotMessage(
+            response.answer,
+            response.suggestions,
+            response.intentId
+        );
+
+    }, delay);
+}
+
+function sendMessage() {
+
+    const text = elements.input.value.trim();
+    const imageFile = state.selectedImage;
+
+    // اگر نه متن داریم و نه عکس
+    if (text === '' && !imageFile) {
+        return;
+    }
+
+    handleUserInput(text, imageFile);
+}
+
+
+function analyzeUploadedImage(file) {
+    return new Promise(function (resolve) {
+
+        // فعلاً برای تست قابلیت عکس
+        // بعداً این قسمت را به API هوش مصنوعی وصل می‌کنیم.
+
+        setTimeout(function () {
+
+            resolve(
+                'این تصویر یک نمونه سنگ یا ماده معدنی بسیار تیره‌رنگ را نشان می‌دهد. ' +
+                'سطح آن زبر و شکسته است و در قسمت‌هایی بازتاب‌های براق و فلزی دیده می‌شود. ' +
+                'از روی تصویر به‌تنهایی نمی‌توان با اطمینان نوع ماده را مشخص کرد، ' +
+                'اما ظاهر آن می‌تواند با یک نمونه زغال‌سنگ یا برخی سنگ‌های معدنی تیره سازگار باشد. ' +
+                'برای شناسایی دقیق‌تر، اطلاعاتی مانند محل نمونه، سختی، وزن مخصوص و آزمایش‌های کانی‌شناسی لازم است.'
+            );
+
+        }, 1200);
+    });
+}
 
     /* ============================================
        OPEN BOT
@@ -2035,61 +2241,106 @@
 
     function initEvents() {
 
-        if (
-            !elements.launcher ||
-            !elements.closeBtn ||
-            !elements.sendBtn ||
-            !elements.input
-        ) {
+    if (
+        !elements.launcher ||
+        !elements.closeBtn ||
+        !elements.sendBtn ||
+        !elements.input
+    ) {
 
-            console.error(
-                'Cafe Madan Bot: ' +
-                'برخی عناصر HTML پیدا نشدند.'
-            );
-
-            return;
-        }
-
-        // Launcher
-        elements.launcher.addEventListener(
-            'click',
-            openBot
+        console.error(
+            'Cafe Madan Bot: برخی عناصر HTML پیدا نشدند.'
         );
 
-        // Close button
-        elements.closeBtn.addEventListener(
+        return;
+    }
+
+    // ============================================
+    // Launcher
+    // ============================================
+
+    elements.launcher.addEventListener(
+        'click',
+        openBot
+    );
+
+
+    // ============================================
+    // Close
+    // ============================================
+
+    elements.closeBtn.addEventListener(
+        'click',
+        closeBot
+    );
+
+
+    // ============================================
+    // Send
+    // ============================================
+
+    elements.sendBtn.addEventListener(
+        'click',
+        sendMessage
+    );
+
+
+    // ============================================
+    // Upload Image
+    // ============================================
+
+    if (
+        elements.uploadBtn &&
+        elements.imageInput
+    ) {
+
+        // کلیک روی آیکون عکس
+        elements.uploadBtn.addEventListener(
             'click',
-            closeBot
-        );
+            function () {
 
-        // Send button
-        elements.sendBtn.addEventListener(
-            'click',
-            sendMessage
-        );
+                elements.imageInput.click();
 
-        // Enter key
-        elements.input.addEventListener(
-            'keydown',
-            function (e) {
-
-                if (
-                    e.key === 'Enter'
-                ) {
-
-                    e.preventDefault();
-
-                    sendMessage();
-                }
             }
         );
 
-        // Escape
-        document.addEventListener(
-            'keydown',
-            handleEscape
+
+        // انتخاب فایل
+        elements.imageInput.addEventListener(
+            'change',
+            handleImageSelect
         );
     }
+
+
+    // ============================================
+    // Enter
+    // ============================================
+
+    elements.input.addEventListener(
+        'keydown',
+        function (e) {
+
+            if (e.key === 'Enter') {
+
+                e.preventDefault();
+
+                sendMessage();
+            }
+
+        }
+    );
+
+
+    // ============================================
+    // Escape
+    // ============================================
+
+    document.addEventListener(
+        'keydown',
+        handleEscape
+    );
+}
 
     /* ============================================
        OPTIONAL PUBLIC API
